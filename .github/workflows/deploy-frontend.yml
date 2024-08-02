@@ -1,0 +1,56 @@
+name: Deploy Envault Frontend
+
+on:
+  push:
+    branches:
+      - staging
+      - production
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+    if: github.ref_name == 'staging'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{vars.AWS_REGION}}
+      - name: Build React App
+        env:
+          VITE_WINDY_API_KEY: ${{secrets.WINDY_API_KEY}}
+        run: yarn install --immutable --immutable-cache && yarn build
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./dist/ s3://${{vars.AWS_S3_BUCKET_NAME}} --delete --cache-control public,max-age=604800,s-maxage=31536000,stale-while-revalidate=86400,immutable --metadata-directive REPLACE
+      - name: Update Cache-Control for non-hashed files
+        run: aws s3 cp ./dist/ s3://${{vars.AWS_S3_BUCKET_NAME}} --recursive --exclude '*' --include 'index.html' --include 'manifest.webmanifest' --include 'registerSW.js' --include 'sw.js' --cache-control no-cache --metadata-directive REPLACE
+      - name: Invalidate Cloudfront CDN
+        run: aws cloudfront create-invalidation --distribution-id=${{vars.AWS_DISTRIBUTION_ID}} --paths '/*'
+
+  production:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    if: github.ref_name == 'production'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{vars.AWS_REGION}}
+      - name: Build React App
+        env:
+          VITE_WINDY_API_KEY: ${{secrets.WINDY_API_KEY}}
+        run: yarn install --immutable --immutable-cache && yarn build
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./dist/ s3://${{vars.AWS_S3_BUCKET_NAME}} --delete --cache-control public,max-age=604800,s-maxage=31536000,stale-while-revalidate=86400,immutable --metadata-directive REPLACE
+      - name: Update Cache-Control for non-hashed files
+        run: aws s3 cp ./dist/ s3://${{vars.AWS_S3_BUCKET_NAME}} --recursive --exclude '*' --include 'index.html' --include 'manifest.webmanifest' --include 'registerSW.js' --include 'sw.js' --cache-control no-cache --metadata-directive REPLACE
+      - name: Invalidate Cloudfront CDN
+        run: aws cloudfront create-invalidation --distribution-id=${{vars.AWS_DISTRIBUTION_ID}} --paths '/*'

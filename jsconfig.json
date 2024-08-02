@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2022",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "app/*": ["./src/app/*"],
+      "assets/*": ["./src/app/assets/*"],
+      "components/*": ["./src/app/components/*"],
+      "config/*": ["./src/app/config/*"],
+      "constant/*": ["./src/app/constant/*"],
+      "layouts/*": ["./src/app/layouts/*"],
+      "pages/*": ["./src/app/pages/*"],
+      "services/*": ["./src/app/services/*"],
+      "api/*": ["./src/app/services/api/*"],
+      "hooks/*": ["./src/app/services/hooks/*"],
+      "utils/*": ["./src/app/utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "snippets"],
+  "include": ["src"]
+}

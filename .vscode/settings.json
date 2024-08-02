@@ -1,0 +1,52 @@
+{
+  "workbench.startupEditor": "none",
+  "files.eol": "\n",
+  "editor.accessibilitySupport": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.inlineSuggest.enabled": true,
+  "editor.fontSize": 14,
+  "editor.fontLigatures": "false",
+  // "editor.fontFamily": "Cascadia Code",
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.formatDocument": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortMembers": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
+}
