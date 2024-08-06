@@ -1,8 +1,75 @@
-import {EditOutlined} from '@ant-design/icons';
-import {App, Button, Form, Input} from 'antd';
-import {useThemeApp} from 'app/config/themes/ThemeColorProvider';
+import {App, Button, Card, Form, Input} from 'antd';
+import {createStyles} from 'antd-style';
+import {Icon} from 'components/atoms/Icon';
 import {useUser, useUserUpdateMutation} from 'hooks/useUser';
 import {useEffect, useState} from 'react';
+
+const useStyles = createStyles(({token, css}) => ({
+  mainDiv: css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
+  backgroundDiv: css`
+    width: 500px;
+    height: 10rem;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 6rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    background-color: ${token.colorPrimary};
+    @media (min-width: 768px) {
+      width: 500px;
+    }
+    @media (min-width: 1024px) {
+      width: 600px;
+    }
+  `,
+  formContainer: css`
+    margin-top: 4rem;
+    position: relative;
+    padding: 0.5rem 1.2rem 0.5rem 1.2rem;
+    width: 100%;
+    max-width: 28rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.25rem;
+    border-radius: 0.75rem;
+  `,
+  formHeader: css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  `,
+  formTitle: css`
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+  `,
+  editButton: css`
+    margin-left: 0.5rem;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 4px;
+    border-radius: 5px;
+  `,
+  divider: css`
+    margin-bottom: 1.75rem;
+  `,
+  formItems: css`
+    margin-bottom: 2rem;
+    & > * {
+      margin-bottom: 1.75rem;
+    }
+  `,
+  submitButton: css`
+    width: 100%;
+    margin-top: 0.5rem;
+    background-color: ${token.colorPrimary};
+  `,
+}));
 
 export const Component = props => {
   const {data: [user] = [{}], isFetched} = useUser();
@@ -13,7 +80,7 @@ export const Component = props => {
   const [form] = Form.useForm();
   const [submittable, setSubmittable] = useState(false);
   const values = Form.useWatch([], form);
-  const {primaryContext} = useThemeApp();
+  const {styles} = useStyles();
 
   useEffect(() => {
     form
@@ -48,19 +115,22 @@ export const Component = props => {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div
-        className="w-[500px] md:w-[500px] lg:w-[600px] h-40 rounded-lg absolute top-24 drop-shadow-lg"
-        style={{backgroundColor: primaryContext}}
-      ></div>
-      <div className="mt-16 p-10 pb-2 w-full max-w-md bg-white drop-shadow-xl text-xl rounded-xl">
+    <div className={styles.mainDiv}>
+      <div className={styles.backgroundDiv}></div>
+      <Card className={styles.formContainer}>
         <Form form={form} name="validateOnly" layout="vertical" autoComplete="off" onFinish={onFinish}>
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-center flex-grow text-xl font-semibold tracking-wider">User Profile</h1>
-            <EditOutlined className="ml-2 cursor-pointer" onClick={() => setEditing(!isEditing)} />
+          <div className={styles.formHeader}>
+            <h1 className={styles.formTitle}>User Profile</h1>
+            <Icon
+              icon={!isEditing ? 'LockOutlined' : 'UnlockOutlined'}
+              type="ant"
+              shape="circle"
+              className={styles.editButton}
+              onClick={() => setEditing(!isEditing)}
+            />
           </div>
-          <hr className="mb-7" />
-          <div className="space-y-7 mb-2">
+          <hr className={styles.divider} />
+          <div className={styles.formItems}>
             <Form.Item hidden name={'id'}>
               <Input type={'hidden'} />
             </Form.Item>
@@ -137,14 +207,13 @@ export const Component = props => {
               onClick={onSave}
               loading={loading}
               disabled={!isEditing || !submittable}
-              className="w-full mt-8"
-              style={{backgroundColor: primaryContext}}
+              className={styles.submitButton}
             >
               Save
             </Button>
           </Form.Item>
         </Form>
-      </div>
+      </Card>
     </div>
   );
 };
