@@ -22,15 +22,17 @@ const useStyles = createStyles(({token, css}) => ({
 }));
 
 export const Component = props => {
-  const {node} = useNodeContext();
+  const {
+    node: {id},
+  } = useNodeContext();
   const {styles} = useStyles();
   const navigate = useNavigate();
   const {updateNode} = useNodeSaveMutation();
 
   const handleClick = e => {
     const type = e.currentTarget.getAttribute('data-value');
-    updateNode({type, id: node.id});
-    const pathname = generatePath(`../:type/:id`, {type, id: node.id});
+    updateNode({type, id});
+    const pathname = generatePath(`../:type/:id`, {type, id});
     const search = new URLSearchParams({tab: 'info'}).toString();
     navigate({pathname, search});
   };

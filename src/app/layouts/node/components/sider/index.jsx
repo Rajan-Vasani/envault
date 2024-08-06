@@ -54,9 +54,10 @@ export const NodeSider = props => {
   const [collapsed, setCollapsed] = useState(!searchParams.has('tab'));
 
   useEffect(() => {
-    if (!node?.id) return;
-    setDisabled(node.id !== -1);
-  }, [node]); // new node mode
+    if (node.id === -1) {
+      setDisabled(false);
+    }
+  }, [node.id]); // new node mode
 
   const handleTabChange = e => {
     setSearchParams({...searchParams, tab: e});

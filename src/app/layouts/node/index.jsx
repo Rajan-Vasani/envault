@@ -4,10 +4,11 @@ import {createStyles} from 'antd-style';
 import {DraggableOverlay} from 'components/draggable/overlay';
 import {Droppable} from 'components/droppable';
 import {nodeDetails} from 'config/menu';
+import {useNode} from 'hooks/useNode';
 import {NodeProvider} from 'layouts/node/context';
 import {NoNode} from 'pages/error/nonode';
 import {lazy, useState, useTransition} from 'react';
-import {Outlet, useNavigate, useOutletContext, useParams} from 'react-router-dom';
+import {Outlet, useMatch, useNavigate, useOutletContext, useParams} from 'react-router-dom';
 const NodeSider = lazy(() => import('layouts/node/components/sider'));
 const NodeHeader = lazy(() => import('layouts/node/components/header'));
 
@@ -24,14 +25,14 @@ const useStyles = createStyles(({token, css}) => ({
 export const Component = props => {
   const navigate = useNavigate();
   const {hub, isPublic} = useOutletContext();
+  const {params} = useMatch('hub/explore/node/:type?/:id?');
+  params.id = +params.id;
+  const {data: treeData} = useNode();
+  const {data: nodeData} = useNode({type: params.type, id: params.id, enabled: !!(params.type && params.id !== -1)});
   const [, startTransition] = useTransition();
   const {nodeId} = useParams();
   const {styles} = useStyles();
   const [showPrivate, setShowPrivate] = useState(false);
-
-  if (!isPublic && !showPrivate) {
-    startTransition(() => setShowPrivate(true));
-  }
 
   //dnd-kit
   useDndMonitor({
@@ -46,10 +47,21 @@ export const Component = props => {
     },
   });
 
+  if (!isPublic && !showPrivate) {
+    startTransition(() => setShowPrivate(true));
+  }
+
+  const currentNode = treeData?.find(({id}) => id === params.id);
+  const node = {
+    ...params,
+    ...nodeData?.[0],
+    ...currentNode,
+  };
+
   const acceptNodeTypes = nodeDetails.map(item => item.value);
 
   return (
-    <NodeProvider hub={hub}>
+    <NodeProvider node={node}>
       <Layout style={{height: '100%'}}>
         {showPrivate && <NodeHeader />}
         <Layout>

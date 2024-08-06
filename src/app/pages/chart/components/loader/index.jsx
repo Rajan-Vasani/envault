@@ -62,7 +62,7 @@ const newDataSelector = (oldConfig, newConfig) => {
 };
 
 const ChartLoader = props => {
-  const {hub, node, config, setConfig, mergeConfig} = useNodeContext();
+  const {node, config, setConfig, mergeConfig} = useNodeContext();
   const {data: chartDataArray = [{}]} = useNode({type: 'chart', id: node?.id, enabled: !!node?.id});
   const [chartData] = chartDataArray;
   // load tokenised data from chart definition
