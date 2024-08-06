@@ -1,5 +1,6 @@
 import {EditOutlined} from '@ant-design/icons';
 import {App, Button, Form, Input} from 'antd';
+import {useThemeApp} from 'app/config/themes/ThemeColorProvider';
 import {useUser, useUserUpdateMutation} from 'hooks/useUser';
 import {useEffect, useState} from 'react';
 
@@ -12,6 +13,7 @@ export const Component = props => {
   const [form] = Form.useForm();
   const [submittable, setSubmittable] = useState(false);
   const values = Form.useWatch([], form);
+  const {primaryContext} = useThemeApp();
 
   useEffect(() => {
     form
@@ -47,7 +49,10 @@ export const Component = props => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="bg-blue-800 w-[500px] md:w-[500px] lg:w-[600px] h-40 rounded-lg absolute top-24 drop-shadow-lg"></div>
+      <div
+        className="w-[500px] md:w-[500px] lg:w-[600px] h-40 rounded-lg absolute top-24 drop-shadow-lg"
+        style={{backgroundColor: primaryContext}}
+      ></div>
       <div className="mt-16 p-10 pb-2 w-full max-w-md bg-white drop-shadow-xl text-xl rounded-xl">
         <Form form={form} name="validateOnly" layout="vertical" autoComplete="off" onFinish={onFinish}>
           <div className="flex justify-between items-center mb-6">
@@ -133,6 +138,7 @@ export const Component = props => {
               loading={loading}
               disabled={!isEditing || !submittable}
               className="w-full mt-8"
+              style={{backgroundColor: primaryContext}}
             >
               Save
             </Button>
