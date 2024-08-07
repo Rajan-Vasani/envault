@@ -1,7 +1,7 @@
 import {QueryCache, QueryClient, QueryClientProvider, useQueryClient} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-import {Collapse, ConfigProvider, Typography, notification} from 'antd';
-import {ThemeProvider, createGlobalStyle} from 'antd-style';
+import {App, Collapse, ConfigProvider, notification, Typography} from 'antd';
+import {createGlobalStyle, ThemeProvider} from 'antd-style';
 import CenturyGothic from 'assets/fonts/CenturyGothic.ttf';
 import HelveticaNeue from 'assets/fonts/HelveticaNeue.ttf';
 import Icon from 'components/atoms/Icon';
@@ -17,14 +17,14 @@ import {Component as NodeLayout} from 'layouts/node';
 import {Component as SettingsLayout} from 'layouts/settings';
 import {Component as UserLayout} from 'layouts/user';
 import {
+  createBrowserRouter,
+  isRouteErrorResponse,
   Navigate,
   Outlet,
   RouterProvider,
-  createBrowserRouter,
-  isRouteErrorResponse,
   useLoaderData,
   useRouteError,
-  useSearchParams,
+  useSearchParams
 } from 'react-router-dom';
 import {BaseService} from 'services/api/base.service';
 
@@ -213,6 +213,8 @@ const HubGlobal = createGlobalStyle`
 const AuthBoundary = () => {
   const {user, isPublic} = useLoaderData();
   const hub = user?.hubs?.find(hub => hub.name === globalThis.envault.hub);
+
+
   if (user) {
     return (
       <ThemeProvider
@@ -230,9 +232,10 @@ const AuthBoundary = () => {
           },
         }}
       >
-        <Global />
         <HubGlobal />
-        <Outlet context={{user, hub, isPublic}} />
+        <App>
+          <Outlet context={{user, hub, isPublic}} />
+        </App>
       </ThemeProvider>
     );
   }
@@ -344,17 +347,17 @@ const router = createBrowserRouter(
                     {
                       path: 'variable/:nodeId?',
                       id: 'variable',
-                      lazy: () => import('pages/error/nonode'),
+                      lazy: () => import('pages/variable'),
                     },
                     {
                       path: 'task/:nodeId?',
                       id: 'task',
-                      lazy: () => import('app/pages/task'),
+                      lazy: () => import('pages/task'),
                     },
                     {
                       path: 'notification/:nodeId?',
                       id: 'notification',
-                      lazy: () => import('pages/error/nonode'),
+                      lazy: () => import('pages/notification'),
                     },
                     {
                       path: 'group/:nodeId?',
@@ -413,22 +416,22 @@ const router = createBrowserRouter(
                 {
                   path: 'config',
                   id: 'config',
-                  lazy: () => import('pages/settings/forms/hub'),
+                  lazy: () => import('app/pages/settings/hub'),
                 },
                 {
                   path: 'users',
                   id: 'users',
-                  lazy: () => import('pages/settings/forms/users'),
+                  lazy: () => import('app/pages/settings/users'),
                 },
                 {
                   path: 'roles',
                   id: 'roles',
-                  lazy: () => import('pages/settings/forms/roles'),
+                  lazy: () => import('app/pages/settings/roles'),
                 },
                 {
                   path: 'tasks',
                   id: 'tasks',
-                  lazy: () => import('pages/settings/forms/tasks'),
+                  lazy: () => import('app/pages/settings/tasks'),
                 },
                 {
                   path: 'tasks/:nodeId',
@@ -438,7 +441,7 @@ const router = createBrowserRouter(
                 {
                   path: 'billing',
                   id: 'billing',
-                  lazy: () => import('pages/settings/forms/billing'),
+                  lazy: () => import('app/pages/settings/billing'),
                 },
               ],
             },
@@ -454,11 +457,7 @@ const router = createBrowserRouter(
             },
             {
               path: 'home',
-              lazy: () => import('pages/user/home'),
-            },
-            {
-              path: 'profile',
-              lazy: () => import('pages/user/profile'),
+              lazy: () => import('app/pages/user'),
             },
             {
               path: 'admin',
@@ -523,6 +522,7 @@ const router = createBrowserRouter(
 const Router = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <Global />
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

@@ -1,4 +1,4 @@
-import {App, Layout} from 'antd';
+import {Layout} from 'antd';
 import {useThemeMode} from 'antd-style';
 import Cookies from 'js-cookie';
 import {NoHub} from 'pages/error/nohub';
@@ -43,13 +43,11 @@ export const Component = props => {
   }, [themeMode]);
 
   return hub ? (
-    <App>
-      <Layout style={{height: '100svh'}}>
-        {showPrivate && <Header {...props} hub={hub} />}
-        <Outlet context={{hub, user, isPublic}} />
-        {showPrivate && <Footer {...props} />}
-      </Layout>
-    </App>
+    <Layout style={{height: '100svh'}}>
+      {showPrivate && <Header {...props} hub={hub} />}
+      <Outlet context={{hub, user, isPublic}} />
+      {showPrivate && <Footer {...props} />}
+    </Layout>
   ) : (
     <NoHub error={{status: 404}} />
   );

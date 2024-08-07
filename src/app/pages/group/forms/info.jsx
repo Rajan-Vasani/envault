@@ -17,7 +17,6 @@ export const GroupInfo = props => {
 
   useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
-    if (!node) return;
     form.setFieldsValue(node);
   }, [node, form]);
 
@@ -72,7 +71,7 @@ export const GroupInfo = props => {
         <TreeSelect
           placeholder="None"
           allowClear={true}
-          treeData={dataSource}
+          treeData={dataSource.map(data => ({...data, disabled: data.id === node.id}))}
           treeDataSimpleMode={{pId: 'parent', id: 'id', rootPId: null}}
           fieldNames={{value: 'id', label: 'name'}}
           showSearch

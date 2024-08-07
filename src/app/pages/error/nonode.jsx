@@ -12,6 +12,7 @@ const useStyles = createStyles(({token, css}, {isOver}) => ({
     border: ${isOver ? `1px solid ${token.colorPrimaryBorder}` : ''};
     box-shadow: ${isOver ? `0 0 10px ${token.colorPrimaryBorderHover}` : ''};
     background-color: ${token.colorBgLayout};
+    max-width: 80%;
   `,
   icon: css`
     padding: 40px;

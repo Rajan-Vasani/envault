@@ -1,13 +1,7 @@
-import {useQueryClient} from '@tanstack/react-query';
-import {API_QUERY} from 'constant/query';
-import {useNode} from 'hooks/useNode';
 import {isArray, mergeWith, union} from 'lodash';
 import {createContext, useContext, useEffect, useState} from 'react';
-import {useMatch} from 'react-router-dom';
 
 const NodeContext = createContext({
-  node: {},
-  config: {},
   setConfig: () => {},
   mergeConfig: () => {},
 });
@@ -16,26 +10,18 @@ export const useNodeContext = () => {
   return useContext(NodeContext);
 };
 
-export const NodeProvider = ({children}) => {
-  // fetch route params
-  const {params: {nodeType, nodeId} = {}} = useMatch('hub/explore/node/:nodeType?/:nodeId?');
-  // fetch node data, preload with route params
-  const queryClient = useQueryClient();
-  const cachedNode = queryClient
-    .getQueryData([API_QUERY.NODE_DATA, globalThis.envault.hub, 'node'])
-    ?.find(node => node.id === +nodeId);
-  const {data: [freshNode] = []} = useNode({type: nodeType, id: +nodeId, enabled: !!(nodeType && nodeId != -1)});
-  const node = freshNode || cachedNode;
-
+export const NodeProvider = ({children, node}) => {
   // config state is the shared config of the node
-  const [config, setConfig] = useState({});
+  const [config, setConfig] = useState(node.config || {});
+
   // update config state when node or route params change
   useEffect(() => {
-    if (node?.config) {
+    if (node.config) {
       return setConfig(structuredClone(node.config));
+    } else {
+      setConfig({});
     }
-    setConfig({});
-  }, [node, nodeId, nodeType]);
+  }, [node.config]);
 
   const mergeConfig = newConfig => {
     setConfig(config =>

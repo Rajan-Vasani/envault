@@ -1,4 +1,6 @@
 .env.*
+.env
+example.env
 .yarn/*
 !.yarn/cache
 !.yarn/patches

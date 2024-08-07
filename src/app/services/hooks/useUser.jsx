@@ -99,27 +99,30 @@ export const useOwner = (props = {}) => {
   const userId = user?.id || Cookies.get('uid');
   return useQueries({
     queries: [userQuery({id: userId}), roleQuery({hub}), hubUserQuery({hub})],
-    combine: useCallback(results => {
-      const [user, role, hubUser] = results;
-      const isLoading = results.some(query => query.isLoading);
-      const isSuccess = results.every(query => query.isSuccess);
-      const isError = results.some(query => query.isError);
-      const isSomeSuccess = results.some(query => query.isSuccess);
-      const userData = user.isSuccess && user.data[0];
-      const isAppAdmin = !!userData?.app_admin;
-      const isHubAdmin = !!userData?.hubs?.find(h => h.id === hub)?.is_admin;
-      const isAdmin = isAppAdmin || isHubAdmin;
-      const hubUserData = hubUser.isSuccess
-        ? hubUser.data.map(user => ({...user, disabled: isAdmin ? !isAdmin : user.id !== userData.id}))
-        : [];
-      const actorData = union(hubUserData, role.data);
-      return {
-        isLoading,
-        isSuccess,
-        isSomeSuccess,
-        isError,
-        data: actorData,
-      };
-    }),
+    combine: useCallback(
+      results => {
+        const [user, role, hubUser] = results;
+        const isLoading = results.some(query => query.isLoading);
+        const isSuccess = results.every(query => query.isSuccess);
+        const isError = results.some(query => query.isError);
+        const isSomeSuccess = results.some(query => query.isSuccess);
+        const userData = user.isSuccess && user.data[0];
+        const isAppAdmin = !!userData?.app_admin;
+        const isHubAdmin = !!userData?.hubs?.find(h => h.id === hub)?.is_admin;
+        const isAdmin = isAppAdmin || isHubAdmin;
+        const hubUserData = hubUser.isSuccess
+          ? hubUser.data.map(user => ({...user, disabled: isAdmin ? !isAdmin : user.id !== userData.id}))
+          : [];
+        const actorData = union(hubUserData, role.data);
+        return {
+          isLoading,
+          isSuccess,
+          isSomeSuccess,
+          isError,
+          data: actorData,
+        };
+      },
+      [hub],
+    ),
   });
 };

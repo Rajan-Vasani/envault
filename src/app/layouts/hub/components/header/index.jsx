@@ -6,6 +6,7 @@ import {routes} from 'constant/routes';
 import {useUserUpdateMutation} from 'hooks/useUser';
 import {useMemo, useState, useTransition} from 'react';
 import {Link, useLocation, useNavigate, useOutletContext} from 'react-router-dom';
+import {getInitials} from 'utils/string';
 const {Header} = Layout;
 
 const NotificationBell = props => {
@@ -22,16 +23,6 @@ const NotificationBell = props => {
       </Badge>
     </Link>
   );
-};
-
-const getUserInitials = userName => {
-  const name = userName ? userName : 'ME';
-  const names = name.split(' ');
-  let initials = names[0].substring(0, 1).toUpperCase();
-  if (names.length > 1) {
-    initials += [...names].pop().substring(0, 1).toUpperCase();
-  }
-  return initials;
 };
 
 const useStyles = createStyles(({token, css}) => ({
@@ -205,7 +196,7 @@ const HeaderNav = props => {
                 onOpenChange={handleOpenChange}
                 open={open}
               >
-                <Avatar style={{textTransform: 'uppercase', cursor: 'pointer'}}>{getUserInitials(user?.name)}</Avatar>
+                <Avatar style={{textTransform: 'uppercase', cursor: 'pointer'}}>{getInitials(user?.name)}</Avatar>
               </Dropdown>
             </Col>
           </Row>

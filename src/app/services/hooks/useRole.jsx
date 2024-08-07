@@ -32,13 +32,16 @@ export const useRoleUsers = props => {
   const {hub = globalThis.envault.hub, roles} = props;
   return useQueries({
     queries: roles ? roles.map(role => roleMemberQuery({hub, role})) : [],
-    combine: useCallback(results => ({
-      isLoading: results.some(query => query.isLoading),
-      isSuccess: results.every(query => query.isSuccess),
-      isSomeSuccess: results.some(query => query.isSuccess),
-      isError: results.some(query => query.isError),
-      data: results.map(result => result.data).reduce((a, v) => ({...a, ...v}), {}),
-    })),
+    combine: useCallback(
+      results => ({
+        isLoading: results.some(query => query.isLoading),
+        isSuccess: results.every(query => query.isSuccess),
+        isSomeSuccess: results.some(query => query.isSuccess),
+        isError: results.some(query => query.isError),
+        data: results.map(result => result.data).reduce((a, v) => ({...a, ...v}), {}),
+      }),
+      [],
+    ),
   });
 };
 
@@ -46,13 +49,16 @@ export const useUserRoles = props => {
   const {hub = globalThis.envault.hub, users} = props;
   return useQueries({
     queries: users ? users.map(user => roleMemberQuery({hub, user})) : [],
-    combine: useCallback(results => ({
-      isLoading: results.some(query => query.isLoading),
-      isSuccess: results.every(query => query.isSuccess),
-      isSomeSuccess: results.some(query => query.isSuccess),
-      isError: results.some(query => query.isError),
-      data: compact(results.map(result => result.data).reduce((a, v) => a.concat(v), [])),
-    })),
+    combine: useCallback(
+      results => ({
+        isLoading: results.some(query => query.isLoading),
+        isSuccess: results.every(query => query.isSuccess),
+        isSomeSuccess: results.some(query => query.isSuccess),
+        isError: results.some(query => query.isError),
+        data: compact(results.map(result => result.data).reduce((a, v) => a.concat(v), [])),
+      }),
+      [],
+    ),
   });
 };
 

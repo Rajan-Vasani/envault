@@ -40,13 +40,16 @@ export const useSeriesDataList = props => {
   const {hub = globalThis.envault.hub, series, ...rest} = props;
   return useQueries({
     queries: series ? series.map(({id}) => seriesDataQuery({series: id, hub, ...rest})) : [],
-    combine: useCallback(results => ({
-      isLoading: results.some(query => query.isLoading),
-      isSuccess: results.every(query => query.isSuccess),
-      isSomeSuccess: results.some(query => query.isSuccess),
-      isError: results.some(query => query.isError),
-      data: series.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
-    })),
+    combine: useCallback(
+      results => ({
+        isLoading: results.some(query => query.isLoading),
+        isSuccess: results.every(query => query.isSuccess),
+        isSomeSuccess: results.some(query => query.isSuccess),
+        isError: results.some(query => query.isError),
+        data: series.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
+      }),
+      [series],
+    ),
   });
 };
 
@@ -62,13 +65,16 @@ export const useTokenisedSeriesList = props => {
           },
         }))
       : [],
-    combine: useCallback(results => ({
-      isLoading: results.some(query => query.isLoading),
-      isSuccess: results.every(query => query.isSuccess),
-      isSomeSuccess: results.some(query => query.isSuccess),
-      isError: results.some(query => query.isError),
-      data: results.map(s => s.data).reduce((a, v) => ({...a, ...v}), {}),
-    })),
+    combine: useCallback(
+      results => ({
+        isLoading: results.some(query => query.isLoading),
+        isSuccess: results.every(query => query.isSuccess),
+        isSomeSuccess: results.some(query => query.isSuccess),
+        isError: results.some(query => query.isError),
+        data: results.map(s => s.data).reduce((a, v) => ({...a, ...v}), {}),
+      }),
+      [],
+    ),
   });
 };
 

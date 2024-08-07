@@ -17,27 +17,6 @@ const {Text} = Typography;
 
 const ConditionalWrapper = ({condition, wrapper, children}) => (condition ? wrapper(children) : children);
 
-const useStyles = createStyles(({token, css}) => ({
-  sider: css`
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background: ${token.colorBgContainer} !important;
-  `,
-  poweredBy: css`
-    position: sticky;
-    bottom: 3px;
-    align-self: center;
-    height: 1.5rem;
-    padding: 3px;
-  `,
-  tree: css`
-    .ant-tree-switcher {
-      display: none;
-    }
-  `,
-}));
-
 const useItemStyles = createStyles(({token, css, cx}, {isNew = false}) => ({
   item: cx(
     css`
@@ -45,6 +24,7 @@ const useItemStyles = createStyles(({token, css, cx}, {isNew = false}) => ({
       border: 1px solid ${token.colorBorder};
       border-radius: ${token.borderRadius}px;
       box-shadow: ${token.boxShadowTertiary};
+      width: 100%;
     `,
     isNew &&
       css`
@@ -58,17 +38,17 @@ export const NodeItem = props => {
   const {styles} = useItemStyles({isNew});
   return (
     <div className={styles.item}>
-      <Flex justify={'space-between'} style={{padding: '3px'}}>
-        <Flex justify={'flex-start'} align={'center'} gap={'small'}>
+      <Flex justify={'space-between'} style={{padding: '3px', width: '100%'}}>
+        <Flex justify={'flex-start'} align={'center'} gap={'small'} flex={1}>
           <Button icon={icon} type={isNew ? 'dashed' : undefined} size={'large'} onClick={onIconClick} />
-          <Flex vertical>
+          <Flex vertical flex={1} style={{width: 0}}>
             <Text ellipsis>{name}</Text>
             <Text ellipsis type={'secondary'}>
               {description}
             </Text>
           </Flex>
         </Flex>
-        <Flex justify={'flex-end'} align={'center'}>
+        <Flex justify={'flex-end'} align={'center'} flex={'none'}>
           {actions.map((action, index) => (
             <div key={index}>{action}</div>
           ))}
@@ -110,55 +90,78 @@ const ItemComponent = props => {
   }, []);
 
   return (
-    <>
-      <ConditionalWrapper
-        condition={nodeInfo.draggable}
-        wrapper={children => (
-          <DraggableItem
-            id={item.id}
-            label={item.name}
-            data={item}
-            title={item.type}
-            className={'newWidget grid-stack-item'}
-            gs-w={'6'}
-            gs-h={'4'}
-            gs-id={item.id}
-            gs-type={item.type === 'series' ? 'chart' : item.type === 'timelapse' ? 'gallery' : item.type}
-          >
-            {children}
-          </DraggableItem>
-        )}
-      >
-        <NodeItem
-          key={item.id}
-          name={item.name}
-          icon={<Icon {...icon} />}
-          onIconClick={handleIconClick}
-          isNew={isNew}
-          actions={[
-            item.geom && <Button type="text" icon={<Icon icon={'AimOutlined'} type={'ant'} />} />,
-            item.type === 'group' && item.permission?.create && (
-              <Tooltip placement={'right'} title={'Create Node'}>
-                <Button
-                  type="text"
-                  icon={<Icon icon={'SisternodeOutlined'} type={'ant'} />}
-                  onClick={e => onCreate(e, item)}
-                />
-              </Tooltip>
-            ),
-            item.latest && (
-              <>
-                <Tag color={'green'}>
-                  {item.latest.text} {item.variable.unit}
-                </Tag>
-              </>
-            ),
-          ]}
-        />
-      </ConditionalWrapper>
-    </>
+    <ConditionalWrapper
+      condition={nodeInfo.draggable}
+      wrapper={children => (
+        <DraggableItem
+          id={item.id}
+          label={item.name}
+          data={item}
+          title={item.type}
+          className={'newWidget grid-stack-item'}
+          gs-w={'6'}
+          gs-h={'4'}
+          gs-id={item.id}
+          gs-type={item.type === 'series' ? 'chart' : item.type === 'timelapse' ? 'gallery' : item.type}
+        >
+          {children}
+        </DraggableItem>
+      )}
+    >
+      <NodeItem
+        key={item.id}
+        name={item.name}
+        icon={<Icon {...icon} />}
+        onIconClick={handleIconClick}
+        isNew={isNew}
+        actions={[
+          item.geom && <Button type="text" icon={<Icon icon={'AimOutlined'} type={'ant'} />} />,
+          item.type === 'group' && item.permission?.create && (
+            <Tooltip placement={'right'} title={'Create Node'}>
+              <Button
+                type="text"
+                icon={<Icon icon={'SisternodeOutlined'} type={'ant'} />}
+                onClick={e => onCreate(e, item)}
+              />
+            </Tooltip>
+          ),
+          item.latest && (
+            <Tag color={'green'}>
+              {item.latest.text} {item.variable.unit}
+            </Tag>
+          ),
+          isNew && (
+            <Button
+              type="text"
+              icon={<Icon icon={'CloseOutlined'} type={'ant'} />}
+              onClick={e => onCreate(e, {...item, remove: true})}
+            />
+          ),
+        ]}
+      />
+    </ConditionalWrapper>
   );
 };
+
+const useStyles = createStyles(({token, css}) => ({
+  sider: css`
+    height: 100%;
+    overflow-y: auto;
+    background: ${token.colorBgContainer} !important;
+  `,
+  poweredBy: css`
+    position: sticky;
+    bottom: 3px;
+    align-self: center;
+    height: 1.5rem;
+    padding: 3px;
+  `,
+  tree: css`
+    .ant-tree-switcher {
+      display: none;
+    }
+  `,
+}));
 
 export const Component = props => {
   const {isDarkMode, themeMode} = useThemeMode();
@@ -183,12 +186,12 @@ export const Component = props => {
     const ancestors = findAncestors(tree, nodeId)?.map(node => node.id);
     setExpandedKeys(expandedKeys => union(expandedKeys, ancestors));
     setSelectedKeys([nodeId]);
-  }, [nodeId, tree]);
+  }, [isFetched, nodeId, tree]);
 
   const onNodeClick = (props, info) => {
     const {type, id} = info.node;
     const path = generatePath('node/:type/:id', {type, id});
-    return navigate({pathname: path, search: searchParams.toString()});
+    return navigate({pathname: path, search: searchParams.toString()}, {unstable_viewTransition: true});
   };
 
   const onExpand = newExpandedKeys => {
@@ -201,15 +204,18 @@ export const Component = props => {
     e.stopPropagation();
     const newNode = {
       id: -1,
-      parent: item ? item.id : null,
+      parent: item?.id ?? null,
       name: 'New Node',
       type: 'create',
+      remove: item?.remove ?? false,
     };
     setExpandedKeys([...expandedKeys, item?.id]);
     setSelectedKeys([newNode.id]);
     updateNode(newNode);
-    const pathname = generatePath('node/create/:id', {id: newNode.id});
-    navigate({pathname});
+    if (!newNode.remove) {
+      const pathname = generatePath('node/:type/:id', {type: newNode.type, id: newNode.id});
+      navigate({pathname}, {unstable_viewTransition: true});
+    }
   };
 
   const onSearch = e => {
@@ -278,7 +284,7 @@ export const Component = props => {
                         onCreate={onCreate}
                       />
                     )}
-                    fieldNames={{key: 'id'}}
+                    fieldNames={{key: 'id', title: 'type'}}
                     onSelect={onNodeClick}
                     showLine={false}
                     showIcon={false}
