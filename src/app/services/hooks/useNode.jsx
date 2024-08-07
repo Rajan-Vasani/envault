@@ -39,13 +39,16 @@ export const useActorNodeACLList = props => {
   const {hub, actors, ...rest} = props;
   return useQueries({
     queries: actors ? actors.map(({id}) => actorNodeACLQuery({hub, actor: id, ...rest})) : [],
-    combine: useCallback(results => ({
-      isLoading: results.some(query => query.isLoading),
-      isSuccess: results.every(query => query.isSuccess),
-      isSomeSuccess: results.some(query => query.isSuccess),
-      isError: results.some(query => query.isError),
-      data: actors.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
-    })),
+    combine: useCallback(
+      results => ({
+        isLoading: results.some(query => query.isLoading),
+        isSuccess: results.every(query => query.isSuccess),
+        isSomeSuccess: results.some(query => query.isSuccess),
+        isError: results.some(query => query.isError),
+        data: actors.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
+      }),
+      [actors],
+    ),
   });
 };
 
@@ -123,6 +126,9 @@ export const useNodeSaveMutation = (props = {}) => {
       if (!previous) return [newNode];
       if (!newNode.id) {
         newNode.id = -1;
+      }
+      if (newNode.remove) {
+        return previous.filter(({id}) => id !== newNode.id);
       }
       const node = previous.find(n => n.id === newNode.id);
       if (node) {

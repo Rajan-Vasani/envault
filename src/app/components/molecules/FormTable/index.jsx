@@ -234,7 +234,6 @@ export const FormTable = props => {
       </Flex>
       {responsive.lg ? (
         <Table
-          size={'small'}
           columns={builtColumns}
           dataSource={dataSource}
           components={components}

@@ -24,10 +24,9 @@ import {
   RouterProvider,
   useLoaderData,
   useRouteError,
-  useSearchParams,
+  useSearchParams
 } from 'react-router-dom';
 import {BaseService} from 'services/api/base.service';
-import {useThemeApp} from './config/themes/ThemeColorProvider';
 
 const Logout = () => {
   const [searchParams] = useSearchParams();
@@ -214,8 +213,7 @@ const HubGlobal = createGlobalStyle`
 const AuthBoundary = () => {
   const {user, isPublic} = useLoaderData();
   const hub = user?.hubs?.find(hub => hub.name === globalThis.envault.hub);
-  const {setPrimaryColor} = useThemeApp();
-  setPrimaryColor(hub?.config?.colorPrimary || '#13aeef');
+
 
   if (user) {
     return (
@@ -349,17 +347,17 @@ const router = createBrowserRouter(
                     {
                       path: 'variable/:nodeId?',
                       id: 'variable',
-                      lazy: () => import('pages/error/nonode'),
+                      lazy: () => import('pages/variable'),
                     },
                     {
                       path: 'task/:nodeId?',
                       id: 'task',
-                      lazy: () => import('app/pages/task'),
+                      lazy: () => import('pages/task'),
                     },
                     {
                       path: 'notification/:nodeId?',
                       id: 'notification',
-                      lazy: () => import('pages/error/nonode'),
+                      lazy: () => import('pages/notification'),
                     },
                     {
                       path: 'group/:nodeId?',
@@ -418,22 +416,22 @@ const router = createBrowserRouter(
                 {
                   path: 'config',
                   id: 'config',
-                  lazy: () => import('pages/settings/forms/hub'),
+                  lazy: () => import('app/pages/settings/hub'),
                 },
                 {
                   path: 'users',
                   id: 'users',
-                  lazy: () => import('pages/settings/forms/users'),
+                  lazy: () => import('app/pages/settings/users'),
                 },
                 {
                   path: 'roles',
                   id: 'roles',
-                  lazy: () => import('pages/settings/forms/roles'),
+                  lazy: () => import('app/pages/settings/roles'),
                 },
                 {
                   path: 'tasks',
                   id: 'tasks',
-                  lazy: () => import('pages/settings/forms/tasks'),
+                  lazy: () => import('app/pages/settings/tasks'),
                 },
                 {
                   path: 'tasks/:nodeId',
@@ -443,7 +441,7 @@ const router = createBrowserRouter(
                 {
                   path: 'billing',
                   id: 'billing',
-                  lazy: () => import('pages/settings/forms/billing'),
+                  lazy: () => import('app/pages/settings/billing'),
                 },
               ],
             },
@@ -459,11 +457,7 @@ const router = createBrowserRouter(
             },
             {
               path: 'home',
-              lazy: () => import('pages/user/home'),
-            },
-            {
-              path: 'profile',
-              lazy: () => import('pages/user/profile'),
+              lazy: () => import('app/pages/user'),
             },
             {
               path: 'admin',

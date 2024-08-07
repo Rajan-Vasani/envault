@@ -34,7 +34,7 @@ export const Component = props => {
     updateNode({type, id});
     const pathname = generatePath(`../:type/:id`, {type, id});
     const search = new URLSearchParams({tab: 'info'}).toString();
-    navigate({pathname, search});
+    navigate({pathname, search}, {unstable_viewTransition: true});
   };
 
   return (

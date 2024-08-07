@@ -40,11 +40,6 @@ export const Component = props => {
       label: <Link to={`/user/${userId}/home`}>Home</Link>,
       icon: <Icon icon={'HomeOutlined'} type={'ant'} />,
     },
-    {
-      key: 'profile',
-      label: <Link to={`/user/${userId}/profile`}>Profile</Link>,
-      icon: <Icon icon={'UserOutlined'} type={'ant'} />,
-    },
   ];
 
   return (
