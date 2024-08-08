@@ -11,7 +11,7 @@ const GalleryViewControl = props => {
   }, [activeTimelapse]);
 
   if (!selectedNodes.length) return null;
-  
+
   return (
     <div
       style={{

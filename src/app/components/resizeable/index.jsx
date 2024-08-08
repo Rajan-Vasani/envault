@@ -216,9 +216,13 @@ const Resizeable = ({children, ...props}) => {
     isResizing,
   });
 
+  useEffect(() => {
+    setSpace(collapsed ? collapsedSize : initSize);
+  }, [collapsed, collapsedSize, initSize]);
+
   const triggerCollapseChange = value => {
     if (collapsed !== value.collapsed) {
-      onCollapse?.(value);
+      onCollapse?.(value.collapsed);
     }
   };
 

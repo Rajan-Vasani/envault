@@ -38,7 +38,7 @@ const useStyles = createStyles(({token, css}) => ({
     margin-top: 10;
   `,
 }));
-const {Title, Text} = Typography;
+const {Title} = Typography;
 
 export const Component = props => {
   const {isDarkMode} = useThemeMode();
@@ -60,11 +60,7 @@ export const Component = props => {
       children: [
         {
           key: 'config',
-          label: (
-            <Link to={routes.config}>
-              <Text>Hub</Text>
-            </Link>
-          ),
+          label: <Link to={routes.config}>Hub</Link>,
           icon: <Icon icon={'SettingOutlined'} type={'ant'} />,
         },
       ],
@@ -81,21 +77,13 @@ export const Component = props => {
       children: [
         {
           key: 'users',
-          label: (
-            <Link to={routes.users}>
-              <Text>Users</Text>
-            </Link>
-          ),
+          label: <Link to={routes.users}>Users</Link>,
           icon: <Icon icon={'UserOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
         {
           key: 'roles',
-          label: (
-            <Link to={routes.roles}>
-              <Text>Roles</Text>
-            </Link>
-          ),
+          label: <Link to={routes.roles}>Roles</Link>,
 
           icon: <Icon icon={'TeamOutlined'} type={'ant'} />,
           disabled: !isAdmin,
@@ -113,11 +101,7 @@ export const Component = props => {
       children: [
         {
           key: 'tasks',
-          label: (
-            <Link to={routes.tasks}>
-              <Text>Tasks</Text>
-            </Link>
-          ),
+          label: <Link to={routes.tasks}>Tasks</Link>,
           icon: <Icon icon={'ScheduleOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
@@ -137,7 +121,7 @@ export const Component = props => {
           key: 'billing',
           label: (
             <Link to={routes.billing}>
-              <Text>Billing</Text>
+              Billing
               <Tag icon={<Icon icon={'ExperimentOutlined'} type={'ant'} style={{padding: '2px'}} />} color="green" />
             </Link>
           ),

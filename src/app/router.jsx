@@ -24,7 +24,7 @@ import {
   RouterProvider,
   useLoaderData,
   useRouteError,
-  useSearchParams
+  useSearchParams,
 } from 'react-router-dom';
 import {BaseService} from 'services/api/base.service';
 
@@ -213,8 +213,6 @@ const HubGlobal = createGlobalStyle`
 const AuthBoundary = () => {
   const {user, isPublic} = useLoaderData();
   const hub = user?.hubs?.find(hub => hub.name === globalThis.envault.hub);
-
-
   if (user) {
     return (
       <ThemeProvider
@@ -458,6 +456,10 @@ const router = createBrowserRouter(
             {
               path: 'home',
               lazy: () => import('app/pages/user'),
+            },
+            {
+              path: 'hubs',
+              lazy: () => import('pages/admin/hubs'),
             },
             {
               path: 'admin',

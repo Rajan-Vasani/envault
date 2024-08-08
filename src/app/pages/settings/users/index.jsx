@@ -10,9 +10,9 @@ import {useEffect, useState} from 'react';
 
 const useStyles = createStyles(({token, css}) => ({
   card: css`
-    width: 65vw;
     margin: auto;
     box-shadow: 0px 4px 42px -9px rgba(0, 0, 0, 0.1);
+    margin-top: 20;
   `,
 }));
 
@@ -188,8 +188,8 @@ export const Component = props => {
 
   return (
     <ErrorBoundary>
-      <Form form={form} component={false}>
-        <Card className={styles.card}>
+      <Form form={form} component={false} justify={'center'}>
+        <Card className={styles.card} style={{width: '90%'}}>
           <FormTable
             columns={columns}
             dataSource={dataSource}
@@ -204,8 +204,8 @@ export const Component = props => {
             onRemove={handleRemoveUser}
             onDisabled={setDisabled}
             disabled={disabled}
-            maxTableWidth={'60vw'}
-            maxFormWidth={'60vw'}
+            maxTableWidth={'100%'}
+            maxFormWidth={'100%'}
           />
         </Card>
       </Form>

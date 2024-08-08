@@ -51,13 +51,20 @@ export const NodeSider = props => {
   const navigate = useNavigate();
   const [form, setForm] = useState();
   const tab = searchParams.get('tab') || undefined;
-  const [collapsed, setCollapsed] = useState(!searchParams.has('tab'));
+  const [collapsed, setCollapsed] = useState(!tab);
 
   useEffect(() => {
     if (node.id === -1) {
       setDisabled(false);
     }
   }, [node.id]); // new node mode
+  useEffect(() => {
+    console.log('tab', !tab);
+    setCollapsed(!tab);
+  }, [tab]);
+  useEffect(() => {
+    console.log('collapsed', collapsed);
+  }, [collapsed]);
 
   const handleTabChange = e => {
     setSearchParams({...searchParams, tab: e});
@@ -84,6 +91,9 @@ export const NodeSider = props => {
       );
     }
   };
+  const handleCollapse = value => {
+    setCollapsed(value);
+  };
 
   const items = [
     {
@@ -99,7 +109,7 @@ export const NodeSider = props => {
   ];
 
   return (
-    <Resizeable placement={'right'} initWidth={'340'} collapsed={collapsed} onCollapse={setCollapsed}>
+    <Resizeable placement={'right'} initWidth={340} collapsed={collapsed} onCollapse={handleCollapse}>
       <Sider className={styles.sider} width={'auto'}>
         <Flex vertical justify={'space-between'} style={{height: '100%'}}>
           <ErrorBoundary>

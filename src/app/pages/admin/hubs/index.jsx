@@ -14,7 +14,7 @@ const useStyles = createStyles(({token, css}) => ({
     border: 1px solid ${token.colorBorder};
   `,
   card: css`
-    width: 50vw;
+    /* width: 50vw; */
     margin: auto;
     box-shadow: 0px 4px 42px -9px rgba(0, 0, 0, 0.1);
   `,
@@ -136,12 +136,12 @@ export const Component = () => {
           key={'settings'}
           href={`${globalThis.envault.getOrigin(record.name)}/hub/settings`}
           icon={<Icon icon={'SettingOutlined'} type={'ant'} />}
-        ></Button>,
+        />,
         <Button
           key={'explore'}
           href={`${globalThis.envault.getOrigin(record.name)}/hub/explore`}
           icon={<Icon icon={'LoginOutlined'} type={'ant'} />}
-        ></Button>,
+        />,
       ],
     },
   };
@@ -149,7 +149,7 @@ export const Component = () => {
   return (
     <Flex vertical gap={'middle'}>
       <Form form={form} component={false}>
-        <Card className={styles.card}>
+        <Card className={styles.card} style={{width: '60%'}}>
           <FormTable
             className={styles.table}
             columns={columns}
@@ -165,8 +165,8 @@ export const Component = () => {
             onRemove={handleDelete}
             onDisabled={setDisabled}
             disabled={disabled}
-            maxTableWidth={'45vw'}
-            maxFormWidth={'45vw'}
+            maxTableWidth={'100%'}
+            maxFormWidth={'100%'}
           />
         </Card>
       </Form>

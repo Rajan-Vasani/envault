@@ -9,7 +9,7 @@ const useStyles = createStyles(({token, css}) => ({
     border-radius: 15px;
 
     .ant-table-thead > tr > th {
-      background-color: #ccd1d1;
+      background-color: ${token.colorBorder};
       font-weight: bold;
       text-align: left;
       padding-left: 20px;
@@ -17,13 +17,13 @@ const useStyles = createStyles(({token, css}) => ({
     .ant-table-tbody > tr > td {
       text-align: left;
       padding-left: 20px;
+      color: ${token.colorText};
     }
     .ant-table-pagination {
       padding-right: 20px;
     }
   `,
   headerFlex: css`
-    align-items: flex-end;
     margin: auto;
   `,
 }));
@@ -178,7 +178,7 @@ export const FormTable = props => {
                           disabled={disabled}
                           icon={<Icon icon={'EditOutlined'} type={'ant'} />}
                           onClick={() => triggerEdit(record)}
-                        ></Button>
+                        />
                       )}
                       <Popconfirm
                         key={'popDelete'}
@@ -193,7 +193,7 @@ export const FormTable = props => {
                           disabled={disabled}
                           danger
                           icon={<Icon icon={'DeleteOutlined'} type={'ant'} />}
-                        ></Button>
+                        />
                       </Popconfirm>
                       {!saved && (
                         <Tag
@@ -239,7 +239,7 @@ export const FormTable = props => {
 
   return (
     <Flex vertical gap={'small'} className={styles.headerFlex} style={{width: maxFormWidth}}>
-      <Flex gap={'small'} justify={'flex-end'} align={'center'}>
+      <Flex gap={'small'} justify={'flex-end'} align={'center'} style={{marginBottom: 10}}>
         {headerElements}
         <Button
           key={'new'}

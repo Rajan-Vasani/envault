@@ -22,7 +22,7 @@ const useStyles = createStyles(({css}, {size}) => ({
       height: ${size && `${size?.h}px !important`};
       margin: 0;
     }
-    `,
+  `,
 }));
 
 const ImageUpload = ({label, name, onImageSelect, initialValues, disabled, size, warping}) => {
