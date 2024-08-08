@@ -1,4 +1,4 @@
-import {Flex, Layout, Menu, Tag} from 'antd';
+import {Flex, Layout, Menu, Tag, Typography} from 'antd';
 import {createStyles, useThemeMode} from 'antd-style';
 import Icon from 'components/atoms/Icon';
 import ErrorBoundary from 'components/error/boundary';
@@ -30,11 +30,15 @@ const useStyles = createStyles(({token, css}) => ({
   content: css`
     padding: 20;
     margin: 0;
-    background: ${token.colorBgContainer};
-    border-radius: ${token.borderRadius}px;
     overflow-y: auto;
   `,
+  title: css`
+    padding: 0px;
+    height: 15px;
+    margin-top: 10;
+  `,
 }));
+const {Title, Text} = Typography;
 
 export const Component = props => {
   const {isDarkMode} = useThemeMode();
@@ -48,11 +52,19 @@ export const Component = props => {
     {
       type: 'group',
       key: 'general',
-      label: 'General',
+      label: (
+        <Title className={styles.title} level={5}>
+          General
+        </Title>
+      ),
       children: [
         {
           key: 'config',
-          label: <Link to={routes.config}>Hub</Link>,
+          label: (
+            <Link to={routes.config}>
+              <Text>Hub</Text>
+            </Link>
+          ),
           icon: <Icon icon={'SettingOutlined'} type={'ant'} />,
         },
       ],
@@ -60,17 +72,31 @@ export const Component = props => {
     {
       type: 'group',
       key: 'access',
-      label: 'Access',
+      label: (
+        <Title className={styles.title} level={5}>
+          Access
+        </Title>
+      ),
+
       children: [
         {
           key: 'users',
-          label: <Link to={routes.users}>Users</Link>,
+          label: (
+            <Link to={routes.users}>
+              <Text>Users</Text>
+            </Link>
+          ),
           icon: <Icon icon={'UserOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
         {
           key: 'roles',
-          label: <Link to={routes.roles}>Roles</Link>,
+          label: (
+            <Link to={routes.roles}>
+              <Text>Roles</Text>
+            </Link>
+          ),
+
           icon: <Icon icon={'TeamOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
@@ -79,11 +105,19 @@ export const Component = props => {
     {
       type: 'group',
       key: 'processing',
-      label: 'Processing',
+      label: (
+        <Title className={styles.title} level={5}>
+          Processing
+        </Title>
+      ),
       children: [
         {
           key: 'tasks',
-          label: <Link to={routes.tasks}>Tasks</Link>,
+          label: (
+            <Link to={routes.tasks}>
+              <Text>Tasks</Text>
+            </Link>
+          ),
           icon: <Icon icon={'ScheduleOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
@@ -92,16 +126,22 @@ export const Component = props => {
     {
       type: 'group',
       key: 'admin',
-      label: 'Administration',
+      label: (
+        <Title className={styles.title} level={5}>
+          Administration
+        </Title>
+      ),
+
       children: [
         {
           key: 'billing',
           label: (
             <Link to={routes.billing}>
-              Billing{' '}
+              <Text>Billing</Text>
               <Tag icon={<Icon icon={'ExperimentOutlined'} type={'ant'} style={{padding: '2px'}} />} color="green" />
             </Link>
           ),
+
           icon: <Icon icon={'DollarOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
@@ -111,9 +151,9 @@ export const Component = props => {
 
   return (
     <Layout>
-      <Resizeable placement={'left'} initWidth={'340'}>
+      <Resizeable placement={'left'} initWidth={280}>
         <Sider className={styles.sider} width={'auto'}>
-          <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%'}}>
+          <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%', width: 250}}>
             <Menu
               mode={'vertical'}
               items={settingsItems}

@@ -1,4 +1,5 @@
-import {App, Flex, Form, Input, Select, Switch, Tag} from 'antd';
+import {App, Card, Flex, Form, Input, Select, Switch, Tag} from 'antd';
+import {createStyles} from 'antd-style';
 import ErrorBoundary from 'app/components/error/boundary';
 import FormTable from 'components/molecules/FormTable';
 import {useHubUserCreateMutation, useHubUserRemoveMutation, useHubUserUpdateMutation} from 'hooks/useHub';
@@ -6,6 +7,14 @@ import {useRole, useRoleMemberDeleteMutation, useRoleMemberPutMutation} from 'ho
 import {useHubUserRoles} from 'hooks/useUser';
 import {differenceBy, isEqual} from 'lodash';
 import {useEffect, useState} from 'react';
+
+const useStyles = createStyles(({token, css}) => ({
+  card: css`
+    width: 65vw;
+    margin: auto;
+    box-shadow: 0px 4px 42px -9px rgba(0, 0, 0, 0.1);
+  `,
+}));
 
 export const Component = props => {
   const {data: userRolesData = [], isSuccess} = useHubUserRoles();
@@ -19,6 +28,7 @@ export const Component = props => {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const {notification} = App.useApp();
+  const {styles} = useStyles();
 
   useEffect(() => {
     setDataSource(userRolesData);
@@ -102,8 +112,7 @@ export const Component = props => {
         title: 'Name',
         key: 'name',
         dataIndex: 'name',
-        width: '20%',
-        defaultSortOrder: 'ascend',
+        width: '25%',
         sorter: 1,
         filter: true,
         filterSearch: true,
@@ -124,6 +133,7 @@ export const Component = props => {
       },
       {
         title: 'Role',
+        width: '15%',
         key: 'roles',
         dataIndex: 'roles',
         editable: true,
@@ -144,7 +154,9 @@ export const Component = props => {
           return (
             <Flex wrap>
               {roles.map(role => (
-                <Tag key={role.id}>{role.name}</Tag>
+                <Tag key={role.id} color="cyan">
+                  {role.name}
+                </Tag>
               ))}
             </Flex>
           );
@@ -152,7 +164,7 @@ export const Component = props => {
       },
       {
         title: 'Admin',
-        width: '10%',
+        width: '13%',
         key: 'is_admin',
         dataIndex: 'is_admin',
         editable: true,
@@ -177,21 +189,25 @@ export const Component = props => {
   return (
     <ErrorBoundary>
       <Form form={form} component={false}>
-        <FormTable
-          columns={columns}
-          dataSource={dataSource}
-          rowKey={record => record?.id}
-          loading={!isSuccess}
-          newText={'Invite'}
-          paginationText={'Users'}
-          onPagination={handleCancel}
-          onNew={handleNew}
-          onSave={handleSave}
-          onCancel={handleCancel}
-          onRemove={handleRemoveUser}
-          onDisabled={setDisabled}
-          disabled={disabled}
-        />
+        <Card className={styles.card}>
+          <FormTable
+            columns={columns}
+            dataSource={dataSource}
+            rowKey={record => record?.id}
+            loading={!isSuccess}
+            newText={'Invite'}
+            paginationText={'Users'}
+            onPagination={handleCancel}
+            onNew={handleNew}
+            onSave={handleSave}
+            onCancel={handleCancel}
+            onRemove={handleRemoveUser}
+            onDisabled={setDisabled}
+            disabled={disabled}
+            maxTableWidth={'60vw'}
+            maxFormWidth={'60vw'}
+          />
+        </Card>
       </Form>
     </ErrorBoundary>
   );
