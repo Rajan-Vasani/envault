@@ -1,32 +1,7 @@
 import {Button, Descriptions, Flex, Form, Popconfirm, Skeleton, Table, Tag} from 'antd';
-import {createStyles, useResponsive} from 'antd-style';
+import {useResponsive} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
 import {useState} from 'react';
-
-const useStyles = createStyles(({token, css}) => ({
-  formTable: css`
-    margin: auto;
-    border-radius: 15px;
-
-    .ant-table-thead > tr > th {
-      background-color: ${token.colorBorder};
-      font-weight: bold;
-      text-align: left;
-      padding-left: 20px;
-    }
-    .ant-table-tbody > tr > td {
-      text-align: left;
-      padding-left: 20px;
-      color: ${token.colorText};
-    }
-    .ant-table-pagination {
-      padding-right: 20px;
-    }
-  `,
-  headerFlex: css`
-    margin: auto;
-  `,
-}));
 
 const EditableCell = props => {
   const {
@@ -87,14 +62,11 @@ export const FormTable = props => {
     onSave,
     onCancel,
     onRemove,
-    maxTableWidth,
-    maxFormWidth,
   } = props;
   const form = Form.useFormInstance();
   const [editingKey, setEditingKey] = useState('');
   const isEditing = (record, key) => record === key;
   const responsive = useResponsive();
-  const {styles} = useStyles();
 
   const triggerPagination = () => {
     onPagination?.();
@@ -150,7 +122,7 @@ export const FormTable = props => {
               const editing = isEditing(rowKey(record), editingKey);
               const saved = !editing;
               return (
-                <Flex justify={'flex-start'} align={'center'} gap={'middle'} wrap>
+                <Flex justify={'flex-start'} align={'center'} gap={'small'} wrap>
                   {isCallable(column.actionItems, record)}
                   {column.editable && (
                     <>
@@ -178,7 +150,9 @@ export const FormTable = props => {
                           disabled={disabled}
                           icon={<Icon icon={'EditOutlined'} type={'ant'} />}
                           onClick={() => triggerEdit(record)}
-                        />
+                        >
+                          Edit
+                        </Button>
                       )}
                       <Popconfirm
                         key={'popDelete'}
@@ -193,7 +167,9 @@ export const FormTable = props => {
                           disabled={disabled}
                           danger
                           icon={<Icon icon={'DeleteOutlined'} type={'ant'} />}
-                        />
+                        >
+                          Delete
+                        </Button>
                       </Popconfirm>
                       {!saved && (
                         <Tag
@@ -238,8 +214,8 @@ export const FormTable = props => {
   };
 
   return (
-    <Flex vertical gap={'small'} className={styles.headerFlex} style={{width: maxFormWidth}}>
-      <Flex gap={'small'} justify={'flex-end'} align={'center'} style={{marginBottom: 10}}>
+    <Flex vertical gap={'small'}>
+      <Flex gap={'small'} justify={'flex-start'} align={'center'}>
         {headerElements}
         <Button
           key={'new'}
@@ -258,11 +234,10 @@ export const FormTable = props => {
       </Flex>
       {responsive.lg ? (
         <Table
-          className={styles.formTable}
           columns={builtColumns}
           dataSource={dataSource}
           components={components}
-          bordered={false}
+          bordered={true}
           sticky={true}
           expandable={expandable}
           rowKey={rowKey}
@@ -278,7 +253,6 @@ export const FormTable = props => {
             onChange: () => triggerPagination(),
             ...pagination,
           }}
-          style={{width: maxTableWidth}}
         />
       ) : loading ? (
         <Skeleton active />

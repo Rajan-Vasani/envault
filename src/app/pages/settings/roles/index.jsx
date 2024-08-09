@@ -1,20 +1,11 @@
 import {useQueryClient} from '@tanstack/react-query';
-import {App, Card, Form, Input} from 'antd';
-import {createStyles} from 'antd-style';
+import {App, Form, Input} from 'antd';
 import ErrorBoundary from 'components/error/boundary';
 import FormTable from 'components/molecules/FormTable';
 import {API_QUERY} from 'constant/query';
 import {useRole, useRoleDeleteMutation, useRolePutMutation} from 'hooks/useRole';
 import {isEqual} from 'lodash';
 import {useEffect, useState} from 'react';
-
-const useStyles = createStyles(({token, css}) => ({
-  card: css`
-    margin: auto;
-    box-shadow: 0px 4px 42px -9px rgba(0, 0, 0, 0.1);
-    margin-top: 20;
-  `,
-}));
 
 export const Component = props => {
   const {data: roleData = [], isPending} = useRole();
@@ -26,7 +17,6 @@ export const Component = props => {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const {notification} = App.useApp();
-  const {styles} = useStyles();
 
   useEffect(() => {
     setDataSource(roleData);
@@ -95,6 +85,7 @@ export const Component = props => {
         formItemProps: {
           rules: [{required: true}, {type: 'string'}],
         },
+        defaultSortOrder: 'ascend',
         sorter: 1,
         filter: true,
         filterSearch: true,
@@ -120,25 +111,21 @@ export const Component = props => {
   return (
     <ErrorBoundary>
       <Form form={form} component={false}>
-        <Card className={styles.card} style={{width: '90%'}}>
-          <FormTable
-            columns={columns}
-            dataSource={dataSource}
-            rowKey={record => record?.id}
-            loading={isPending}
-            newText={'Add Role'}
-            paginationText={'Roles'}
-            onPagination={handleCancel}
-            onNew={handleNew}
-            onSave={handleSave}
-            onCancel={handleCancel}
-            onRemove={handleDeleteRole}
-            onDisabled={setDisabled}
-            disabled={disabled}
-            maxTableWidth={'100%'}
-            maxFormWidth={'100%'}
-          />
-        </Card>
+        <FormTable
+          columns={columns}
+          dataSource={dataSource}
+          rowKey={record => record?.id}
+          loading={isPending}
+          newText={'Add Role'}
+          paginationText={'Roles'}
+          onPagination={handleCancel}
+          onNew={handleNew}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onRemove={handleDeleteRole}
+          onDisabled={setDisabled}
+          disabled={disabled}
+        />
       </Form>
     </ErrorBoundary>
   );

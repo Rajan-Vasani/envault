@@ -60,7 +60,11 @@ export const Component = props => {
       children: [
         {
           key: 'config',
-          label: <Link to={routes.config}>Hub</Link>,
+          label: (
+            <Link to={routes.config}>
+             Hub
+            </Link>
+          ),
           icon: <Icon icon={'SettingOutlined'} type={'ant'} />,
         },
       ],
@@ -77,13 +81,21 @@ export const Component = props => {
       children: [
         {
           key: 'users',
-          label: <Link to={routes.users}>Users</Link>,
+          label: (
+            <Link to={routes.users}>
+              Users
+            </Link>
+          ),
           icon: <Icon icon={'UserOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
         {
           key: 'roles',
-          label: <Link to={routes.roles}>Roles</Link>,
+          label: (
+            <Link to={routes.roles}>
+              Roles
+            </Link>
+          ),
 
           icon: <Icon icon={'TeamOutlined'} type={'ant'} />,
           disabled: !isAdmin,
@@ -101,7 +113,11 @@ export const Component = props => {
       children: [
         {
           key: 'tasks',
-          label: <Link to={routes.tasks}>Tasks</Link>,
+          label: (
+            <Link to={routes.tasks}>
+             Tasks
+            </Link>
+          ),
           icon: <Icon icon={'ScheduleOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },

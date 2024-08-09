@@ -40,8 +40,6 @@ export const Component = params => {
   const {styles} = useStyles();
   const screens = useBreakpoint();
 
-  console.log('useBreakpoint ', screens);
-
   const initHubValue = {
     name: '',
     full_name: '',
@@ -315,7 +313,7 @@ export const Component = params => {
                 </Col>
               </Row>
               <Text>Favicon (recommended at least 32 x 32)</Text>
-              <Row gutter={[, 18]} style={{marginTop: 15}}>
+              <Row gutter={[18]} style={{marginTop: 15}}>
                 <Col>
                   <Form.Item name={['config', 'favicon']}>
                     <Card>

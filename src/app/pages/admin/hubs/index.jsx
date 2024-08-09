@@ -1,4 +1,4 @@
-import {Button, Card, Flex, Form, Input} from 'antd';
+import {Button, Flex, Form, Input} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
 import FormTable from 'components/molecules/FormTable';
@@ -12,11 +12,6 @@ const useStyles = createStyles(({token, css}) => ({
     box-shadow: ${token.boxShadowTertiary};
     border-radius: ${token.borderRadius}px;
     border: 1px solid ${token.colorBorder};
-  `,
-  card: css`
-    /* width: 50vw; */
-    margin: auto;
-    box-shadow: 0px 4px 42px -9px rgba(0, 0, 0, 0.1);
   `,
 }));
 
@@ -136,12 +131,16 @@ export const Component = () => {
           key={'settings'}
           href={`${globalThis.envault.getOrigin(record.name)}/hub/settings`}
           icon={<Icon icon={'SettingOutlined'} type={'ant'} />}
-        />,
+        >
+          Settings
+        </Button>,
         <Button
           key={'explore'}
           href={`${globalThis.envault.getOrigin(record.name)}/hub/explore`}
           icon={<Icon icon={'LoginOutlined'} type={'ant'} />}
-        />,
+        >
+          Explore
+        </Button>,
       ],
     },
   };
@@ -149,26 +148,22 @@ export const Component = () => {
   return (
     <Flex vertical gap={'middle'}>
       <Form form={form} component={false}>
-        <Card className={styles.card} style={{width: '60%'}}>
-          <FormTable
-            className={styles.table}
-            columns={columns}
-            dataSource={dataSource}
-            rowKey={record => record?.name}
-            loading={!isSuccess}
-            newText={'New Hub'}
-            paginationText={'Hubs'}
-            onPagination={handleCancel}
-            onNew={handleNew}
-            onSave={handleSave}
-            onCancel={handleCancel}
-            onRemove={handleDelete}
-            onDisabled={setDisabled}
-            disabled={disabled}
-            maxTableWidth={'100%'}
-            maxFormWidth={'100%'}
-          />
-        </Card>
+        <FormTable
+          className={styles.table}
+          columns={columns}
+          dataSource={dataSource}
+          rowKey={record => record?.name}
+          loading={!isSuccess}
+          newText={'New Hub'}
+          paginationText={'Hubs'}
+          onPagination={handleCancel}
+          onNew={handleNew}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onRemove={handleDelete}
+          onDisabled={setDisabled}
+          disabled={disabled}
+        />
       </Form>
     </Flex>
   );
