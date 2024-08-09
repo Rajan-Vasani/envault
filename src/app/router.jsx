@@ -1,7 +1,7 @@
 import {QueryCache, QueryClient, QueryClientProvider, useQueryClient} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-import {App, Collapse, ConfigProvider, notification, Typography} from 'antd';
-import {createGlobalStyle, ThemeProvider} from 'antd-style';
+import {App, Collapse, ConfigProvider, Typography, notification} from 'antd';
+import {ThemeProvider, createGlobalStyle} from 'antd-style';
 import CenturyGothic from 'assets/fonts/CenturyGothic.ttf';
 import HelveticaNeue from 'assets/fonts/HelveticaNeue.ttf';
 import Icon from 'components/atoms/Icon';
@@ -17,14 +17,14 @@ import {Component as NodeLayout} from 'layouts/node';
 import {Component as SettingsLayout} from 'layouts/settings';
 import {Component as UserLayout} from 'layouts/user';
 import {
-  createBrowserRouter,
-  isRouteErrorResponse,
   Navigate,
   Outlet,
   RouterProvider,
+  createBrowserRouter,
+  isRouteErrorResponse,
   useLoaderData,
   useRouteError,
-  useSearchParams
+  useSearchParams,
 } from 'react-router-dom';
 import {BaseService} from 'services/api/base.service';
 
@@ -213,8 +213,6 @@ const HubGlobal = createGlobalStyle`
 const AuthBoundary = () => {
   const {user, isPublic} = useLoaderData();
   const hub = user?.hubs?.find(hub => hub.name === globalThis.envault.hub);
-
-
   if (user) {
     return (
       <ThemeProvider

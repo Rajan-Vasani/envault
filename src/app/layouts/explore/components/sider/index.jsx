@@ -248,7 +248,7 @@ export const Component = props => {
   );
 
   return (
-    <Resizeable placement={'left'} initWidth={'340'}>
+    <Resizeable placement={'left'} initWidth={340}>
       <Sider className={styles.sider} width={'auto'}>
         <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%'}}>
           {!isFetched ? (
