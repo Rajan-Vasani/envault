@@ -43,10 +43,10 @@ export const useSeriesDataList = props => {
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
-        data: series.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
+        data: series?.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
       }),
       [series],
     ),
@@ -59,21 +59,18 @@ export const useTokenisedSeriesList = props => {
     queries: tokens
       ? Object.entries(tokens).map(([series, accessToken]) => ({
           queryKey: [API_QUERY.SERIES_DATA, +series],
-          queryFn: async () => {
-            const data = await BaseService.get(`api/series-data?`, {access_token: accessToken});
-            return {[series]: data};
-          },
+          queryFn: async () => BaseService.get(`api/series-data?`, {access_token: accessToken}),
         }))
       : [],
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
-        data: results.map(s => s.data).reduce((a, v) => ({...a, ...v}), {}),
+        data: Object.entries(tokens).reduce((acc, [series], index) => ({...acc, [series]: results[index].data}), {}),
       }),
-      [],
+      [tokens],
     ),
   });
 };

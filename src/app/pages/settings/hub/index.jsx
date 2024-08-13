@@ -1,17 +1,16 @@
-import {App, Button, Card, Col, ColorPicker, Flex, Form, Grid, Input, QRCode, Row, Select, Typography} from 'antd';
-import {createStyles, ThemeProvider, useTheme} from 'antd-style';
+import {App, Button, Card, Col, ColorPicker, Flex, Form, Input, QRCode, Row, Select, Typography} from 'antd';
+import {ThemeProvider, createStyles, useTheme} from 'antd-style';
 import ImageUpload from 'app/components/molecules/ImageUpload';
 import Icon from 'components/atoms/Icon';
 import {useHubUpdateMutation} from 'hooks/useHub';
 import {useEffect, useState} from 'react';
 import {useOutletContext} from 'react-router-dom';
-
 const {Text, Link} = Typography;
-const {useBreakpoint} = Grid;
 
 const useStyles = createStyles(({token, css}) => ({
   card: css`
     width: 100%;
+    height: 100%;
   `,
   cardTitle: css`
     text-align: center;
@@ -20,25 +19,17 @@ const useStyles = createStyles(({token, css}) => ({
     box-shadow: ${token.boxShadowTertiary};
     border: 1px solid ${token.colorBorder};
   `,
-  content: css`
-    overflow-y: hidden !important;
-    display: block;
-    position: absolute;
-    width: -webkit-fill-available;
-  `,
-  floatbutton: css`
-    margin-top: 0 !important;
-  `,
 }));
-export const Component = params => {
-  const {message} = App.useApp();
+
+export const Component = props => {
+  const {notification} = App.useApp();
+  const {mutate: saveHub} = useHubUpdateMutation();
   const [formHubValue, setFormHubValue] = useState();
   const theme = useTheme();
   const {user, hub} = useOutletContext();
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const {styles} = useStyles();
-  const screens = useBreakpoint();
 
   const initHubValue = {
     name: '',
@@ -54,26 +45,30 @@ export const Component = params => {
     },
   };
 
-  const {mutate: saveHub} = useHubUpdateMutation();
+  useEffect(() => {
+    if (hub) {
+      const {id, name, full_name, config} = hub;
+      form.setFieldsValue({id, name, full_name, config});
+      setFormHubValue({id, name, full_name, config});
+    } else {
+      form.setFieldsValue(initHubValue);
+    }
+  }, [form, hub]);
 
   const onFinish = values => {
-    message.info('Saving your hub');
+    notification.info({description: 'Saving your hub'});
     const {colorPrimary = theme.colorPrimary} = values.config;
     values.config.colorPrimary = typeof colorPrimary === 'string' ? colorPrimary : colorPrimary.toHexString();
     saveHub(values, {
       onSuccess: () => {
-        message.success(`Hub ${globalThis.envault.hub ? 'edit' : 'create'} success!`);
+        notification.success({description: `Hub ${globalThis.envault.hub ? 'edit' : 'create'} success!`});
       },
       onError: error => {
         const errorMessage =
           error.status === 409 ? 'This name already exists' : 'Can not save your hub. Please try again later!';
-        message.error(errorMessage);
+        notification.error({description: errorMessage});
       },
     });
-  };
-
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
   };
 
   const handleFieldChange = () => {
@@ -102,45 +97,33 @@ export const Component = params => {
     setDisabled(disabled => !disabled);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
-    if (hub) {
-      const {id, name, full_name, config} = hub;
-      form.setFieldsValue({id, name, full_name, config});
-      setFormHubValue({id, name, full_name, config});
-    } else {
-      form.setFieldsValue(initHubValue);
-    }
-  }, [hub]);
-
   return (
-    <>
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={onFinish}
-        onChange={handleFieldChange}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        style={{paddingBottom: '12px', maxWidth: '100%'}}
-        initialValues={initHubValue}
-        className={screens.xl && styles.content}
-      >
-        <Form.Item>
-          <Flex justify="end" style={{marginRight: 20}} className={styles.floatbutton}>
-            <Button type="primary" htmlType="submit" disabled={disabled} style={{marginRight: 20, width: 120}}>
-              Save
-            </Button>
-            <Button
-              onClick={handleDisabled}
-              icon={<Icon icon={disabled ? 'LockOutlined' : 'UnlockOutlined'} type={'ant'} />}
-            />
-          </Flex>
-        </Form.Item>
-        <Row gutter={[18, 18]} justify={'space-between'} style={{height: '100%', width: '100%'}}>
-          <Col xs={{flex: '100%'}} sm={{flex: '100%'}} md={{flex: '100%'}} lg={{flex: '50%'}}>
-            <Card className={styles.card} style={screens.lg && {boxSizing: 'border-box', height: '100%'}}>
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={onFinish}
+      onChange={handleFieldChange}
+      autoComplete="off"
+      initialValues={initHubValue}
+    >
+      <Flex vertical gap={'small'}>
+        <Flex justify={'flex-start'} align={'center'} gap={'small'}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={disabled}
+            icon={<Icon icon={'SaveOutlined'} type={'ant'} />}
+          >
+            Save
+          </Button>
+          <Button
+            onClick={handleDisabled}
+            icon={<Icon icon={disabled ? 'LockOutlined' : 'UnlockOutlined'} type={'ant'} />}
+          />
+        </Flex>
+        <Row gutter={[18, 18]} justify={'center'} style={{height: '100%'}}>
+          <Col xs={{flex: '100%'}} sm={{flex: '100%'}} lg={{flex: '50%'}}>
+            <Card className={styles.card}>
               <Form.Item
                 name="full_name"
                 label="Name"
@@ -240,8 +223,8 @@ export const Component = params => {
               </Form.Item>
             </Card>
           </Col>
-          <Col xs={{flex: '100%'}} sm={{flex: '100%'}} md={{flex: '100%'}} lg={{flex: '50%'}}>
-            <Card className={styles.card} style={screens.xl && {boxSizing: 'border-box', height: '100%'}}>
+          <Col xs={{flex: '100%'}} sm={{flex: '100%'}} lg={{flex: '50%'}}>
+            <Card className={styles.card}>
               <Text>Logo Inline (recommended at least 200 x 40)</Text>
               <Row gutter={[18, 18]} style={{marginTop: 15}}>
                 <Col>
@@ -313,7 +296,7 @@ export const Component = params => {
                 </Col>
               </Row>
               <Text>Favicon (recommended at least 32 x 32)</Text>
-              <Row gutter={[18]} style={{marginTop: 15}}>
+              <Row gutter={[18, 18]} style={{marginTop: 15}}>
                 <Col>
                   <Form.Item name={['config', 'favicon']}>
                     <Card>
@@ -332,8 +315,8 @@ export const Component = params => {
             </Card>
           </Col>
         </Row>
-      </Form>
-    </>
+      </Flex>
+    </Form>
   );
 };
 

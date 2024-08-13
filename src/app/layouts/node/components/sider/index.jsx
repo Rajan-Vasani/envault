@@ -59,12 +59,8 @@ export const NodeSider = props => {
     }
   }, [node.id]); // new node mode
   useEffect(() => {
-    console.log('tab', !tab);
     setCollapsed(!tab);
   }, [tab]);
-  useEffect(() => {
-    console.log('collapsed', collapsed);
-  }, [collapsed]);
 
   const handleTabChange = e => {
     setSearchParams({...searchParams, tab: e});

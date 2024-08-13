@@ -35,7 +35,7 @@ export const useRoleUsers = props => {
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
         data: results.map(result => result.data).reduce((a, v) => ({...a, ...v}), {}),
@@ -52,7 +52,7 @@ export const useUserRoles = props => {
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
         data: compact(results.map(result => result.data).reduce((a, v) => a.concat(v), [])),

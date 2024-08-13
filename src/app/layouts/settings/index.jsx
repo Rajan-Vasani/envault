@@ -24,9 +24,6 @@ const useStyles = createStyles(({token, css}) => ({
     height: 1.5rem;
     padding: 3px;
   `,
-  layout: css`
-    padding: 10;
-  `,
   content: css`
     padding: 20;
     margin: 0;
@@ -60,11 +57,7 @@ export const Component = props => {
       children: [
         {
           key: 'config',
-          label: (
-            <Link to={routes.config}>
-             Hub
-            </Link>
-          ),
+          label: <Link to={routes.config}>Hub</Link>,
           icon: <Icon icon={'SettingOutlined'} type={'ant'} />,
         },
       ],
@@ -81,21 +74,13 @@ export const Component = props => {
       children: [
         {
           key: 'users',
-          label: (
-            <Link to={routes.users}>
-              Users
-            </Link>
-          ),
+          label: <Link to={routes.users}>Users</Link>,
           icon: <Icon icon={'UserOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
         {
           key: 'roles',
-          label: (
-            <Link to={routes.roles}>
-              Roles
-            </Link>
-          ),
+          label: <Link to={routes.roles}>Roles</Link>,
 
           icon: <Icon icon={'TeamOutlined'} type={'ant'} />,
           disabled: !isAdmin,
@@ -113,11 +98,7 @@ export const Component = props => {
       children: [
         {
           key: 'tasks',
-          label: (
-            <Link to={routes.tasks}>
-             Tasks
-            </Link>
-          ),
+          label: <Link to={routes.tasks}>Tasks</Link>,
           icon: <Icon icon={'ScheduleOutlined'} type={'ant'} />,
           disabled: !isAdmin,
         },
@@ -153,7 +134,7 @@ export const Component = props => {
     <Layout>
       <Resizeable placement={'left'} initWidth={280}>
         <Sider className={styles.sider} width={'auto'}>
-          <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%', width: 250}}>
+          <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%'}}>
             <Menu
               mode={'vertical'}
               items={settingsItems}
@@ -169,13 +150,11 @@ export const Component = props => {
           </Flex>
         </Sider>
       </Resizeable>
-      <Layout className={styles.layout}>
-        <Content className={styles.content}>
-          <ErrorBoundary {...props}>
-            <Outlet context={{user, hub}} />
-          </ErrorBoundary>
-        </Content>
-      </Layout>
+      <Content className={styles.content}>
+        <ErrorBoundary {...props}>
+          <Outlet context={{user, hub}} />
+        </ErrorBoundary>
+      </Content>
     </Layout>
   );
 };
