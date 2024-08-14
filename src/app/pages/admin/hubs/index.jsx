@@ -1,4 +1,4 @@
-import {Button, Flex, Form, Input} from 'antd';
+import {App, Button, Flex, Form, Input} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
 import FormTable from 'components/molecules/FormTable';
@@ -25,6 +25,7 @@ export const Component = () => {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const {styles} = useStyles();
+  const {notification} = App.useApp();
 
   useEffect(() => {
     setDataSource(user.hubs);
@@ -35,7 +36,18 @@ export const Component = () => {
       setDataSource(dataSource => dataSource.filter(item => item.name !== record.name));
       return;
     }
-    removeHub({name: record.name});
+    removeHub(
+      {name: record.name},
+      {
+        onSuccess: () => {
+          setDataSource(dataSource => dataSource.filter(item => item.name !== record.name));
+          notification.success({description: 'Hub deleted successfully'});
+        },
+        onError: () => {
+          notification.error({description: 'Failed to delete hub'});
+        },
+      },
+    );
   };
 
   const handleSave = values => {

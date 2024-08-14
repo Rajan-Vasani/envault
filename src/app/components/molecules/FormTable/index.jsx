@@ -96,7 +96,7 @@ export const FormTable = props => {
     setEditingKey(null);
   };
   const triggerRemove = record => {
-    onRemove?.(record);
+    onRemove?.({record, saved: true});
   };
 
   const builtColumns = Object.entries(columns || {}).flatMap(([type, column]) => {
