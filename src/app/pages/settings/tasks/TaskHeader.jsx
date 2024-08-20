@@ -2,11 +2,11 @@ import {Button, Col, Flex, Form, Input, Layout, Row, Select, Switch, TreeSelect}
 import {createStyles} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
 import {useUser} from 'app/services/hooks/useUser';
+import {Schedule} from 'components/molecules/Schedule';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
 import {useNode} from 'hooks/useNode';
 import {useEffect} from 'react';
-import {Schedule} from './components/Schedule';
 dayjs.extend(isToday);
 const {Header} = Layout;
 

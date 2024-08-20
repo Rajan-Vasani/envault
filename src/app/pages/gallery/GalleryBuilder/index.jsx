@@ -104,7 +104,7 @@ export default function GalleryBuilder() {
   };
   if (!selectedNodes.length) return null;
   return (
-    <Resizeable placement={'right'} initWidth={340}>
+    <Resizeable placement={'right'}>
       <Sider className={styles.sider} width={'auto'}>
         <div className="envault-module-builder">
           <Flex justify="flex-end" gap="middle">

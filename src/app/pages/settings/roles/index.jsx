@@ -120,7 +120,9 @@ const TreeItem = props => {
 };
 
 const FormTree = props => {
-  const {value, onChange, expandedKeys, updateExpandedKeys, record, treeData, tree, className, editing} = props;
+  const {value, onChange, expandedKeys, updateExpandedKeys, record, treeData, className, editing} = props;
+  const disabled = record.id !== editing;
+  const selectedKeys = value?.map(item => item.node) ?? [];
 
   const handleActionClick = acl => {
     const current = value ?? [];
@@ -141,23 +143,28 @@ const FormTree = props => {
     <Tree
       className={className}
       treeData={treeData}
-      titleRender={node => (
-        <TreeItem
-          node={node}
-          acl={value?.find(item => item.node === node.id) ?? {}}
-          expanded={expandedKeys.includes(node.id)}
-          disabled={record.id !== editing}
-          onActionClick={handleActionClick}
-          onIconClick={handleIconClick}
-        />
-      )}
+      titleRender={node => {
+        const acl =
+          value?.find(item => item.node === node.id) ?? record?.acl?.find(item => item.node === node.id) ?? {};
+        const expanded = expandedKeys.includes(node.id);
+        return (
+          <TreeItem
+            node={node}
+            acl={acl}
+            expanded={expanded}
+            disabled={disabled}
+            onActionClick={handleActionClick}
+            onIconClick={handleIconClick}
+          />
+        );
+      }}
       fieldNames={{key: 'id'}}
       checkStrictly={true}
       blockNode={true}
-      disabled={record.id !== editing}
+      disabled={disabled}
       multiple={true}
       expandedKeys={expandedKeys}
-      selectedKeys={value?.map(item => item.node)}
+      selectedKeys={selectedKeys}
     />
   );
 };
@@ -166,6 +173,21 @@ const useStyles = createStyles(({css}) => ({
   tree: css`
     .ant-tree-switcher {
       display: none;
+    }
+    .ant-btn-primary.ant-btn-dangerous:disabled {
+      background: #ff4d507a;
+      box-shadow: 0 2px 0 rgba(255, 38, 5, 0.06);
+      color: #fff;
+    }
+    .ant-btn-primary.ant-btn-dangerous {
+      background: #ff4d4f;
+      box-shadow: 0 2px 0 rgba(255, 38, 5, 0.06);
+      color: #fff;
+    }
+    .ant-btn-primary:disabled {
+      color: #fff;
+      background: #8318b96d;
+      box-shadow: 0 2px 0 rgba(175, 25, 205, 0.1);
     }
   `,
 }));
@@ -209,22 +231,27 @@ export const Component = props => {
 
   const handleDeleteRole = values => {
     notification.open({type: 'info', description: 'Deleting role...'});
-    const body = {
-      hub: globalThis.envault.hub,
-      id: values.id,
-    };
-    deleteRole(
-      {...body},
-      {
-        onSuccess: () => {
-          notification.open({type: 'success', description: 'Role deleted'});
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE_HUB, globalThis.envault.hub]});
+    const {id} = values.record;
+    if (id) {
+      const body = {
+        hub: globalThis.envault.hub,
+        id: id,
+      };
+      console.log('delete role ', id);
+
+      deleteRole(
+        {...body},
+        {
+          onSuccess: () => {
+            notification.open({type: 'success', description: 'Role deleted'});
+            queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE_HUB, globalThis.envault.hub]});
+          },
+          onError: () => {
+            notification.open({type: 'error', description: 'Could not delete role'});
+          },
         },
-        onError: () => {
-          notification.open({type: 'error', description: 'Could not delete role'});
-        },
-      },
-    );
+      );
+    }
   };
 
   const handleSave = props => {
@@ -338,7 +365,6 @@ export const Component = props => {
                   className={styles.tree}
                   record={record}
                   treeData={treeData}
-                  tree={tree}
                   editing={editing}
                   expandedKeys={expandedKeys[record.id] ?? []}
                   updateExpandedKeys={updateExpandedKeys}

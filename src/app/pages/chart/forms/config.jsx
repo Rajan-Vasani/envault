@@ -12,17 +12,18 @@ import DataZoomFormList from 'pages/chart/forms/zoom';
 import {useEffect} from 'react';
 import {parseTimeFrom} from 'utils/time';
 
+const initialValues = {
+  global: baseGlobal,
+  option: baseOption,
+};
+
 export const ChartConfig = props => {
   const {setForm, disabled} = props;
   const {eventState, handleStreamStateChange} = {eventstate: '', handleStreamStateChange: () => {}}; // temporary
-  const {node, config, setConfig} = useNodeContext();
+  const {nodeAttrs, nodeConfig, setNodeConfig} = useNodeContext();
   const [form] = Form.useForm();
-  const {mutate: saveNode} = useNodeSaveMutation({type: node.type});
+  const {mutate: saveNode} = useNodeSaveMutation({type: nodeAttrs.type});
   const {notification} = App.useApp();
-  const initialValues = {
-    global: baseGlobal,
-    option: baseOption,
-  };
   const show = Form.useWatch(
     values => ({
       legend: values?.option?.legend?.show,
@@ -34,18 +35,18 @@ export const ChartConfig = props => {
 
   useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
-    if (config?.option && config?.global) {
-      form.setFieldsValue(config);
+    if (nodeConfig?.option && nodeConfig?.global) {
+      form.setFieldsValue(nodeConfig);
     } else {
       form.setFieldsValue(initialValues);
     }
-  }, [config, form]);
+  }, [nodeConfig, form]);
 
   const onFinish = values => {
     notification.info({description: 'Saving chart configuration'});
     const timeRange = values.global.timeRange;
     const dataChart = {
-      id: node?.id,
+      id: nodeAttrs?.id,
       type: 'chart',
       data: values.option.series.reduce(
         (a, v, index) => ({
@@ -67,14 +68,16 @@ export const ChartConfig = props => {
         }),
         {},
       ),
-      config,
+      nodeConfig,
     };
     saveNode({data: dataChart});
   };
 
   const onValuesChange = (changedValues, allValues) => {
     // merge objects, replace arrays
-    setConfig?.(config => structuredClone(mergeWith(config, allValues, (a, b) => (isArray(b) ? b : undefined))));
+    setNodeConfig?.(nodeConfig =>
+      structuredClone(mergeWith(nodeConfig, allValues, (a, b) => (isArray(b) ? b : undefined))),
+    );
     console.log(JSON.stringify(changedValues, null, 2), JSON.stringify(allValues, null, 2));
   };
   // Normalize input and output of form components to suit chart options
@@ -105,7 +108,7 @@ export const ChartConfig = props => {
         form={form}
         layout="horizontal"
         labelAlign="left"
-        name={`chart-config-${node?.id}`}
+        name={`chart-config-${nodeAttrs?.id}`}
         requiredMark={false}
         onFinish={onFinish}
         initialValues={initialValues}

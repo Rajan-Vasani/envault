@@ -7,11 +7,11 @@ import {useNode} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
 import ChartLoader from 'pages/chart/components/loader';
 import {baseGlobal} from 'pages/chart/config';
-import {NoNode} from 'pages/error/nonode';
+import NoNode from 'pages/error/nonode';
 const {Content} = Layout;
 
 export const Component = props => {
-  const {config, mergeConfig} = useNodeContext();
+  const {nodeConfig, mergeNodeConfig} = useNodeContext();
   const {data: tree} = useNode();
   const {notification} = App.useApp();
   const acceptedTypes = ['series', 'group'];
@@ -31,7 +31,7 @@ export const Component = props => {
       btn: (
         <Button
           onClick={() => {
-            mergeConfig({option: {series: series}});
+            mergeNodeConfig({option: {series: series}});
             notification.destroy(key);
           }}
         >
@@ -66,26 +66,28 @@ export const Component = props => {
           const chartSeries = series.map(s => ({
             id: s.id,
             name: s.name,
-            type: config?.global?.type || baseGlobal.type,
+            type: nodeConfig?.global?.type || baseGlobal.type,
           }));
           if (chartSeries.length > 10) {
             handleLargeGroup(series);
           }
-          return mergeConfig({option: {series: chartSeries}});
+          return mergeNodeConfig({option: {series: chartSeries}});
         }
-        return mergeConfig({option: {series: [{id, name, type: config?.global?.type || baseGlobal.type}]}});
+        return mergeNodeConfig({option: {series: [{id, name, type: nodeConfig?.global?.type || baseGlobal.type}]}});
       }
       handleRejectedType(type, accepts);
     },
   });
 
-  return (
+  return nodeConfig.option ? (
     <>
       <Droppable key={'chart-droppable'} id={'chart-droppable'} acceptedTypes={acceptedTypes}>
-        {config.option ? <ChartLoader /> : <NoNode type={'chart'} />}
+        <ChartLoader />
       </Droppable>
       <DraggableOverlay />
     </>
+  ) : (
+    <NoNode type={'chart'} />
   );
 };
 Component.displayName = 'Chart';

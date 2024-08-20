@@ -22,6 +22,7 @@ export const useHubCreateMutation = () => {
     meta: {type: 'hub user', id: '', method: 'create'},
     onSettled: () => {
       queryClient.invalidateQueries({queryKey: [API_QUERY.USER_DATA]});
+      queryClient.invalidateQueries({queryKey: [API_QUERY.HUB_DATA]});
     },
   });
 };
@@ -33,6 +34,7 @@ export const useHubUpdateMutation = () => {
     meta: {type: 'hub user', id: '', method: 'update'},
     onSettled: () => {
       queryClient.invalidateQueries({queryKey: [API_QUERY.USER_DATA]});
+      queryClient.invalidateQueries({queryKey: [API_QUERY.HUB_DATA]});
     },
   });
 };
@@ -44,6 +46,7 @@ export const useHubRemoveMutation = () => {
     meta: {type: 'hub', id: '', method: 'remove'},
     onSettled: () => {
       queryClient.invalidateQueries({queryKey: [API_QUERY.USER_DATA]});
+      queryClient.invalidateQueries({queryKey: [API_QUERY.HUB_DATA]});
     },
   });
 };

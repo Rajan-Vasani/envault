@@ -1,14 +1,10 @@
-import {useDndMonitor} from '@dnd-kit/core';
 import {Layout} from 'antd';
 import {createStyles} from 'antd-style';
-import {DraggableOverlay} from 'components/draggable/overlay';
-import {Droppable} from 'components/droppable';
-import {nodeDetails} from 'config/menu';
 import {useNode} from 'hooks/useNode';
 import {NodeProvider} from 'layouts/node/context';
-import {NoNode} from 'pages/error/nonode';
+import NoNode from 'pages/error/nonode';
 import {lazy, useState, useTransition} from 'react';
-import {Outlet, useMatch, useNavigate, useOutletContext, useParams} from 'react-router-dom';
+import {Outlet, useMatch, useOutletContext} from 'react-router-dom';
 const NodeSider = lazy(() => import('layouts/node/components/sider'));
 const NodeHeader = lazy(() => import('layouts/node/components/header'));
 
@@ -23,60 +19,36 @@ const useStyles = createStyles(({token, css}) => ({
 }));
 
 export const Component = props => {
-  const navigate = useNavigate();
-  const {hub, isPublic} = useOutletContext();
+  const context = useOutletContext();
   const {params} = useMatch('hub/explore/node/:type?/:id?');
-  params.id = +params.id;
+  const nodeAttrs = {id: +params.id, type: params.type};
   const {data: treeData} = useNode();
-  const {data: nodeData} = useNode({type: params.type, id: params.id, enabled: !!(params.type && params.id !== -1)});
+  const {data: nodeData} = useNode({
+    type: nodeAttrs.type,
+    id: nodeAttrs.id,
+    enabled: !!(nodeAttrs.type && nodeAttrs.id !== -1),
+  });
   const [, startTransition] = useTransition();
-  const {nodeId} = useParams();
   const {styles} = useStyles();
   const [showPrivate, setShowPrivate] = useState(false);
 
-  //dnd-kit
-  useDndMonitor({
-    onDragEnd({active, over}) {
-      if (!over) {
-        return;
-      }
-      const {type, id} = active.data.current;
-      if (!nodeId) {
-        return navigate(`${type}/${id}`);
-      }
-    },
-  });
-
-  if (!isPublic && !showPrivate) {
+  if (!context.isPublic && !showPrivate) {
     startTransition(() => setShowPrivate(true));
   }
 
-  const currentNode = treeData?.find(({id}) => id === params.id);
+  const currentNode = treeData?.find(({id}) => id === nodeAttrs.id);
   const node = {
     ...params,
     ...nodeData?.[0],
     ...currentNode,
   };
 
-  const acceptNodeTypes = nodeDetails.map(item => item.value);
-
   return (
     <NodeProvider node={node}>
       <Layout style={{height: '100%'}}>
         {showPrivate && <NodeHeader />}
         <Layout>
-          <Content className={styles.content}>
-            {nodeId ? (
-              <Outlet />
-            ) : (
-              <>
-                <Droppable key={'node-droppable'} id={'node-droppable'} acceptedTypes={acceptNodeTypes}>
-                  <NoNode />
-                </Droppable>
-                <DraggableOverlay />
-              </>
-            )}
-          </Content>
+          <Content className={styles.content}>{nodeAttrs.id ? <Outlet context={context} /> : <NoNode />}</Content>
           {showPrivate && <NodeSider />}
         </Layout>
       </Layout>

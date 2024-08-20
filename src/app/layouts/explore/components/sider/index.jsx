@@ -213,8 +213,11 @@ export const Component = props => {
     setSelectedKeys([newNode.id]);
     updateNode(newNode);
     if (!newNode.remove) {
+      const search = new URLSearchParams({tab: 'info'}).toString();
       const pathname = generatePath('node/:type/:id', {type: newNode.type, id: newNode.id});
-      navigate({pathname}, {unstable_viewTransition: true});
+      navigate({pathname, search}, {unstable_viewTransition: true});
+    } else {
+      navigate({pathname: 'node'}, {unstable_viewTransition: true});
     }
   };
 
@@ -248,7 +251,7 @@ export const Component = props => {
   );
 
   return (
-    <Resizeable placement={'left'} initWidth={340}>
+    <Resizeable placement={'left'}>
       <Sider className={styles.sider} width={'auto'}>
         <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%'}}>
           {!isFetched ? (

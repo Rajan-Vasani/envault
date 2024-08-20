@@ -1,5 +1,5 @@
 import useResizeObserver from '@react-hook/resize-observer';
-import {Button, Col, FloatButton, Row} from 'antd';
+import {Button, Col, Flex, Row} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'components/atoms/Icon';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
@@ -36,10 +36,10 @@ export const ModuleMicroHeader = props => {
 };
 
 const useStyles = createStyles(
-  ({token, css, cx}, {placement, currentSize, initHeight, initWidth, space, collapsedSize, isResizing}) => {
+  ({token, css, cx, responsive}, {placement, initSize, space, collapsedSize, isResizing}) => {
     const dragPosition = () => {
       const style = css`
-        z-index: 98;
+        z-index: 100;
         cursor: ew-resize;
         padding: 4px 0 0;
         position: absolute;
@@ -48,19 +48,19 @@ const useStyles = createStyles(
         case 'top':
           return css`
             ${style};
-            bottom: -2px;
+            bottom: -4px;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             cursor: ns-resize;
           `;
         case 'bottom':
           return css`
             ${style};
-            top: -2px;
+            top: -4px;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             cursor: ns-resize;
           `;
         case 'left':
@@ -68,16 +68,16 @@ const useStyles = createStyles(
             ${style};
             top: 0;
             bottom: 0;
-            right: -2px;
-            width: 5px;
+            right: -4;
+            width: 4px;
           `;
         case 'right':
           return css`
             ${style};
             top: 0;
             bottom: 0;
-            left: -2px;
-            width: 5px;
+            left: -4;
+            width: 4px;
           `;
         default:
           return css`
@@ -104,33 +104,49 @@ const useStyles = createStyles(
     }[placement];
     const drawerDimension = () => {
       const isSider = placement === 'left' || placement === 'right';
-      const dimensionValue = space || (isSider ? initHeight : initWidth) || undefined;
-      const dimension = dimensionValue ? `${dimensionValue}px` : 'auto';
+      const dimension = space || initSize;
       return isSider
         ? css`
-            width: ${dimension};
+            width: ${dimension}px;
             height: 100%;
           `
         : css`
-            height: ${dimension};
+            height: ${dimension}px;
             width: 100%;
           `;
     };
-    const buttonPosition = () => {
-      const isSider = placement === 'left' || placement === 'right';
-      const dimensionValue = space || (isSider ? initHeight : initWidth) || undefined;
-      const dimension = dimensionValue ? `${Number(dimensionValue) - 20}px` : 'auto';
-      return isSider
-        ? css`
-            bottom: ${currentSize.height - 120}px;
-            left: ${placement === 'left' ? dimension : 'unset'};
-            right: ${placement === 'right' ? dimension : 'unset'};
-          `
-        : css`
-            right: ${currentSize.width - 120}px;
-            top: ${placement === 'top' ? dimension : 'unset'};
-            bottom: ${placement === 'bottom' ? dimension : 'unset'};
+    const buttonContainerPosition = () => {
+      const isCollapsed = space <= collapsedSize;
+      switch (placement) {
+        case 'left':
+          return css`
+            top: 80px;
+            left: ${isCollapsed ? `${-collapsedSize}px` : 0};
+            border-left: none;
+            border-radius: 0 ${token.borderRadius}px ${token.borderRadius}px 0;
           `;
+        case 'right':
+          return css`
+            top: 80px;
+            right: ${isCollapsed ? `${-collapsedSize}px` : 0};
+            border-right: none;
+            border-radius: ${token.borderRadius}px 0 0 ${token.borderRadius}px;
+          `;
+        case 'bottom':
+          return css`
+            left: 80px;
+            bottom: ${isCollapsed ? `${-collapsedSize}px` : 0};
+            border-bottom: none;
+            border-radius: ${token.borderRadius}px ${token.borderRadius}px 0 0;
+          `;
+        case 'top':
+          return css`
+            right: 80px;
+            top: ${isCollapsed ? `${-collapsedSize}px` : 0};
+            border-top: none;
+            border-radius: 0 0 ${token.borderRadius}px ${token.borderRadius}px;
+          `;
+      }
     };
 
     return {
@@ -145,7 +161,9 @@ const useStyles = createStyles(
       drawer: cx(
         drawerDimension(),
         css`
-          transition: ${isResizing ? 'none' : `all 300ms ${token.motionEaseOut} 0s`};
+          z-index: ${responsive.mobile ? 98 : 'auto'};
+          background: ${token.colorBgLayout};
+          transition: ${isResizing.current ? 'none' : `all 300ms ${token.motionEaseOut} 0s`};
           position: relative;
           border: thin solid ${token.colorBorder};
         `,
@@ -171,13 +189,17 @@ const useStyles = createStyles(
           }
         `,
       ),
-      button: cx(
-        buttonPosition(),
+      buttonContainer: cx(
         css`
-          z-index: 999;
-          transition: ${isResizing ? 'none' : `all 300ms ${token.motionEaseOut} 0s`};
+          background: ${token.colorBgContainer};
+          border: thin solid ${token.colorBorder};
+          transition: ${isResizing.current ? 'none' : `all 300ms ${token.motionEaseOut} 0s`};
           position: absolute;
+          &:hover {
+            border-color: ${token.colorPrimaryBorderHover};
+          }
         `,
+        buttonContainerPosition(),
       ),
     };
   },
@@ -185,8 +207,7 @@ const useStyles = createStyles(
 
 const Resizeable = ({children, ...props}) => {
   const {
-    initWidth,
-    initHeight,
+    initSize = 340,
     placement,
     parent,
     stop,
@@ -194,22 +215,22 @@ const Resizeable = ({children, ...props}) => {
     collapsed = false,
     collapsedSize = 20,
     onCollapse,
+    actions,
   } = props;
   const parentComponent = parent || document.body;
   const parentRef = useRef(parentComponent);
   const parentSize = useSize(parentRef);
   const resizeableRef = useRef(null);
   const currentSize = useSize(resizeableRef);
-  const initSize = placement === 'top' || placement === 'bottom' ? initHeight : initWidth;
   const parentSpan = placement === 'top' || placement === 'bottom' ? parentSize.height : parentSize.width;
   const currentSpan = placement === 'top' || placement === 'bottom' ? currentSize.height : currentSize.width;
-  const [isResizing, setIsResizing] = useState(false);
+  const isResizing = useRef(false);
+  const currentTarget = useRef(null);
   const [space, setSpace] = useState(collapsed ? collapsedSize : initSize);
   const {styles} = useStyles({
     placement,
+    initSize,
     currentSize,
-    initHeight,
-    initWidth,
     space,
     collapsed,
     collapsedSize,
@@ -255,35 +276,41 @@ const Resizeable = ({children, ...props}) => {
     },
   }[placement];
 
-  const handleMousedown = () => {
-    setIsResizing(true);
+  const handleMousedown = e => {
+    currentTarget.current = e.currentTarget;
+    isResizing.current = true;
   };
 
-  const handleMouseup = () => {
-    setIsResizing(false);
+  const handleMouseup = e => {
+    currentTarget.current = null;
+    isResizing.current = false;
   };
 
   const handleMousemove = e => {
-    if (isResizing) {
-      const newSize = {
-        top: e.clientY - parentSize.top,
-        bottom: parentSize.bottom - e.clientY,
-        left: e.clientX - parentSize.left,
-        right: parentSize.right - e.clientX,
-      }[placement];
+    if (!isResizing.current || !currentTarget.current) return;
+    e.preventDefault();
 
-      if (newSize < collapsedSize * 3) {
-        setSpace(collapsedSize);
-        return triggerCollapseChange({collapsed: true});
-      } else {
-        triggerCollapseChange({collapsed: false});
-      }
-      if (newSize > parentSpan - 5) {
-        return setSpace(parentSpan);
-      }
-      if (newSize > collapsedSize && newSize < parentSpan) {
-        return setSpace(newSize);
-      }
+    const clientY = e.clientY || e.touches[0].clientY;
+    const clientX = e.clientX || e.touches[0].clientX;
+
+    const newSize = {
+      top: clientY - parentSize.top,
+      bottom: parentSize.bottom - clientY,
+      left: clientX - parentSize.left,
+      right: parentSize.right - clientX,
+    }[placement];
+
+    if (newSize < collapsedSize * 3) {
+      setSpace(collapsedSize);
+      return triggerCollapseChange({collapsed: true});
+    } else {
+      triggerCollapseChange({collapsed: false});
+    }
+    if (newSize > parentSpan - collapsedSize) {
+      return setSpace(parentSpan);
+    }
+    if (newSize > collapsedSize && newSize < parentSpan) {
+      return setSpace(newSize);
     }
   };
 
@@ -305,25 +332,48 @@ const Resizeable = ({children, ...props}) => {
 
   useEffect(() => {
     document.addEventListener('mousemove', handleMousemove);
-    document.addEventListener('mouseup', handleMouseup);
+    document.addEventListener('touchmove', handleMousemove, {
+      passive: false,
+      capture: true,
+    });
 
     return () => {
       document.removeEventListener('mousemove', handleMousemove);
-      document.removeEventListener('mouseup', handleMouseup);
+      document.removeEventListener('touchmove', handleMousemove);
     };
   });
 
   return (
     <div ref={resizeableRef} className={styles.drawer}>
-      {collapsible && (
-        <FloatButton
-          onClick={handleCollapse}
-          icon={<Icon icon={space === collapsedSize ? collapsedIcon.collapsed : collapsedIcon.expanded} type="ant" />}
-          className={styles.button}
-          shape={'circle'}
-        />
-      )}
-      <div className={styles.dragger} onMouseDown={handleMousedown}></div>
+      <div
+        className={styles.dragger}
+        onMouseDown={handleMousedown}
+        onMouseUp={handleMouseup}
+        onTouchStart={handleMousedown}
+        onTouchEnd={handleMouseup}
+      >
+        {collapsible && (
+          <div
+            className={styles.buttonContainer}
+            onMouseDown={handleMousedown}
+            onMouseUp={handleMouseup}
+            onTouchStart={handleMousedown}
+            onTouchEnd={handleMouseup}
+          >
+            <Flex vertical>
+              <Button
+                type="text"
+                onClick={handleCollapse}
+                icon={
+                  <Icon icon={space === collapsedSize ? collapsedIcon.collapsed : collapsedIcon.expanded} type="ant" />
+                }
+                className={styles.button}
+              />
+              {actions}
+            </Flex>
+          </div>
+        )}
+      </div>
       <div className={styles.content}>
         <ModuleMicroHeader {...props} onStopChange={handleStop} fullSize={space === parentSpan} />
         {children}

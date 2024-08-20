@@ -156,8 +156,8 @@ export const FormTable = props => {
                       )}
                       <Popconfirm
                         key={'popDelete'}
-                        title="Delete the user"
-                        description="Are you sure to delete this user?"
+                        title="Confirm Delete"
+                        description="This action is permanent, are you sure?"
                         onConfirm={() => triggerRemove(record)}
                         okText="Yes"
                         cancelText="No"

@@ -25,10 +25,11 @@ export const Component = props => {
   }, [userRolesData, form]);
 
   const handleRemoveUser = record => {
-    if (record.id) {
+    const {id} = record.record;
+    if (id) {
       notification.info({description: 'Deleting user...'});
       removeUser(
-        {id: record.id},
+        {id: id},
         {
           onSuccess: () => {
             notification.success({description: 'User deleted'});

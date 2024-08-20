@@ -11,20 +11,23 @@ export const useNodeContext = () => {
 };
 
 export const NodeProvider = ({children, node}) => {
+  const {id, parent, hub, type, name, permission, deleted, meta, ...nodeParams} = node;
+  const nodeAttrs = {id, parent, hub, type, name, permission, deleted, meta};
+
   // config state is the shared config of the node
-  const [config, setConfig] = useState(node.config || {});
+  const [nodeConfig, setNodeConfig] = useState(nodeParams.config || {});
 
   // update config state when node or route params change
   useEffect(() => {
-    if (node.config) {
-      return setConfig(structuredClone(node.config));
+    if (nodeParams.config) {
+      return setNodeConfig(structuredClone(nodeParams.config));
     } else {
-      setConfig({});
+      setNodeConfig({});
     }
-  }, [node.config]);
+  }, [nodeParams.config]);
 
-  const mergeConfig = newConfig => {
-    setConfig(config =>
+  const mergeNodeConfig = newConfig => {
+    setNodeConfig(config =>
       structuredClone(
         mergeWith(config, newConfig, (objValue, srcValue) => {
           if (isArray(objValue)) {
@@ -37,9 +40,11 @@ export const NodeProvider = ({children, node}) => {
 
   const value = {
     node,
-    config,
-    setConfig,
-    mergeConfig,
+    nodeAttrs,
+    nodeParams,
+    nodeConfig,
+    setNodeConfig,
+    mergeNodeConfig,
   };
 
   return <NodeContext.Provider value={value}>{children}</NodeContext.Provider>;

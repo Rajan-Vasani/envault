@@ -64,6 +64,7 @@ const onErrorHandler = (error, query) => {
     errorMessage.status = error.status;
     errorMessage.statusText = error.statusText;
     errorMessage.data = error.data;
+    errorMessage.url = error.url;
   }
 
   if (Cookies.get('uid')) {
@@ -191,6 +192,7 @@ export const Global = createGlobalStyle`
     min-width: 280px;
     padding: 0;
     margin: 0;
+    overflow: hidden;
   }
 `;
 
@@ -385,7 +387,7 @@ const router = createBrowserRouter(
                     {
                       path: 'create/:nodeId?',
                       id: 'create',
-                      lazy: () => import('pages/create'),
+                      lazy: () => import('pages/error/nonode'),
                     },
                     {
                       path: '*',

@@ -17,12 +17,12 @@ const useStyles = createStyles(({token, css}) => ({
 }));
 
 export const NodeHeader = props => {
-  const {node} = useNodeContext();
+  const {nodeAttrs} = useNodeContext();
   const {styles} = useStyles();
 
   return (
     <Header className={styles.header}>
-      <NodeBreadcrumb node={node} />
+      <NodeBreadcrumb node={nodeAttrs} />
     </Header>
   );
 };

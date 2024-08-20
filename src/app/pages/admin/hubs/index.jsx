@@ -31,7 +31,8 @@ export const Component = () => {
     setDataSource(user.hubs);
   }, [user.hubs]);
 
-  const handleDelete = ({record, saved}) => {
+  const handleDelete = record => {
+    const saved = user.hubs.some(hub => hub.name === record.name);
     if (!saved) {
       setDataSource(dataSource => dataSource.filter(item => item.name !== record.name));
       return;
@@ -40,11 +41,7 @@ export const Component = () => {
       {name: record.name},
       {
         onSuccess: () => {
-          setDataSource(dataSource => dataSource.filter(item => item.name !== record.name));
           notification.success({description: 'Hub deleted successfully'});
-        },
-        onError: () => {
-          notification.error({description: 'Failed to delete hub'});
         },
       },
     );
@@ -53,9 +50,17 @@ export const Component = () => {
   const handleSave = values => {
     const existing = user.hubs.some(hub => hub.name === values.name);
     if (existing) {
-      updateHub(values);
+      updateHub(values, {
+        onSuccess: () => {
+          notification.success({description: 'Hub updated successfully'});
+        },
+      });
     } else {
-      createHub(values);
+      createHub(values, {
+        onSuccess: () => {
+          notification.success({description: 'Hub created successfully'});
+        },
+      });
     }
   };
 

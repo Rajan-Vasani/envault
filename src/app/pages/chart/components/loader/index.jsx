@@ -62,24 +62,24 @@ const newDataSelector = (oldConfig, newConfig) => {
 };
 
 const ChartLoader = props => {
-  const {node, config, setConfig, mergeConfig} = useNodeContext();
-  const {data: chartDataArray = [{}]} = useNode({type: 'chart', id: node?.id, enabled: !!node?.id});
+  const {nodeAttrs, nodeConfig, setNodeConfig, mergeNodeConfig} = useNodeContext();
+  const {data: chartDataArray = [{}]} = useNode({type: 'chart', id: nodeAttrs?.id, enabled: !!nodeAttrs?.id});
   const [chartData] = chartDataArray;
   // load tokenised data from chart definition
   const {data: initialData, isLoading: isInitialLoading} = useTokenisedSeriesList({tokens: chartData?.data});
   // load series data requested by user, only do this when node.config !== initialConfig
-  const seriesList = newDataSelector(chartData?.config, config);
+  const seriesList = newDataSelector(chartData?.config, nodeConfig);
   const {data: newData, isLoading: isNewLoading} = useSeriesDataList({
     series: seriesList,
-    range: {...config?.global?.timeRange, from: parseTimeFrom(config?.global?.timeRange)?.valueOf()},
+    range: {...nodeConfig?.global?.timeRange, from: parseTimeFrom(nodeConfig?.global?.timeRange)?.valueOf()},
     enabled: !!seriesList.length,
   });
   // load initial config
   useEffect(() => {
     if (chartData?.config) {
-      setConfig?.(structuredClone(chartData.config)); // prevent circular reference to chartData
+      setNodeConfig?.(structuredClone(chartData.config)); // prevent circular reference to chartData
     }
-  }, [chartData, setConfig]);
+  }, [chartData, setNodeConfig]);
 
   const data = useMemo(
     () =>
@@ -92,10 +92,10 @@ const ChartLoader = props => {
   );
 
   const option = useMemo(() => {
-    if (!config.option) return undefined;
-    const _option = structuredClone(config.option);
+    if (!nodeConfig.option) return undefined;
+    const _option = structuredClone(nodeConfig.option);
     _option.series = _option.series.map(s => {
-      const timeRange = s.timeRange || config.global.timeRange;
+      const timeRange = s.timeRange || nodeConfig.global.timeRange;
       const from = parseTimeFrom(timeRange);
       const to = timeRange?.to ? dayjs(timeRange.to) : dayjs();
       const name = s.name || data[s.id]?.[0]?.name || s.id;
@@ -111,10 +111,10 @@ const ChartLoader = props => {
       };
     });
     return _option;
-  }, [config, data]);
+  }, [nodeConfig, data]);
 
   const handleZoom = zoomData => {
-    mergeConfig?.({option: {dataZoom: {start: zoomData.start, end: zoomData.end}}});
+    mergeNodeConfig?.({option: {dataZoom: {start: zoomData.start, end: zoomData.end}}});
   };
 
   return option ? (

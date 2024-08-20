@@ -141,7 +141,7 @@ export const useNestedNodeFilter = props => {
 };
 
 export const useNodeSaveMutation = (props = {}) => {
-  const {hub: _hub = globalThis.envault.hub, type: _type} = props;
+  const {hub: _hub = globalThis.envault.hub, type: _type = 'node'} = props;
   const queryClient = useQueryClient();
   const {notification} = App.useApp();
 
@@ -171,13 +171,13 @@ export const useNodeSaveMutation = (props = {}) => {
     meta: {type: 'node', id: '', method: 'create / update'},
     onMutate: ({data}) => updateNode({...data}),
     onSuccess: (data, variables) => {
+      notification.success({
+        description: `${capitaliseString(variables.type ?? 'node')} ${variables.data.id ? 'updated' : 'created'} successfully`,
+      });
       queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
       if (_type === 'group') {
         queryClient.invalidateQueries({queryKey: [API_QUERY.GET_GROUP_GEO]});
       }
-      notification.success({
-        description: `${capitaliseString(variables.data.type)} ${variables.data.id ? 'updated' : 'created'} successfully`,
-      });
     },
   });
 

@@ -1,8 +1,8 @@
 import {useQueryClient} from '@tanstack/react-query';
 import {App, Form, Input, Layout} from 'antd';
-import NodeHeader from 'app/layouts/node/header';
 import {API_QUERY} from 'constant/query';
 import {useNode, useNodeSaveMutation} from 'hooks/useNode';
+import NodeHeader from 'layouts/node/components/header';
 import {createContext, useEffect, useRef, useState} from 'react';
 import {useOutletContext, useParams} from 'react-router-dom';
 import GridStackControl from './DashboardPreview/GridStackControl';
