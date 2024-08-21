@@ -1,4 +1,4 @@
-import {App, Flex, Form, Input, Select, Typography} from 'antd';
+import {App, Collapse, Flex, Form, Input, Select, Typography} from 'antd';
 import {useNodeSaveMutation} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
 import {isArray, mergeWith} from 'lodash';
@@ -9,36 +9,37 @@ const {Text} = Typography;
 
 export const DeviceConfig = props => {
   const {setForm, disabled} = props;
-  const {nodeAttrs, nodeParams, setNodeConfig} = useNodeContext();
+  const {nodeAttrs, nodeParams, setNodeParams} = useNodeContext();
   const [form] = Form.useForm();
   const {mutate: saveNode} = useNodeSaveMutation({type: nodeAttrs.type});
   const {notification} = App.useApp();
-  const type = Form.useWatch('type', {form, preserve: true});
+  const type = Form.useWatch(['driver', 'type'], {form, preserve: true});
 
   useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
-    if (nodeParams.driver) {
-      form.setFieldsValue(nodeParams.driver);
+    if (nodeParams) {
+      form.setFieldsValue(nodeParams);
     } else {
       form.setFieldsValue(initialValues);
     }
-  }, [nodeParams.driver, form]);
+  }, [nodeParams, form]);
 
   const onFinish = values => {
-    const {schedule, ...config} = values;
+    const {schedule, ...driver} = values;
     notification.info({description: 'Saving device configuration'});
     saveNode({
       id: nodeAttrs?.id,
       type: 'device',
-      ...config,
+      ...driver,
     });
   };
 
   const onValuesChange = (changedValues, allValues) => {
     // merge objects, replace arrays
-    setNodeConfig?.(nodeConfig =>
-      structuredClone(mergeWith(nodeConfig, allValues, (a, b) => (isArray(b) ? b : undefined))),
+    setNodeParams?.(previousParams =>
+      structuredClone(mergeWith(previousParams, allValues, (a, b) => (isArray(b) ? b : undefined))),
     );
+    console.log('nodeParams', nodeParams);
   };
 
   return (
@@ -54,38 +55,53 @@ export const DeviceConfig = props => {
         onValuesChange={onValuesChange}
         disabled={disabled}
       >
-        <Form.Item label={'Endpoints'}>
-          <Flex vertical gap={'small'}>
-            <Text type={'secondary'} copyable>
-              FTP: ftp://ftp.envault.io/device/{nodeAttrs?.id}
-            </Text>
-            <Text type={'secondary'} copyable>
-              HTTP: https://api.envault.io/device-uplink?device={nodeAttrs?.id}
-            </Text>
-            <Text type={'secondary'} copyable>
-              MQTT: mqtts://mqtt.envault.io/device/{nodeAttrs?.id}/uplink
-            </Text>
-          </Flex>
-        </Form.Item>
-        <Flex gap={'small'}>
-          <Form.Item
-            label={'EUI'}
-            name={['eui']}
-            rules={[{pattern: /^[0-9a-fA-F]{16}$/, message: 'EUI must be 16 alphanumeric characters'}]}
-            style={{flex: 1}}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label={'Key'}
-            name={['key']}
-            rules={[{pattern: /^[0-9a-fA-F]{16}$/, message: 'EUI must be 16 alphanumeric characters'}]}
-            style={{flex: 1}}
-          >
-            <Input />
-          </Form.Item>
-        </Flex>
-        <Form.Item label={'Type'} name={['type']}>
+        <Collapse
+          size={'small'}
+          style={{marginBottom: 16}}
+          items={[
+            {
+              key: 'access',
+              label: 'Access',
+              children: (
+                <>
+                  <Flex gap={'small'}>
+                    <Form.Item
+                      label={'EUI'}
+                      name={['driver', 'eui']}
+                      rules={[{pattern: /^[0-9a-fA-F]{16}$/, message: 'EUI must be 16 alphanumeric characters'}]}
+                      style={{flex: 1}}
+                    >
+                      <Input />
+                    </Form.Item>
+                    <Form.Item
+                      label={'Key'}
+                      name={['driver', 'key']}
+                      rules={[{pattern: /^[0-9a-fA-F]{16}$/, message: 'EUI must be 16 alphanumeric characters'}]}
+                      style={{flex: 1}}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Flex>
+                  <Form.Item label={'Endpoints'}>
+                    <Flex vertical gap={'small'}>
+                      <Text type={'secondary'} copyable>
+                        FTP: ftp://ftp.envault.io/device/{nodeAttrs?.id}
+                      </Text>
+                      <Text type={'secondary'} copyable>
+                        HTTP: https://api.envault.io/device-uplink?device={nodeAttrs?.id}
+                      </Text>
+                      <Text type={'secondary'} copyable>
+                        MQTT: mqtts://mqtt.envault.io/device/{nodeAttrs?.id}/uplink
+                      </Text>
+                    </Flex>
+                  </Form.Item>
+                </>
+              ),
+            },
+          ]}
+        />
+
+        <Form.Item label={'Type'} name={['driver', 'type']}>
           <Select options={deviceTypeOptions} />
         </Form.Item>
         <DeviceTypeConfig type={type} />

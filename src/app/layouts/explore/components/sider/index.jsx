@@ -2,7 +2,7 @@ import {Button, Empty, Flex, Input, Layout, Space, Tag, Tooltip, Tree, Typograph
 import {ThemeProvider, createStyles, useTheme, useThemeMode} from 'antd-style';
 import Icon from 'components/atoms/Icon';
 import DraggableItem from 'components/draggable/item';
-import {TreeSiderSkeleton} from 'components/molecules/Skeleton';
+import {TreeSiderItemsSkeleton} from 'components/molecules/Skeleton';
 import Resizeable from 'components/resizeable';
 import {nodeDetails} from 'config/menu';
 import {GridStack} from 'gridstack';
@@ -255,7 +255,7 @@ export const Component = props => {
       <Sider className={styles.sider} width={'auto'}>
         <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%'}}>
           {!isFetched ? (
-            <TreeSiderSkeleton />
+            <TreeSiderItemsSkeleton />
           ) : (
             <Space direction="vertical" size="middle">
               <Search placeholder="Search" allowClear onChange={onSearch} loading={isSearchLoading} />

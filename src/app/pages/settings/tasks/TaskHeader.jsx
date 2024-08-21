@@ -1,8 +1,8 @@
 import {Button, Col, Flex, Form, Input, Layout, Row, Select, Switch, TreeSelect} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
+import {FormSchedule} from 'app/components/molecules/FormSchedule';
 import {useUser} from 'app/services/hooks/useUser';
-import {Schedule} from 'components/molecules/Schedule';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
 import {useNode} from 'hooks/useNode';
@@ -121,7 +121,7 @@ export default function TaskHeader(props) {
               <Form.Item label="Enable" valuePropName={'checked'} name="active" style={{margin: 0}}>
                 <Switch />
               </Form.Item>
-              <Schedule />
+              <FormSchedule />
               <Form.Item noStyle>
                 <Button type="primary" htmlType="submit">
                   {id ? 'Update' : 'Save'}

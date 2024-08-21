@@ -1,9 +1,10 @@
 import {Layout} from 'antd';
 import {createStyles} from 'antd-style';
+import {NodeHeaderSkeleton, NodeSiderSkeleton} from 'components/molecules/Skeleton';
 import {useNode} from 'hooks/useNode';
 import {NodeProvider} from 'layouts/node/context';
 import NoNode from 'pages/error/nonode';
-import {lazy, useState, useTransition} from 'react';
+import {Suspense, lazy, useMemo} from 'react';
 import {Outlet, useMatch, useOutletContext} from 'react-router-dom';
 const NodeSider = lazy(() => import('layouts/node/components/sider'));
 const NodeHeader = lazy(() => import('layouts/node/components/header'));
@@ -19,37 +20,44 @@ const useStyles = createStyles(({token, css}) => ({
 }));
 
 export const Component = props => {
-  const context = useOutletContext();
+  const {isPublic, ...context} = useOutletContext();
   const {params} = useMatch('hub/explore/node/:type?/:id?');
   const nodeAttrs = {id: +params.id, type: params.type};
   const {data: treeData} = useNode();
-  const {data: nodeData} = useNode({
+  const {data: [nodeData = {}] = [{}]} = useNode({
     type: nodeAttrs.type,
     id: nodeAttrs.id,
     enabled: !!(nodeAttrs.type && nodeAttrs.id !== -1),
   });
-  const [, startTransition] = useTransition();
   const {styles} = useStyles();
-  const [showPrivate, setShowPrivate] = useState(false);
-
-  if (!context.isPublic && !showPrivate) {
-    startTransition(() => setShowPrivate(true));
-  }
 
   const currentNode = treeData?.find(({id}) => id === nodeAttrs.id);
-  const node = {
-    ...params,
-    ...nodeData?.[0],
-    ...currentNode,
-  };
+  const node = useMemo(
+    () => ({
+      ...params,
+      ...nodeData,
+      ...currentNode,
+    }),
+    [params, nodeData, currentNode],
+  );
 
   return (
     <NodeProvider node={node}>
       <Layout style={{height: '100%'}}>
-        {showPrivate && <NodeHeader />}
+        {!isPublic && (
+          <Suspense fallback={<NodeHeaderSkeleton />}>
+            <NodeHeader />
+          </Suspense>
+        )}
         <Layout>
-          <Content className={styles.content}>{nodeAttrs.id ? <Outlet context={context} /> : <NoNode />}</Content>
-          {showPrivate && <NodeSider />}
+          <Content className={styles.content}>
+            {nodeAttrs.id ? <Outlet context={{isPublic, ...context}} /> : <NoNode />}
+          </Content>
+          {!isPublic && (
+            <Suspense fallback={<NodeSiderSkeleton />}>
+              <NodeSider />
+            </Suspense>
+          )}
         </Layout>
       </Layout>
     </NodeProvider>

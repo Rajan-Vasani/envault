@@ -68,7 +68,10 @@ export const useTokenisedSeriesList = props => {
         isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
-        data: Object.entries(tokens).reduce((acc, [series], index) => ({...acc, [series]: results[index].data}), {}),
+        data: Object.entries(tokens ?? []).reduce(
+          (acc, [series], index) => ({...acc, [series]: results[index].data}),
+          {},
+        ),
       }),
       [tokens],
     ),

@@ -7,11 +7,10 @@ import {useNode} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
 import ChartLoader from 'pages/chart/components/loader';
 import {baseGlobal} from 'pages/chart/config';
-import NoNode from 'pages/error/nonode';
 const {Content} = Layout;
 
 export const Component = props => {
-  const {nodeConfig, mergeNodeConfig} = useNodeContext();
+  const {nodeParams, mergeNodeParams} = useNodeContext();
   const {data: tree} = useNode();
   const {notification} = App.useApp();
   const acceptedTypes = ['series', 'group'];
@@ -31,7 +30,7 @@ export const Component = props => {
       btn: (
         <Button
           onClick={() => {
-            mergeNodeConfig({option: {series: series}});
+            mergeNodeParams({config: {option: {series: series}}});
             notification.destroy(key);
           }}
         >
@@ -66,28 +65,28 @@ export const Component = props => {
           const chartSeries = series.map(s => ({
             id: s.id,
             name: s.name,
-            type: nodeConfig?.global?.type || baseGlobal.type,
+            type: nodeParams.config?.global?.type || baseGlobal.type,
           }));
           if (chartSeries.length > 10) {
             handleLargeGroup(series);
           }
-          return mergeNodeConfig({option: {series: chartSeries}});
+          return mergeNodeParams({config: {option: {series: chartSeries}}});
         }
-        return mergeNodeConfig({option: {series: [{id, name, type: nodeConfig?.global?.type || baseGlobal.type}]}});
+        return mergeNodeParams({
+          config: {option: {series: [{id, name, type: nodeParams.config?.global?.type || baseGlobal.type}]}},
+        });
       }
       handleRejectedType(type, accepts);
     },
   });
 
-  return nodeConfig.option ? (
+  return (
     <>
       <Droppable key={'chart-droppable'} id={'chart-droppable'} acceptedTypes={acceptedTypes}>
         <ChartLoader />
       </Droppable>
       <DraggableOverlay />
     </>
-  ) : (
-    <NoNode type={'chart'} />
   );
 };
 Component.displayName = 'Chart';

@@ -20,7 +20,7 @@ const initialValues = {
 export const ChartConfig = props => {
   const {setForm, disabled} = props;
   const {eventState, handleStreamStateChange} = {eventstate: '', handleStreamStateChange: () => {}}; // temporary
-  const {nodeAttrs, nodeConfig, setNodeConfig} = useNodeContext();
+  const {nodeAttrs, nodeParams, updateNodeParams} = useNodeContext();
   const [form] = Form.useForm();
   const {mutate: saveNode} = useNodeSaveMutation({type: nodeAttrs.type});
   const {notification} = App.useApp();
@@ -35,12 +35,12 @@ export const ChartConfig = props => {
 
   useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
-    if (nodeConfig?.option && nodeConfig?.global) {
-      form.setFieldsValue(nodeConfig);
+    if (nodeParams.config?.option && nodeParams.config?.global) {
+      form.setFieldsValue(nodeParams.config);
     } else {
       form.setFieldsValue(initialValues);
     }
-  }, [nodeConfig, form]);
+  }, [nodeParams.config, form]);
 
   const onFinish = values => {
     notification.info({description: 'Saving chart configuration'});
@@ -68,17 +68,16 @@ export const ChartConfig = props => {
         }),
         {},
       ),
-      nodeConfig,
+      config: {...nodeParams.config, ...values},
     };
     saveNode({data: dataChart});
   };
 
   const onValuesChange = (changedValues, allValues) => {
     // merge objects, replace arrays
-    setNodeConfig?.(nodeConfig =>
-      structuredClone(mergeWith(nodeConfig, allValues, (a, b) => (isArray(b) ? b : undefined))),
+    updateNodeParams('config', previousValue =>
+      structuredClone(mergeWith(previousValue, allValues, (a, b) => (isArray(b) ? b : undefined))),
     );
-    console.log(JSON.stringify(changedValues, null, 2), JSON.stringify(allValues, null, 2));
   };
   // Normalize input and output of form components to suit chart options
   // input: Global TimeRange

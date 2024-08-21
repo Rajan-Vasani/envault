@@ -1,5 +1,5 @@
 import {Button, Descriptions, Flex, Form, Popconfirm, Skeleton, Table, Tag} from 'antd';
-import {useResponsive} from 'antd-style';
+import {createStyles, useResponsive} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
 import {useState} from 'react';
 
@@ -42,7 +42,13 @@ const isCallable = (value, props) => {
   }
   return value;
 };
-
+const useStyles = createStyles(({css, token}) => ({
+  table: css`
+    .ant-table-cell {
+      color: ${token.colorTextBase};
+    }
+  `,
+}));
 export const FormTable = props => {
   const {
     columns,
@@ -67,6 +73,7 @@ export const FormTable = props => {
   const [editingKey, setEditingKey] = useState('');
   const isEditing = (record, key) => record === key;
   const responsive = useResponsive();
+  const {styles} = useStyles();
 
   const triggerPagination = () => {
     onPagination?.();
@@ -234,6 +241,7 @@ export const FormTable = props => {
       </Flex>
       {responsive.lg ? (
         <Table
+          className={styles.table}
           columns={builtColumns}
           dataSource={dataSource}
           components={components}

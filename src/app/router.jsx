@@ -229,6 +229,9 @@ const AuthBoundary = () => {
               algorithm: true,
               headerPadding: '0 10px',
             },
+            Form: {
+              itemMarginBottom: 16,
+            },
           },
         }}
       >

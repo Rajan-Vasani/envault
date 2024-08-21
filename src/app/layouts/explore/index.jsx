@@ -1,19 +1,14 @@
 import {DndContext, PointerSensor, TouchSensor, useSensor, useSensors} from '@dnd-kit/core';
 import {Layout} from 'antd';
 import ErrorBoundary from 'components/error/boundary';
-import {lazy, useState, useTransition} from 'react';
+import {TreeSiderSkeleton} from 'components/molecules/Skeleton';
+import {Suspense, lazy} from 'react';
 import {Outlet, useOutletContext} from 'react-router-dom';
-const Sider = lazy(() => import('layouts/explore/components/sider'));
-const {Content} = Layout;
+const ExploreSider = lazy(() => import('layouts/explore/components/sider'));
+const {Content, Sider} = Layout;
 
 export const Component = props => {
-  const context = useOutletContext();
-  const [, startTransition] = useTransition();
-  const [showPrivate, setShowPrivate] = useState(false);
-
-  if (!context.isPublic && !showPrivate) {
-    startTransition(() => setShowPrivate(true));
-  }
+  const {isPublic, ...context} = useOutletContext();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -32,10 +27,14 @@ export const Component = props => {
   return (
     <Layout>
       <DndContext sensors={sensors}>
-        {showPrivate && <Sider />}
+        {!isPublic && (
+          <Suspense fallback={<TreeSiderSkeleton />}>
+            <ExploreSider />
+          </Suspense>
+        )}
         <Content>
           <ErrorBoundary {...props}>
-            <Outlet context={context} />
+            <Outlet context={{isPublic, ...context}} />
           </ErrorBoundary>
         </Content>
       </DndContext>

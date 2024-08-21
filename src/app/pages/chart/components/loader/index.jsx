@@ -3,11 +3,10 @@ import {Echarts} from 'app/pages/chart/components/echarts/init';
 import Icon from 'components/atoms/Icon';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import {useNode} from 'hooks/useNode';
 import {useSeriesDataList, useTokenisedSeriesList} from 'hooks/useSeries';
 import {useNodeContext} from 'layouts/node/context';
 import {differenceBy, isArray, isEmpty, isEqual, mergeWith, unionBy} from 'lodash';
-import {useEffect, useMemo} from 'react';
+import {useMemo} from 'react';
 import {parseTimeFrom} from 'utils/time';
 dayjs.extend(isBetween);
 
@@ -62,24 +61,19 @@ const newDataSelector = (oldConfig, newConfig) => {
 };
 
 const ChartLoader = props => {
-  const {nodeAttrs, nodeConfig, setNodeConfig, mergeNodeConfig} = useNodeContext();
-  const {data: chartDataArray = [{}]} = useNode({type: 'chart', id: nodeAttrs?.id, enabled: !!nodeAttrs?.id});
-  const [chartData] = chartDataArray;
+  const {nodeAttrs, nodeParams, mergeNodeParams} = useNodeContext();
   // load tokenised data from chart definition
-  const {data: initialData, isLoading: isInitialLoading} = useTokenisedSeriesList({tokens: chartData?.data});
+  const {data: initialData, isLoading: isInitialLoading} = useTokenisedSeriesList({tokens: nodeParams?.data});
   // load series data requested by user, only do this when node.config !== initialConfig
-  const seriesList = newDataSelector(chartData?.config, nodeConfig);
+  const seriesList = nodeParams.config?.option?.series?.map(({id}) => id in nodeParams.data) ?? [];
   const {data: newData, isLoading: isNewLoading} = useSeriesDataList({
     series: seriesList,
-    range: {...nodeConfig?.global?.timeRange, from: parseTimeFrom(nodeConfig?.global?.timeRange)?.valueOf()},
+    range: {
+      ...nodeParams.config?.global?.timeRange,
+      from: parseTimeFrom(nodeParams.config?.global?.timeRange)?.valueOf(),
+    },
     enabled: !!seriesList.length,
   });
-  // load initial config
-  useEffect(() => {
-    if (chartData?.config) {
-      setNodeConfig?.(structuredClone(chartData.config)); // prevent circular reference to chartData
-    }
-  }, [chartData, setNodeConfig]);
 
   const data = useMemo(
     () =>
@@ -92,10 +86,10 @@ const ChartLoader = props => {
   );
 
   const option = useMemo(() => {
-    if (!nodeConfig.option) return undefined;
-    const _option = structuredClone(nodeConfig.option);
+    if (!nodeParams.config?.option) return undefined;
+    const _option = structuredClone(nodeParams.config.option);
     _option.series = _option.series.map(s => {
-      const timeRange = s.timeRange || nodeConfig.global.timeRange;
+      const timeRange = s.timeRange || nodeParams.config.global.timeRange;
       const from = parseTimeFrom(timeRange);
       const to = timeRange?.to ? dayjs(timeRange.to) : dayjs();
       const name = s.name || data[s.id]?.[0]?.name || s.id;
@@ -111,10 +105,10 @@ const ChartLoader = props => {
       };
     });
     return _option;
-  }, [nodeConfig, data]);
+  }, [nodeParams.config, data]);
 
   const handleZoom = zoomData => {
-    mergeNodeConfig?.({option: {dataZoom: {start: zoomData.start, end: zoomData.end}}});
+    mergeNodeParams?.({config: {option: {dataZoom: {start: zoomData.start, end: zoomData.end}}}});
   };
 
   return option ? (

@@ -32,13 +32,14 @@ export const Component = () => {
   }, [user.hubs]);
 
   const handleDelete = record => {
-    const saved = user.hubs.some(hub => hub.name === record.name);
+    const {name} = record.record;
+    const saved = user.hubs.some(hub => hub.name === name);
     if (!saved) {
-      setDataSource(dataSource => dataSource.filter(item => item.name !== record.name));
+      setDataSource(dataSource => dataSource.filter(item => item.name !== name));
       return;
     }
     removeHub(
-      {name: record.name},
+      {name: name},
       {
         onSuccess: () => {
           notification.success({description: 'Hub deleted successfully'});

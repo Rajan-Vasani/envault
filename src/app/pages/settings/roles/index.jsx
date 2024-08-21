@@ -1,11 +1,9 @@
-import {useQueryClient} from '@tanstack/react-query';
 import {App, Button, Dropdown, Form, Input, Space, Tree} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'components/atoms/Icon';
 import ErrorBoundary from 'components/error/boundary';
 import FormTable from 'components/molecules/FormTable';
 import {nodeDetails} from 'config/menu';
-import {API_QUERY} from 'constant/query';
 import {useNode, useNodeACLDeleteMutation, useNodeACLPutMutation, useRoleACLList} from 'hooks/useNode';
 import {useRoleDeleteMutation, useRolePutMutation} from 'hooks/useRole';
 import {NodeItem} from 'layouts/explore/components/sider';
@@ -169,25 +167,22 @@ const FormTree = props => {
   );
 };
 
-const useStyles = createStyles(({css}) => ({
+const useStyles = createStyles(({css, token}) => ({
   tree: css`
     .ant-tree-switcher {
       display: none;
     }
     .ant-btn-primary.ant-btn-dangerous:disabled {
       background: #ff4d507a;
-      box-shadow: 0 2px 0 rgba(255, 38, 5, 0.06);
       color: #fff;
     }
     .ant-btn-primary.ant-btn-dangerous {
-      background: #ff4d4f;
-      box-shadow: 0 2px 0 rgba(255, 38, 5, 0.06);
+      background: ${token.colorError};
       color: #fff;
     }
     .ant-btn-primary:disabled {
       color: #fff;
-      background: #8318b96d;
-      box-shadow: 0 2px 0 rgba(175, 25, 205, 0.1);
+      background: ${token.colorPrimary};
     }
   `,
 }));
@@ -199,7 +194,6 @@ export const Component = props => {
   const {mutate: upsertRole} = useRolePutMutation();
   const {mutate: upsertNodeAcl} = useNodeACLPutMutation();
   const {mutate: removeNodeAcl} = useNodeACLDeleteMutation();
-  const queryClient = useQueryClient();
   const [dataSource, setDataSource] = useState([]);
   const [disabled, setDisabled] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -229,28 +223,28 @@ export const Component = props => {
     });
   };
 
-  const handleDeleteRole = values => {
+  const handleDeleteRole = record => {
+    const {id} = record.record;
     notification.open({type: 'info', description: 'Deleting role...'});
-    const {id} = values.record;
-    if (id) {
-      const body = {
-        hub: globalThis.envault.hub,
-        id: id,
-      };
-      console.log('delete role ', id);
-
-      deleteRole(
-        {...body},
-        {
-          onSuccess: () => {
-            notification.open({type: 'success', description: 'Role deleted'});
-            queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE_HUB, globalThis.envault.hub]});
+    const saved = roleData.some(item => item.id === id);
+    if (!saved) {
+      setDataSource(dataSource => dataSource.filter(item => item.id !== id));
+      return;
+    } else {
+      if (id) {
+        const body = {
+          hub: globalThis.envault.hub,
+          id: id,
+        };
+        deleteRole(
+          {...body},
+          {
+            onSuccess: () => {
+              notification.open({type: 'success', description: 'Role deleted'});
+            },
           },
-          onError: () => {
-            notification.open({type: 'error', description: 'Could not delete role'});
-          },
-        },
-      );
+        );
+      }
     }
   };
 
@@ -258,11 +252,14 @@ export const Component = props => {
     const {acl, ...role} = props;
     const initValues = dataSource.find(item => item.id === role.id);
     const isUpdateRequired = !isEqual(initValues, props);
+
     if (isUpdateRequired) {
       if (typeof role.id !== 'number') {
+        notification.open({type: 'info', description: 'Creating role...'});
         delete role.id;
+      } else {
+        notification.open({type: 'info', description: 'Updating role...'});
       }
-      notification.open({type: 'info', description: 'Updating role...'});
       upsertRole(role, {
         onSuccess: () => {
           const aclBase = {actor: role.id, create: null, read: null, update: null, delete: null};
@@ -277,7 +274,11 @@ export const Component = props => {
               upsertNodeAcl(updatedAcl);
             }
           }
-          notification.open({type: 'success', description: 'Role updated'});
+          if (typeof role.id !== 'number') {
+            notification.open({type: 'success', description: 'Role created successfully'});
+          } else {
+            notification.open({type: 'success', description: 'Role updated successfully'});
+          }
         },
       });
     }

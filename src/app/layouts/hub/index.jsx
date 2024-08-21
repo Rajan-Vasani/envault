@@ -1,8 +1,9 @@
 import {Layout} from 'antd';
 import {useThemeMode} from 'antd-style';
+import {HubHeaderSkeleton} from 'components/molecules/Skeleton';
 import Cookies from 'js-cookie';
 import {NoHub} from 'pages/error/nohub';
-import {lazy, useEffect, useState, useTransition} from 'react';
+import {Suspense, lazy, useEffect, useTransition} from 'react';
 import {Outlet, useOutletContext} from 'react-router-dom';
 const Header = lazy(() => import('layouts/hub/components/header'));
 const Footer = lazy(() => import('layouts/hub/components/footer'));
@@ -11,7 +12,6 @@ export const Component = props => {
   const {hub, user, isPublic} = useOutletContext();
   const {themeMode, setThemeMode} = useThemeMode();
   const [, startTransition] = useTransition();
-  const [showPrivate, setShowPrivate] = useState(false);
 
   // set hub favicon and title
   useEffect(() => {
@@ -27,10 +27,6 @@ export const Component = props => {
     }
   }, [hub]);
 
-  if (!isPublic && !showPrivate) {
-    startTransition(() => setShowPrivate(true));
-  }
-
   // set user theme preference
   useEffect(() => {
     startTransition(() => {
@@ -44,9 +40,17 @@ export const Component = props => {
 
   return hub ? (
     <Layout style={{height: '100svh'}}>
-      {showPrivate && <Header {...props} hub={hub} />}
+      {!isPublic && (
+        <Suspense fallback={<HubHeaderSkeleton />}>
+          <Header {...props} hub={hub} />
+        </Suspense>
+      )}
       <Outlet context={{hub, user, isPublic}} />
-      {showPrivate && <Footer {...props} />}
+      {!isPublic && (
+        <Suspense fallback={<HubHeaderSkeleton />}>
+          <Footer {...props} />
+        </Suspense>
+      )}
     </Layout>
   ) : (
     <NoHub error={{status: 404}} />
