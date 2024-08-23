@@ -20,16 +20,7 @@ const useStyles = createStyles(({token, css}) => ({
 const FooterNav = props => {
   const {pathname} = useLocation();
   const {styles} = useStyles();
-  const navMenuItems = useMemo(() => {
-    const slug = pathname.split('/')[1];
-    switch (slug) {
-      case 'user':
-        return menuItemsHandler(initialMenu.adminMenuItems);
-      case 'explore':
-      default:
-        return menuItemsHandler(initialMenu.mainMenuItems);
-    }
-  }, [pathname]);
+  const navMenuItems = useMemo(() => menuItemsHandler(initialMenu.mainMenuItems), []);
 
   return (
     <Footer className={styles.footer}>

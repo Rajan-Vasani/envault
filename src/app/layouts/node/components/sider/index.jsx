@@ -49,7 +49,7 @@ export const NodeSider = props => {
   const {styles} = useStyles();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [form, setForm] = useState();
+  const [form, setForm] = useState(null);
   const hasTab = searchParams.has('tab');
   const [collapsed, setCollapsed] = useState(!hasTab);
 
@@ -63,6 +63,7 @@ export const NodeSider = props => {
   }, [hasTab]); // tab change
 
   const handleTabChange = e => {
+    setForm(null);
     setSearchParams({...searchParams, tab: e});
   };
 

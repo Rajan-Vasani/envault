@@ -224,17 +224,16 @@ export const Component = props => {
   };
 
   const handleDeleteRole = record => {
-    const {id} = record.record;
     notification.open({type: 'info', description: 'Deleting role...'});
-    const saved = roleData.some(item => item.id === id);
+    const saved = roleData.some(item => item.id === record.id);
     if (!saved) {
-      setDataSource(dataSource => dataSource.filter(item => item.id !== id));
+      setDataSource(dataSource => dataSource.filter(item => item.id !== record.id));
       return;
     } else {
-      if (id) {
+      if (record.id) {
         const body = {
           hub: globalThis.envault.hub,
-          id: id,
+          id: record.id,
         };
         deleteRole(
           {...body},

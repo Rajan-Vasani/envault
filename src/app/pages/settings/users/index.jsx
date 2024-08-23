@@ -25,18 +25,15 @@ export const Component = props => {
   }, [userRolesData, form]);
 
   const handleRemoveUser = record => {
-    console.log(record);
-
-    const {id} = record.record;
-    const saved = userRolesData.some(item => item.id === id);
+    const saved = userRolesData.some(item => item.id === record.id);
     if (!saved) {
-      setDataSource(dataSource => dataSource.filter(item => item.id !== id));
+      setDataSource(dataSource => dataSource.filter(item => item.id !== record.id));
       return;
     } else {
-      if (id) {
+      if (record.id) {
         notification.info({description: 'Deleting user...'});
         removeUser(
-          {id: id},
+          {id: record.id},
           {
             onSuccess: () => {
               notification.success({description: 'User deleted'});

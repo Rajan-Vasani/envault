@@ -17,10 +17,10 @@ export const Component = props => {
 
   return (
     <Row gutter={[32, 32]} justify={'center'} style={{height: '100%'}}>
-      <Col xs={{flex: '100%'}} sm={{flex: '100%'}} md={{flex: '50%'}} lg={{flex: '40%'}} xl={{flex: '40%'}}>
+      <Col xs={{flex: '100%'}} sm={{flex: '100%'}} md={{flex: '50%'}} lg={{flex: '40%'}}>
         <Profile className={styles.item} />
       </Col>
-      <Col xs={{flex: '100%'}} sm={{flex: '100%'}} md={{flex: '50%'}} lg={{flex: '40%'}} xl={{flex: '30%'}}>
+      <Col xs={{flex: '100%'}} sm={{flex: '100%'}} md={{flex: '50%'}} lg={{flex: '40%'}}>
         <Hubs className={styles.item} />
       </Col>
     </Row>

@@ -6,7 +6,7 @@ import {nodeDetails} from 'config/menu';
 import {baseNodeAttrs} from 'layouts/node/config';
 import {useNodeContext} from 'layouts/node/context';
 import {useEffect} from 'react';
-import {generatePath, useNavigate} from 'react-router-dom';
+import {createSearchParams, generatePath, useNavigate} from 'react-router-dom';
 
 const nodeTypeOptions = nodeDetails.map(node => ({
   value: node.value,
@@ -35,18 +35,20 @@ export const NodeInfo = props => {
 
   const onFinish = values => {
     notification.info({type: 'info', description: `Saving ${values.type}`});
-    if (values.id === -1) {
-      delete values.id;
+    let {type, ...data} = values;
+    if (data.id === -1) {
+      delete data.id;
+      data = {...baseNodeAttrs[type], ...data};
     }
-    const {type, ...formData} = values;
-    const data = {...baseNodeAttrs[type], ...formData};
     saveNode(
       {data, type},
       {
         onSuccess: (data, variables) => {
           if (!variables.data.id) {
-            const path = generatePath(':type/:id', {type, id: data[0].id});
-            navigate(path);
+            navigate({
+              pathname: generatePath(':type/:id', {type, id: data[0].id}),
+              search: createSearchParams({tab: 'config'}).toString(),
+            });
           }
         },
       },

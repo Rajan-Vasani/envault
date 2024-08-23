@@ -42,7 +42,7 @@ export const Component = props => {
     <Layout style={{height: '100svh'}}>
       {!isPublic && (
         <Suspense fallback={<HubHeaderSkeleton />}>
-          <Header {...props} hub={hub} />
+          <Header {...props} />
         </Suspense>
       )}
       <Outlet context={{hub, user, isPublic}} />

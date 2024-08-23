@@ -1,4 +1,4 @@
-import {App, Collapse, Flex, Form, Input, Select, Typography} from 'antd';
+import {App, Collapse, Descriptions, Flex, Form, Input, Select, Typography} from 'antd';
 import {useNodeSaveMutation} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
 import {isArray, mergeWith} from 'lodash';
@@ -13,7 +13,7 @@ export const DeviceConfig = props => {
   const [form] = Form.useForm();
   const {mutate: saveNode} = useNodeSaveMutation({type: nodeAttrs.type});
   const {notification} = App.useApp();
-  const type = Form.useWatch(['driver', 'type'], {form, preserve: true});
+  const {type, eui, key} = Form.useWatch('driver', {form, preserve: true}) ?? {};
 
   useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
@@ -83,17 +83,107 @@ export const DeviceConfig = props => {
                     </Form.Item>
                   </Flex>
                   <Form.Item label={'Endpoints'}>
-                    <Flex vertical gap={'small'}>
-                      <Text type={'secondary'} copyable>
-                        FTP: ftp://ftp.envault.io/device/{nodeAttrs?.id}
-                      </Text>
-                      <Text type={'secondary'} copyable>
-                        HTTP: https://api.envault.io/device-uplink?device={nodeAttrs?.id}
-                      </Text>
-                      <Text type={'secondary'} copyable>
-                        MQTT: mqtts://mqtt.envault.io/device/{nodeAttrs?.id}/uplink
-                      </Text>
-                    </Flex>
+                    <Collapse
+                      size={'small'}
+                      items={[
+                        {
+                          key: 'API',
+                          label: 'Rest API',
+                          children: (
+                            <Descriptions
+                              bordered
+                              column={1}
+                              items={[
+                                {
+                                  key: 'Host',
+                                  label: 'Hostname',
+                                  children: <Text copyable>https://api.envault.io/device/{eui}/uplink</Text>,
+                                },
+                                {
+                                  key: 'Headers',
+                                  label: 'Headers',
+                                  children: (
+                                    <Flex vertical gap={'small'}>
+                                      <Text copyable>X-Api-Key: {key}</Text>
+                                      <Text copyable>Accept-Version: latest</Text>
+                                    </Flex>
+                                  ),
+                                },
+                              ]}
+                            />
+                          ),
+                        },
+                        {
+                          key: 'MQTT',
+                          label: 'MQTT',
+                          children: (
+                            <Descriptions
+                              bordered
+                              column={1}
+                              items={[
+                                {
+                                  key: 'host',
+                                  label: 'Hostname',
+                                  children: (
+                                    <Flex vertical gap={'small'}>
+                                      <Text copyable>mqtt://mqtt.envault.io:1883</Text>
+                                      <Text copyable>mqtts://mqtt.envault.io:8883</Text>
+                                    </Flex>
+                                  ),
+                                },
+                                {
+                                  key: 'topic',
+                                  label: 'Topic',
+                                  children: <Text copyable>device/{eui}/uplink</Text>,
+                                },
+                                {
+                                  key: 'Username',
+                                  label: 'Username',
+                                  children: <Text copyable>{eui}</Text>,
+                                },
+                                {
+                                  key: 'Password',
+                                  label: 'Password',
+                                  children: <Text copyable>{key}</Text>,
+                                },
+                              ]}
+                            />
+                          ),
+                        },
+                        {
+                          key: 'FTP',
+                          label: 'FTP',
+                          children: (
+                            <Descriptions
+                              bordered
+                              column={1}
+                              items={[
+                                {
+                                  key: 'Host',
+                                  label: 'Hostname',
+                                  children: <Text copyable>ftp://ftp.envault.io:21</Text>,
+                                },
+                                {
+                                  key: 'Directory',
+                                  label: 'Directory',
+                                  children: <Text copyable>device/{nodeAttrs?.id}/uplink/</Text>,
+                                },
+                                {
+                                  key: 'Username',
+                                  label: 'Username',
+                                  children: <Text copyable>{eui}</Text>,
+                                },
+                                {
+                                  key: 'Password',
+                                  label: 'Password',
+                                  children: <Text copyable>{key}</Text>,
+                                },
+                              ]}
+                            />
+                          ),
+                        },
+                      ]}
+                    />
                   </Form.Item>
                 </>
               ),

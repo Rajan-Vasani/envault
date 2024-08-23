@@ -47,7 +47,7 @@ export const nodeDetails = [
     icon: {icon: 'LineChartOutlined', type: 'ant'},
     draggable: true,
     color: 'volcano',
-    label: {name: 'Chart', path: routes.chart},
+    label: {name: 'Chart'},
   },
   {
     value: 'timelapse',
@@ -65,7 +65,7 @@ export const nodeDetails = [
     icon: {icon: 'PictureOutlined', type: 'ant'},
     color: 'gold',
     draggable: true,
-    label: {name: 'Gallery', path: routes.gallery},
+    label: {name: 'Gallery'},
   },
   {
     value: 'dashboard',
@@ -73,7 +73,7 @@ export const nodeDetails = [
     icon: {icon: 'ReconciliationOutlined', type: 'ant'},
     color: 'lime',
     draggable: true,
-    label: {name: 'Dashboard', path: routes.dashboard},
+    label: {name: 'Dashboard'},
   },
   {
     value: 'device',
@@ -124,28 +124,12 @@ export const mainMenuItems = [
     },
   },
 ];
-export const adminMenuItems = [
-  {
-    key: 'explore',
-    icon: {icon: 'RocketOutlined', type: 'ant'},
-    label: {path: routes.default, name: 'Explore'},
-  },
-  {
-    key: 'hub',
-    icon: {icon: 'ClusterOutlined', type: 'ant'},
-    label: {path: routes.hub, name: 'Hub'},
-  },
-  {
-    key: 'profile',
-    icon: {icon: 'UserOutlined', type: 'ant'},
-    label: {path: routes.profile, name: 'Account'},
-  },
-];
+
 export const accountMenuItems = [
   {
     key: 'profile',
     icon: {icon: 'UserOutlined', type: 'ant'},
-    label: {path: routes.profile, name: 'Account'},
+    label: {path: globalThis.envault.app, name: 'Account'},
   },
   {
     type: 'divider',
@@ -181,7 +165,6 @@ export const settingsMenuItems = [
 
 const initialMenu = {
   mainMenuItems,
-  adminMenuItems,
   accountMenuItems,
   settingsMenuItems,
   nodeDetails,

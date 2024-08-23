@@ -38,8 +38,13 @@ export const Component = props => {
   }, [geom]);
 
   const handleMarkerClick = item => {
-    const path = generatePath('../group/:id', {id: item.properties.id});
-    navigate({pathname: path, search: location.search});
+    navigate(
+      {
+        pathname: generatePath('../group/:id', {id: item.properties.id}),
+        search: location.search,
+      },
+      {unstable_viewTransition: true},
+    );
   };
 
   return (

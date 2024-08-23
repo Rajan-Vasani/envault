@@ -23,6 +23,7 @@ import {
   createBrowserRouter,
   isRouteErrorResponse,
   useLoaderData,
+  useOutletContext,
   useRouteError,
   useSearchParams,
 } from 'react-router-dom';
@@ -94,7 +95,15 @@ const onErrorHandler = (error, query) => {
             errorResponse.description = 'You do not have access to this hub';
             errorResponse.navigate = {to: {pathname: globalThis.envault.app}, replace: true};
             break;
-          case 'NO_ACCESS_ADMIN':
+          case 'NO_ACCESS_HUB_ADMIN':
+            errorResponse.message = 'Access Denied';
+            errorResponse.description = 'You need Hub Admin permissions to access this resource';
+            errorResponse.navigate = {to: globalThis.envault.app, replace: true};
+            break;
+          case 'NO_ACCESS_APP_ADMIN':
+            errorResponse.message = 'Access Denied';
+            errorResponse.description = 'You need App Admin permissions to access this resource';
+            errorResponse.navigate = {to: globalThis.envault.app, replace: true};
             break;
           default:
             errorResponse.message = 'Forbidden';
@@ -106,7 +115,7 @@ const onErrorHandler = (error, query) => {
           case 'HUB_NOT_FOUND':
             errorResponse.message = 'Hub Not Found';
             errorResponse.description = 'The hub you are looking for does not exist';
-            errorResponse.navigate = {to: {pathname: globalThis.envault.app}, replace: true};
+            errorResponse.navigate = {to: globalThis.envault.app, replace: true};
             break;
           default:
             errorResponse.message = 'Resource Not Found';
@@ -244,12 +253,29 @@ const AuthBoundary = () => {
   }
   throw {data: user, internal: false, status: 401, statusText: 'Unauthorized'};
 };
-const AdminBoundary = () => {
+const AppAdminBoundary = () => {
   const {user} = useLoaderData();
   if (user?.app_admin) {
     return <Outlet context={{user}} />;
   }
-  throw {data: {type: 'NO_ACCESS_ADMIN'}, internal: false, status: 403, statusText: 'Forbidden'};
+  throw {
+    data: {type: 'NO_ACCESS_APP_ADMIN'},
+    internal: false,
+    status: 403,
+    statusText: 'Forbidden',
+  };
+};
+const HubAdminBoundary = () => {
+  const {user, hub, ...context} = useOutletContext();
+  if (hub.is_admin || user?.app_admin) {
+    return <Outlet context={{user, hub, ...context}} />;
+  }
+  throw {
+    data: {type: 'NO_ACCESS_HUB_ADMIN'},
+    internal: false,
+    status: 403,
+    statusText: 'Forbidden',
+  };
 };
 // Catch route and handle route errors
 const AuthErrorBoundary = () => {
@@ -318,6 +344,7 @@ const router = createBrowserRouter(
         {
           element: <HubLayout />,
           path: 'hub',
+          id: 'hub',
           children: [
             {
               index: true,
@@ -346,6 +373,27 @@ const router = createBrowserRouter(
                       path: 'device/:nodeId?',
                       id: 'device',
                       lazy: () => import('pages/device'),
+                      children: [
+                        {
+                          index: true,
+                          element: <Navigate to={'data'} replace />,
+                        },
+                        {
+                          path: 'data',
+                          id: 'device-data',
+                          lazy: () => import('pages/chart'),
+                        },
+                        {
+                          path: 'image',
+                          id: 'device-image',
+                          lazy: () => import('pages/gallery'),
+                        },
+                        {
+                          path: 'state',
+                          id: 'device-state',
+                          lazy: () => import('pages/dashboard'),
+                        },
+                      ],
                     },
                     {
                       path: 'variable/:nodeId?',
@@ -410,41 +458,46 @@ const router = createBrowserRouter(
             },
             {
               path: 'settings',
-              element: <SettingsLayout />,
+              element: <HubAdminBoundary />,
               children: [
                 {
-                  index: true,
-                  element: <Navigate to={'config'} replace />,
-                },
-                {
-                  path: 'config',
-                  id: 'config',
-                  lazy: () => import('app/pages/settings/hub'),
-                },
-                {
-                  path: 'users',
-                  id: 'users',
-                  lazy: () => import('app/pages/settings/users'),
-                },
-                {
-                  path: 'roles',
-                  id: 'roles',
-                  lazy: () => import('app/pages/settings/roles'),
-                },
-                {
-                  path: 'tasks',
-                  id: 'tasks',
-                  lazy: () => import('app/pages/settings/tasks'),
-                },
-                {
-                  path: 'tasks/:nodeId',
-                  id: 'taskDetail',
-                  lazy: () => import('pages/task'),
-                },
-                {
-                  path: 'billing',
-                  id: 'billing',
-                  lazy: () => import('app/pages/settings/billing'),
+                  element: <SettingsLayout />,
+                  children: [
+                    {
+                      index: true,
+                      element: <Navigate to={'config'} replace />,
+                    },
+                    {
+                      path: 'config',
+                      id: 'config',
+                      lazy: () => import('app/pages/settings/hub'),
+                    },
+                    {
+                      path: 'users',
+                      id: 'users',
+                      lazy: () => import('app/pages/settings/users'),
+                    },
+                    {
+                      path: 'roles',
+                      id: 'roles',
+                      lazy: () => import('app/pages/settings/roles'),
+                    },
+                    {
+                      path: 'tasks',
+                      id: 'tasks',
+                      lazy: () => import('app/pages/settings/tasks'),
+                    },
+                    {
+                      path: 'tasks/:nodeId',
+                      id: 'taskDetail',
+                      lazy: () => import('pages/task'),
+                    },
+                    {
+                      path: 'billing',
+                      id: 'billing',
+                      lazy: () => import('app/pages/settings/billing'),
+                    },
+                  ],
                 },
               ],
             },
@@ -464,7 +517,7 @@ const router = createBrowserRouter(
             },
             {
               path: 'admin',
-              element: <AdminBoundary />,
+              element: <AppAdminBoundary />,
               loader: ({request}) => userLoader(request, queryClient),
               children: [
                 {

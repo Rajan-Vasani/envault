@@ -9,7 +9,7 @@ import {GridStack} from 'gridstack';
 import {useNodeFilter, useNodeSaveMutation} from 'hooks/useNode';
 import {debounce, union} from 'lodash';
 import {useEffect, useMemo, useState} from 'react';
-import {generatePath, useNavigate, useParams, useSearchParams} from 'react-router-dom';
+import {createSearchParams, generatePath, useNavigate, useParams, useSearchParams} from 'react-router-dom';
 import {arrayToTree, findAncestors} from 'utils/tree';
 const {Sider} = Layout;
 const {Search} = Input;
@@ -190,8 +190,13 @@ export const Component = props => {
 
   const onNodeClick = (props, info) => {
     const {type, id} = info.node;
-    const path = generatePath('node/:type/:id', {type, id});
-    return navigate({pathname: path, search: searchParams.toString()}, {unstable_viewTransition: true});
+    return navigate(
+      {
+        pathname: generatePath('node/:type/:id', {type, id}),
+        search: searchParams.toString(),
+      },
+      {unstable_viewTransition: true},
+    );
   };
 
   const onExpand = newExpandedKeys => {
@@ -213,9 +218,13 @@ export const Component = props => {
     setSelectedKeys([newNode.id]);
     updateNode(newNode);
     if (!newNode.remove) {
-      const search = new URLSearchParams({tab: 'info'}).toString();
-      const pathname = generatePath('node/:type/:id', {type: newNode.type, id: newNode.id});
-      navigate({pathname, search}, {unstable_viewTransition: true});
+      navigate(
+        {
+          pathname: generatePath('node/:type/:id', {type: newNode.type, id: newNode.id}),
+          search: createSearchParams({tab: 'info'}).toString(),
+        },
+        {unstable_viewTransition: true},
+      );
     } else {
       navigate({pathname: 'node'}, {unstable_viewTransition: true});
     }

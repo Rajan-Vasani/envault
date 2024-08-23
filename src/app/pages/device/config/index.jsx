@@ -18,5 +18,7 @@ export const deviceTypeOptions = [
 ];
 
 export const initialValues = {
-  type: 'base',
+  driver: {
+    type: 'base',
+  },
 };

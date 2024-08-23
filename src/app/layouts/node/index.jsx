@@ -2,13 +2,13 @@ import {Layout} from 'antd';
 import {createStyles} from 'antd-style';
 import {NodeHeaderSkeleton, NodeSiderSkeleton} from 'components/molecules/Skeleton';
 import {useNode} from 'hooks/useNode';
+import {nodeNavItems} from 'layouts/node/config';
 import {NodeProvider} from 'layouts/node/context';
 import NoNode from 'pages/error/nonode';
 import {Suspense, lazy, useMemo} from 'react';
 import {Outlet, useMatch, useOutletContext} from 'react-router-dom';
 const NodeSider = lazy(() => import('layouts/node/components/sider'));
 const NodeHeader = lazy(() => import('layouts/node/components/header'));
-
 const {Content} = Layout;
 
 const useStyles = createStyles(({token, css}) => ({
@@ -21,7 +21,7 @@ const useStyles = createStyles(({token, css}) => ({
 
 export const Component = props => {
   const {isPublic, ...context} = useOutletContext();
-  const {params} = useMatch('hub/explore/node/:type?/:id?');
+  const {params} = useMatch('hub/explore/node/:type?/:id?/:module?');
   const nodeAttrs = {id: +params.id, type: params.type};
   const {data: treeData} = useNode();
   const {data: [nodeData = {}] = [{}]} = useNode({
@@ -46,7 +46,7 @@ export const Component = props => {
       <Layout style={{height: '100%'}}>
         {!isPublic && (
           <Suspense fallback={<NodeHeaderSkeleton />}>
-            <NodeHeader />
+            <NodeHeader navItems={nodeNavItems[nodeAttrs.type] ?? []} />
           </Suspense>
         )}
         <Layout>
