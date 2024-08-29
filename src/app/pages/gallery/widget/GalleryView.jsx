@@ -1,8 +1,8 @@
-import ImageCarousel from 'app/components/molecules/ImageCarousel';
-import {useEventStream} from 'app/services/hooks/useEventStream';
-import {useHub} from 'app/services/hooks/useHub';
-import {useTimelapseDataUpdate, useTimelapseImage} from 'app/services/hooks/useTimelapse';
 import dayjs from 'dayjs';
+import {useEventStream} from 'hooks/useEventStream';
+import {useHub} from 'hooks/useHub';
+import {useTimelapseImage, useTimelapseImageUpdate} from 'hooks/useTimelapse';
+import ImageCarousel from 'pages/gallery/components/ImageCarousel';
 import {useEffect, useMemo} from 'react';
 
 const GalleryView = props => {
@@ -31,7 +31,7 @@ const GalleryView = props => {
 
   const {data} = useEventStream(streamUrl);
 
-  const {mutate: updateTimelapse} = useTimelapseDataUpdate();
+  const {mutate: updateTimelapse} = useTimelapseImageUpdate();
 
   const sortImageFromOldest = (array = []) => {
     return array.sort(function (a, b) {

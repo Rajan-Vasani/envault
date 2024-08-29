@@ -34,11 +34,13 @@ const GridStackControl = ({widgetItems = [], removeWidget, addWidget}) => {
   const [view, setView] = useState('full');
   const {styles, cx} = useStyles();
 
-  if (Object.keys(refs.current).length !== widgetItems.length) {
-    widgetItems.forEach(({id}) => {
-      refs.current[id] = refs.current[id] || createRef();
-    });
-  }
+  useEffect(() => {
+    if (Object.keys(refs.current).length !== widgetItems.length) {
+      widgetItems.forEach(({id}) => {
+        refs[id].current = refs[id].current || createRef();
+      });
+    }
+  }, [widgetItems]);
 
   const [dropInWidget, setDropInWidget] = useState(false);
   const [dropData, setDropData] = useState(null);
@@ -165,7 +167,7 @@ const GridStackControl = ({widgetItems = [], removeWidget, addWidget}) => {
     if (active && widgetId && gridRef.current) {
       gridRef.current.update(refs.current[widgetId]?.current, {locked: true});
     }
-  }, [over, active, refs]);
+  }, [over, active]);
 
   return (
     <>
@@ -179,7 +181,7 @@ const GridStackControl = ({widgetItems = [], removeWidget, addWidget}) => {
           const {id, gridstack} = item;
           return (
             <div
-              ref={refs.current[id]}
+              ref={refs[id]}
               key={id}
               id={id}
               className="grid-stack-item ui-draggable ui-resizable ui-resizable-autohide"

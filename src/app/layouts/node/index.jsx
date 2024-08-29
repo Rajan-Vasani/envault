@@ -1,83 +1,59 @@
-import {useDndMonitor} from '@dnd-kit/core';
 import {Layout} from 'antd';
 import {createStyles} from 'antd-style';
-import {DraggableOverlay} from 'components/draggable/overlay';
-import {Droppable} from 'components/droppable';
-import {nodeDetails} from 'config/menu';
+import {NodeHeaderSkeleton, NodeSiderSkeleton} from 'components/molecules/Skeleton';
 import {useNode} from 'hooks/useNode';
+import {nodeNavItems} from 'layouts/node/config';
 import {NodeProvider} from 'layouts/node/context';
-import {NoNode} from 'pages/error/nonode';
-import {lazy, useState, useTransition} from 'react';
-import {Outlet, useMatch, useNavigate, useOutletContext, useParams} from 'react-router-dom';
+import {merge} from 'lodash';
+import NoNode from 'pages/error/nonode';
+import {Suspense, lazy, useMemo} from 'react';
+import {Outlet, useMatch, useOutletContext} from 'react-router-dom';
 const NodeSider = lazy(() => import('layouts/node/components/sider'));
 const NodeHeader = lazy(() => import('layouts/node/components/header'));
-
 const {Content} = Layout;
 
 const useStyles = createStyles(({token, css}) => ({
   content: css`
     border-radius: ${token.borderRadius}px;
-    background: ${token.colorBgContainer};
     margin: 10px;
   `,
 }));
 
 export const Component = props => {
-  const navigate = useNavigate();
-  const {hub, isPublic} = useOutletContext();
-  const {params} = useMatch('hub/explore/node/:type?/:id?');
-  params.id = +params.id;
+  const {isPublic, ...context} = useOutletContext();
+  const {params} = useMatch('hub/explore/node/:type?/:id?/:module?');
+  const nodeAttrs = {id: +params.id, type: params.type};
   const {data: treeData} = useNode();
-  const {data: nodeData} = useNode({type: params.type, id: params.id, enabled: !!(params.type && params.id !== -1)});
-  const [, startTransition] = useTransition();
-  const {nodeId} = useParams();
-  const {styles} = useStyles();
-  const [showPrivate, setShowPrivate] = useState(false);
-
-  //dnd-kit
-  useDndMonitor({
-    onDragEnd({active, over}) {
-      if (!over) {
-        return;
-      }
-      const {type, id} = active.data.current;
-      if (!nodeId) {
-        return navigate(`${type}/${id}`);
-      }
-    },
+  const {data: [nodeData = {}] = [{}]} = useNode({
+    type: nodeAttrs.type,
+    id: nodeAttrs.id,
+    enabled: !!(nodeAttrs.type && nodeAttrs.id !== -1),
   });
+  const {styles} = useStyles();
 
-  if (!isPublic && !showPrivate) {
-    startTransition(() => setShowPrivate(true));
-  }
-
-  const currentNode = treeData?.find(({id}) => id === params.id);
-  const node = {
-    ...params,
-    ...nodeData?.[0],
-    ...currentNode,
-  };
-
-  const acceptNodeTypes = nodeDetails.map(item => item.value);
+  const currentNode = treeData?.find(({id}) => id === nodeAttrs.id);
+  const node = useMemo(
+    () => merge({id: params.id, type: params.type}, nodeData, currentNode),
+    [params, nodeData, currentNode],
+  );
 
   return (
     <NodeProvider node={node}>
       <Layout style={{height: '100%'}}>
-        {showPrivate && <NodeHeader />}
+        {!isPublic && (
+          <Suspense fallback={<NodeHeaderSkeleton />}>
+            <NodeHeader navItems={nodeNavItems[nodeAttrs.type] ?? []} />
+          </Suspense>
+        )}
         <Layout>
           <Content className={styles.content}>
-            {nodeId ? (
-              <Outlet />
-            ) : (
-              <>
-                <Droppable key={'node-droppable'} id={'node-droppable'} acceptedTypes={acceptNodeTypes}>
-                  <NoNode />
-                </Droppable>
-                <DraggableOverlay />
-              </>
-            )}
+            {nodeAttrs.id ? <Outlet context={{isPublic, ...context}} /> : <NoNode />}
           </Content>
-          {showPrivate && <NodeSider />}
+          {!isPublic && (
+            <Suspense fallback={<NodeSiderSkeleton />}>
+              <NodeSider />
+            </Suspense>
+          )}
         </Layout>
       </Layout>
     </NodeProvider>

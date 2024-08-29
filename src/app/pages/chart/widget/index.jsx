@@ -1,7 +1,6 @@
 import {useDndMonitor} from '@dnd-kit/core';
 import {Form} from 'antd';
 import {Droppable} from 'components/droppable';
-import {initUserConfig} from 'pages/chart/config';
 import EchartControl from 'pages/chart/widget/loader';
 import {useDashboardContext} from 'pages/dashboard/context';
 import WidgetDroppable from 'pages/dashboard/widget/droppable';
@@ -9,6 +8,8 @@ import {useMemo} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {useNode} from 'services/hooks/useNode';
 import {getDayjsRange, getRange} from 'utils/time';
+
+const initUserConfig = {};
 
 const ChartDroppable = props => {
   const {onSelectedNode = () => {}, acceptType, id, children} = props;

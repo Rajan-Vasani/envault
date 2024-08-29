@@ -49,8 +49,7 @@ const useStyles = createStyles(({token, css}) => ({
 }));
 
 const HeaderNav = props => {
-  const {hub} = props;
-  const {user} = useOutletContext();
+  const {user, hub} = useOutletContext();
   const {mutate: updateUser} = useUserUpdateMutation();
   const {pathname} = useLocation();
   const navigate = useNavigate();
@@ -59,17 +58,7 @@ const HeaderNav = props => {
   const {message} = App.useApp();
   const {styles} = useStyles();
   const {isDarkMode, themeMode, setThemeMode} = useThemeMode();
-
-  const navMenuItems = useMemo(() => {
-    const slug = pathname.split('/')[1];
-    switch (slug) {
-      case 'user':
-        return menuItemsHandler(initialMenu.adminMenuItems);
-      case 'explore':
-      default:
-        return menuItemsHandler(initialMenu.mainMenuItems);
-    }
-  }, [pathname]);
+  const navMenuItems = useMemo(() => menuItemsHandler(initialMenu.mainMenuItems), []);
 
   const hubLogo = useMemo(() => {
     if (isDarkMode) {
@@ -165,13 +154,15 @@ const HeaderNav = props => {
         </Col>
         <Col>
           <Row wrap={false} align={'middle'} justify={'end'}>
-            <Col style={{paddingRight: '5px'}}>
-              <Link to={routes.settings}>
-                <Tooltip title={'Settings'}>
-                  <Button type="ghost" icon={<Icon icon="SettingOutlined" type={'ant'} />} />
-                </Tooltip>
-              </Link>
-            </Col>
+            {(hub.is_admin || user.app_admin) && (
+              <Col style={{paddingRight: '5px'}}>
+                <Link to={routes.settings}>
+                  <Tooltip title={'Settings'}>
+                    <Button type="ghost" icon={<Icon icon="SettingOutlined" type={'ant'} />} />
+                  </Tooltip>
+                </Link>
+              </Col>
+            )}
             <Col>
               <Link to={globalThis.envault.app}>
                 <Tooltip title={'Home'}>

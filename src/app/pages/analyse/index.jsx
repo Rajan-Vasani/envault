@@ -21,7 +21,7 @@ export const Component = props => {
 
   return (
     <div className={styles.page}>
-      <h1>Welcome to analyse, let's get started</h1>
+      <h1>Welcome to analyse, let&apos;s get started</h1>
       <Empty
         description={`Welcome to analyse, let's get started`}
         image={<Icon icon={'Empty'} type={'envault'} raw />}

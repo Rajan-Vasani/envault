@@ -1,9 +1,9 @@
-import {isArray, mergeWith, union} from 'lodash';
+import {get, set} from 'lodash';
 import {createContext, useContext, useEffect, useState} from 'react';
 
 const NodeContext = createContext({
-  setConfig: () => {},
-  mergeConfig: () => {},
+  setNodeParams: () => {},
+  updateNodeParams: () => {},
 });
 
 export const useNodeContext = () => {
@@ -11,35 +11,42 @@ export const useNodeContext = () => {
 };
 
 export const NodeProvider = ({children, node}) => {
-  // config state is the shared config of the node
-  const [config, setConfig] = useState(node.config || {});
+  const {id, parent, hub, type, name, permission, deleted, meta, ...params} = node;
+  const nodeAttrs = {id, parent, hub, type, name, permission, deleted, meta};
 
-  // update config state when node or route params change
-  useEffect(() => {
-    if (node.config) {
-      return setConfig(structuredClone(node.config));
-    } else {
-      setConfig({});
-    }
-  }, [node.config]);
+  /**
+   * Getter and Setter for the node parameters.
+   */
+  const [nodeParams, setNodeParams] = useState(params || {});
 
-  const mergeConfig = newConfig => {
-    setConfig(config =>
-      structuredClone(
-        mergeWith(config, newConfig, (objValue, srcValue) => {
-          if (isArray(objValue)) {
-            return union(objValue, srcValue);
-          }
-        }),
-      ),
-    );
+  /**
+   * Updates nodeParams when node changes.
+   * Use node as dependency to avoid infinite loop, as the reference to params changes on every render.
+   */
+  useEffect(() => setNodeParams(params), [node]);
+
+  /**
+   * Updates the node parameters at the specified index.
+   * @param {string} path - The path to the node property to update.
+   * @param {Function|any} updater - The updater function or value to apply to the node parameters.
+   * @returns {void}
+   */
+  const updateNodeParams = (path, updater) => {
+    setNodeParams(previousParams => {
+      const updated = structuredClone(previousParams);
+      const currentValue = get(updated, path);
+      const newValue = typeof updater === 'function' ? updater(currentValue ?? {}) : updater;
+      set(updated, path, newValue);
+      return updated;
+    });
   };
 
   const value = {
     node,
-    config,
-    setConfig,
-    mergeConfig,
+    nodeAttrs,
+    nodeParams,
+    setNodeParams,
+    updateNodeParams,
   };
 
   return <NodeContext.Provider value={value}>{children}</NodeContext.Provider>;

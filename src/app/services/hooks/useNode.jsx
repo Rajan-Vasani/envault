@@ -2,8 +2,9 @@ import {useMutation, useQueries, useQuery, useQueryClient} from '@tanstack/react
 import {App} from 'antd';
 import {BaseService} from 'api/base.service';
 import {API_QUERY} from 'constant/query';
-import {isNil, omitBy} from 'lodash';
-import {useCallback} from 'react';
+import {isNil, isUndefined, omitBy} from 'lodash';
+import {useCallback, useMemo} from 'react';
+import {useRole} from 'services/hooks/useRole';
 import {capitaliseString} from 'utils/string';
 import {arrayToTree, findDescendants, nodeTypeFilter} from 'utils/tree';
 
@@ -12,9 +13,10 @@ export const nodeQuery = (props = {}) => {
   const key = Object.values(omitBy({hub, type, id}, isNil));
   const query = omitBy({hub, id}, isNil);
   return {
-    queryKey: [API_QUERY.NODE_DATA, ...key],
+    queryKey: [...API_QUERY.NODE, ...key],
     queryFn: async () => BaseService.get(`api/${type}?`, query),
     meta: {type: 'node', id: 'all', method: 'read'},
+    refetchInterval: 1000 * 60 * 5,
     enabled: !!hub,
     ...options,
   };
@@ -24,7 +26,7 @@ export const useNode = (props = {}) => useQuery(nodeQuery(props));
 export const actorNodeACLQuery = (props = {}) => {
   const {hub = globalThis.envault.hub, actor, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_NODE_ACL_ROLE, hub, actor],
+    queryKey: [...API_QUERY.NODE_ACL, hub, actor],
     queryFn: async () => BaseService.get(`api/node-acl?`, {hub, actor: actor}),
     meta: {type: 'access control', id: actor, method: 'read'},
     retry: false,
@@ -42,14 +44,38 @@ export const useActorNodeACLList = props => {
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
-        data: actors.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
+        data: actors?.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
       }),
       [actors],
     ),
   });
+};
+
+export const useRoleACLList = (props = {}) => {
+  const {hub = globalThis.envault.hub} = props;
+  const roleQuery = useRole({hub});
+  const roleData = roleQuery.data || [];
+  const roleACLQuery = useActorNodeACLList({hub, actors: roleData});
+  const results = [roleQuery, roleACLQuery];
+  const isLoading = results.some(query => query.isLoading);
+  const isSomeSuccess = results.some(query => query.isSuccess);
+  const isSuccess = results.every(query => query.isSuccess);
+  const isError = results.some(query => query.isError);
+  const [roles, roleACLs] = results.map(query => query.data);
+  const result = useMemo(() => {
+    const data = isSomeSuccess ? roles?.map(role => ({...role, acl: roleACLs[role.id] ?? []})) : [];
+    return {
+      isLoading,
+      isSuccess,
+      isSomeSuccess,
+      isError,
+      data,
+    };
+  }, [isSuccess, isLoading, isSomeSuccess, isError, roles, roleACLs]);
+  return result;
 };
 
 export const useNodeACLPutMutation = () => {
@@ -57,10 +83,10 @@ export const useNodeACLPutMutation = () => {
   const _hub = globalThis.envault.hub;
 
   return useMutation({
-    mutationFn: async ({hub = _hub, ...data}) => BaseService.put(`api/node-acl?`, {hub}, omitBy(data, isNil)),
+    mutationFn: async ({hub = _hub, ...data}) => BaseService.put(`api/node-acl?`, {hub}, omitBy(data, isUndefined)),
     meta: {type: 'access control', id: '', method: 'update / create'},
-    onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
+    onSettled: (data, error, variables) => {
+      queryClient.invalidateQueries({queryKey: [...API_QUERY.NODE_ACL, variables.hub ?? _hub, variables.actor]});
     },
   });
 };
@@ -72,8 +98,8 @@ export const useNodeACLDeleteMutation = () => {
   return useMutation({
     mutationFn: async ({hub = _hub, ...query}) => BaseService.remove(`api/node-acl?`, {hub, ...query}),
     meta: {type: 'access control', id: '', method: 'remove'},
-    onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
+    onSettled: (data, error, variables) => {
+      queryClient.invalidateQueries({queryKey: [...API_QUERY.NODE_ACL, variables.hub ?? _hub, variables.actor]});
     },
   });
 };
@@ -116,13 +142,13 @@ export const useNestedNodeFilter = props => {
 };
 
 export const useNodeSaveMutation = (props = {}) => {
-  const {hub: _hub = globalThis.envault.hub, type: _type} = props;
+  const {hub: _hub = globalThis.envault.hub, type: _type = 'node'} = props;
   const queryClient = useQueryClient();
   const {notification} = App.useApp();
 
   const updateNode = async newNode => {
-    await queryClient.cancelQueries([API_QUERY.NODE_DATA, _hub, 'node']);
-    queryClient.setQueryData([API_QUERY.NODE_DATA, _hub, 'node'], previous => {
+    await queryClient.cancelQueries([...API_QUERY.NODE, _hub, 'node']);
+    queryClient.setQueryData([...API_QUERY.NODE, _hub, 'node'], previous => {
       if (!previous) return [newNode];
       if (!newNode.id) {
         newNode.id = -1;
@@ -137,7 +163,7 @@ export const useNodeSaveMutation = (props = {}) => {
       }
       return [...previous, newNode];
     });
-    const previous = queryClient.getQueryData([API_QUERY.NODE_DATA, _hub, 'node']);
+    const previous = queryClient.getQueryData([...API_QUERY.NODE, _hub, 'node']);
     return {previous};
   };
 
@@ -146,13 +172,13 @@ export const useNodeSaveMutation = (props = {}) => {
     meta: {type: 'node', id: '', method: 'create / update'},
     onMutate: ({data}) => updateNode({...data}),
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
-      if (_type === 'group') {
-        queryClient.invalidateQueries({queryKey: [API_QUERY.GET_GROUP_GEO]});
-      }
       notification.success({
-        description: `${capitaliseString(variables.data.type)} ${variables.data.id ? 'updated' : 'created'} successfully`,
+        description: `${capitaliseString(variables.type ?? 'node')} ${variables.data.id ? 'updated' : 'created'} successfully`,
       });
+      queryClient.invalidateQueries({queryKey: API_QUERY.NODE});
+      if (_type === 'group') {
+        queryClient.invalidateQueries({queryKey: API_QUERY.GROUP_GEO});
+      }
     },
   });
 
@@ -168,8 +194,8 @@ export const useNodeDeleteMutation = (props = {}) => {
     mutationFn: async ({hub = _hub, id}) => BaseService.remove(`api/node?`, {hub, id}),
     meta: {type: 'node', id: '', method: 'delete'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_GROUP_GEO]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.NODE});
+      queryClient.invalidateQueries({queryKey: API_QUERY.GROUP_GEO});
     },
     onSuccess: (data, variables) => {
       notification.success({

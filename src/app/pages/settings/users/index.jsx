@@ -25,19 +25,22 @@ export const Component = props => {
   }, [userRolesData, form]);
 
   const handleRemoveUser = record => {
-    if (record.id) {
-      notification.info({description: 'Deleting user...'});
-      removeUser(
-        {id: record.id},
-        {
-          onSuccess: () => {
-            notification.success({description: 'User deleted'});
+    const saved = userRolesData.some(item => item.id === record.id);
+    if (!saved) {
+      setDataSource(dataSource => dataSource.filter(item => item.id !== record.id));
+      return;
+    } else {
+      if (record.id) {
+        notification.info({description: 'Deleting user...'});
+        removeUser(
+          {id: record.id},
+          {
+            onSuccess: () => {
+              notification.success({description: 'User deleted'});
+            },
           },
-          onError: () => {
-            notification.error({description: 'Could not delete user'});
-          },
-        },
-      );
+        );
+      }
     }
   };
 

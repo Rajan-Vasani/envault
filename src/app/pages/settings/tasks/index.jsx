@@ -56,7 +56,7 @@ export const Component = props => {
           message.success(`Task ${values.name} delete success!`);
         },
         onSettled: () => {
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ALL_TASK, globalThis.envault.hub]});
+          queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK, globalThis.envault.hub]});
         },
       },
     );
@@ -69,7 +69,7 @@ export const Component = props => {
       {
         onSuccess: data => {
           message.success('Task save success!');
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ALL_TASK, globalThis.envault.hub]});
+          queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK, globalThis.envault.hub]});
         },
         onSettled: () => {
           setActiveLoading(false);

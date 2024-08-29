@@ -42,29 +42,25 @@ const useStyles = createStyles(({css, token}) => ({
 }));
 
 export const NodeSider = props => {
-  const {node} = useNodeContext();
+  const {nodeAttrs} = useNodeContext();
   const {notification} = App.useApp();
   const {mutate: deleteNode} = useNodeDeleteMutation();
   const [disabled, setDisabled] = useState(true);
   const {styles} = useStyles();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [form, setForm] = useState();
-  const tab = searchParams.get('tab') || undefined;
-  const [collapsed, setCollapsed] = useState(!tab);
+  const [form, setForm] = useState(null);
+  const hasTab = searchParams.has('tab');
+  const [collapsed, setCollapsed] = useState(!hasTab);
 
   useEffect(() => {
-    if (node.id === -1) {
+    if (nodeAttrs.id === -1) {
       setDisabled(false);
     }
-  }, [node.id]); // new node mode
+  }, [nodeAttrs.id]); // new node mode
   useEffect(() => {
-    console.log('tab', !tab);
-    setCollapsed(!tab);
-  }, [tab]);
-  useEffect(() => {
-    console.log('collapsed', collapsed);
-  }, [collapsed]);
+    setCollapsed(!hasTab);
+  }, [hasTab]); // tab change
 
   const handleTabChange = e => {
     setSearchParams({...searchParams, tab: e});
@@ -82,7 +78,7 @@ export const NodeSider = props => {
     if (node?.id) {
       notification.info({description: `Deleting ${node?.type}`});
       deleteNode(
-        {id: node?.id},
+        {id: nodeAttrs?.id},
         {
           onSuccess: () => {
             navigate(`/hub/explore`);
@@ -92,6 +88,7 @@ export const NodeSider = props => {
     }
   };
   const handleCollapse = value => {
+    setSearchParams(value ? {} : {tab: 'info'});
     setCollapsed(value);
   };
 
@@ -99,26 +96,27 @@ export const NodeSider = props => {
     {
       key: 'config',
       label: 'Config',
-      children: <NodeConfig node={node} setForm={setForm} disabled={disabled} />,
+      children: <NodeConfig node={nodeAttrs} setForm={setForm} disabled={disabled} />,
     },
     {
       key: 'info',
       label: 'Info',
-      children: <NodeInfo node={node} setForm={setForm} disabled={disabled} />,
+      children: <NodeInfo node={nodeAttrs} setForm={setForm} disabled={disabled} />,
     },
   ];
 
   return (
-    <Resizeable placement={'right'} initWidth={340} collapsed={collapsed} onCollapse={handleCollapse}>
+    <Resizeable placement={'right'} collapsed={collapsed} onCollapse={handleCollapse}>
       <Sider className={styles.sider} width={'auto'}>
         <Flex vertical justify={'space-between'} style={{height: '100%'}}>
           <ErrorBoundary>
             <Tabs
               className={styles.tabs}
-              activeKey={tab}
+              activeKey={searchParams.get('tab')}
               defaultActiveKey={'info'}
               items={items}
               onChange={handleTabChange}
+              destroyInactiveTabPane={true}
               tabBarExtraContent={
                 <Flex justify={'flex-end'} gap={'small'}>
                   <Tooltip title={disabled ? 'Unlock' : 'Lock'}>
@@ -136,7 +134,7 @@ export const NodeSider = props => {
                   <Tooltip title={'Delete'}>
                     <Button
                       danger
-                      onClick={() => handleDelete(node)}
+                      onClick={() => handleDelete(nodeAttrs)}
                       icon={<Icon icon={'DeleteOutlined'} type={'ant'} />}
                     />
                   </Tooltip>

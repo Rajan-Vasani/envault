@@ -1,8 +1,8 @@
 import {Button, Form, Input, Layout, Select} from 'antd';
-import {createStyles, useTheme} from 'antd-style';
-import NodeHeader from 'app/layouts/node/header';
+import {createStyles} from 'antd-style';
 import Resizeable from 'components/resizeable';
 import {useGroupGeo} from 'hooks/useGroup';
+import NodeHeader from 'layouts/node/components/header';
 import MapView from 'pages/map/components/view';
 import {useEffect, useRef, useState} from 'react';
 const {Content, Sider} = Layout;
@@ -30,7 +30,6 @@ const useStyles = createStyles(({token, css}) => ({
 const MapSetting = props => {
   const {widget, closeWidgetEdit, onSave} = props;
   const sidebarRef = useRef(null);
-  const token = useTheme();
   const {data: groupData, isPending} = useGroupGeo();
   const [location, setLocation] = useState([]);
   const [form] = Form.useForm();
@@ -81,12 +80,7 @@ const MapSetting = props => {
         <Content>
           <MapView data={location} zoom={zoom} />
         </Content>
-        <Resizeable
-          placement="right"
-          parent={sidebarRef?.current}
-          initWidth="300"
-          collapseButtonStyle={{left: '-16px'}}
-        >
+        <Resizeable placement={'right'} parent={sidebarRef?.current} collapseButtonStyle={{left: '-16px'}}>
           <Sider className={styles.sider} width={'auto'}>
             <Form form={form} onFieldsChange={handleMapSetting} name={`map-${widget.id}`} layout="vertical">
               <Form.Item label="Group" name="group">

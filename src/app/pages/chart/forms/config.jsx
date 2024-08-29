@@ -1,28 +1,27 @@
 import {App, Divider, Flex, Form, Input, Select, Switch} from 'antd';
 import {StreamIndicator} from 'components/atoms/StreamIndicator';
 import TimeRange from 'components/molecules/TimeRange';
-import dayjs from 'dayjs';
 import {useNodeSaveMutation} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
-import {isArray, isNil, mergeWith, omitBy} from 'lodash';
+import {isArray, mergeWith} from 'lodash';
 import {baseGlobal, baseOption, mapTypeOptions} from 'pages/chart/config';
 import AxisFormList from 'pages/chart/forms/axis';
 import SeriesFormList from 'pages/chart/forms/series';
 import DataZoomFormList from 'pages/chart/forms/zoom';
 import {useEffect} from 'react';
-import {parseTimeFrom} from 'utils/time';
+
+const initialValues = {
+  global: baseGlobal,
+  option: baseOption,
+};
 
 export const ChartConfig = props => {
   const {setForm, disabled} = props;
   const {eventState, handleStreamStateChange} = {eventstate: '', handleStreamStateChange: () => {}}; // temporary
-  const {node, config, setConfig} = useNodeContext();
+  const {nodeAttrs, nodeParams, updateNodeParams} = useNodeContext();
   const [form] = Form.useForm();
-  const {mutate: saveNode} = useNodeSaveMutation({type: node.type});
+  const {mutate: saveNode} = useNodeSaveMutation({type: nodeAttrs.type});
   const {notification} = App.useApp();
-  const initialValues = {
-    global: baseGlobal,
-    option: baseOption,
-  };
   const show = Form.useWatch(
     values => ({
       legend: values?.option?.legend?.show,
@@ -32,60 +31,46 @@ export const ChartConfig = props => {
     form,
   );
 
-  useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
-    if (config?.option && config?.global) {
-      form.setFieldsValue(config);
+    setForm(form);
+    return () => setForm(null);
+  }, [form, setForm]);
+
+  useEffect(() => {
+    if (nodeParams.config?.option || nodeParams.config?.global) {
+      form.setFieldsValue(nodeParams.config);
     } else {
       form.setFieldsValue(initialValues);
     }
-  }, [config, form]);
+  }, [nodeParams.config, form]);
 
   const onFinish = values => {
     notification.info({description: 'Saving chart configuration'});
-    const timeRange = values.global.timeRange;
     const dataChart = {
-      id: node?.id,
+      id: nodeAttrs?.id,
       type: 'chart',
       data: values.option.series.reduce(
         (a, v, index) => ({
           ...a,
-          [`${index}-${v.id}`]: {
-            pathname: `/series-data`,
-            query: new URLSearchParams(
-              omitBy(
-                {
-                  hub: globalThis.envault.hub,
-                  series: v.id,
-                  from: timeRange?.from,
-                  to: timeRange?.to,
-                },
-                isNil,
-              ),
-            ).toString(),
+          [index]: {
+            id: v.node.id,
+            type: v.node.type,
           },
         }),
         {},
       ),
-      config,
+      config: {...nodeParams.config, ...values},
     };
     saveNode({data: dataChart});
   };
 
   const onValuesChange = (changedValues, allValues) => {
     // merge objects, replace arrays
-    setConfig?.(config => structuredClone(mergeWith(config, allValues, (a, b) => (isArray(b) ? b : undefined))));
-    console.log(JSON.stringify(changedValues, null, 2), JSON.stringify(allValues, null, 2));
+    updateNodeParams('config', previousValue =>
+      structuredClone(mergeWith(previousValue, allValues, (a, b) => (isArray(b) ? b : undefined))),
+    );
   };
   // Normalize input and output of form components to suit chart options
-  // input: Global TimeRange
-  const getTimeRangeValueProps = value => {
-    if (value) {
-      value.from = parseTimeFrom(value);
-      value.to = value.to ? dayjs(value.to) : null;
-      return {value};
-    }
-  };
   // output: Global TimeRange
   const normalizeTimeRange = value => {
     if (value) {
@@ -93,19 +78,20 @@ export const ChartConfig = props => {
       if (!to && delta) {
         from = delta.join('');
       } else {
-        from = from.valueOf();
-        to = to.valueOf();
+        from = from?.valueOf();
+        to = to?.valueOf();
       }
       return {from, to};
     }
   };
+
   return (
-    <Flex vertical justify="space-between">
+    <Flex vertical justify={'space-between'}>
       <Form
         form={form}
-        layout="horizontal"
-        labelAlign="left"
-        name={`chart-config-${node?.id}`}
+        layout={'horizontal'}
+        labelAlign={'left'}
+        name={`chart-config-${nodeAttrs?.id}`}
         requiredMark={false}
         onFinish={onFinish}
         initialValues={initialValues}
@@ -120,12 +106,7 @@ export const ChartConfig = props => {
             <StreamIndicator eventState={eventState} onChange={handleStreamStateChange} />
           </Flex>
         </Form.Item>
-        <Form.Item
-          label={'Time'}
-          name={['global', 'timeRange']}
-          getValueProps={getTimeRangeValueProps}
-          normalize={normalizeTimeRange}
-        >
+        <Form.Item label={'Time'} name={['global', 'timeRange']} normalize={normalizeTimeRange}>
           <TimeRange />
         </Form.Item>
         <Form.Item label={'Type'} name={['global', 'type']}>

@@ -3,6 +3,7 @@ import {createStyles} from 'antd-style';
 import {routes} from 'app/constant/routes';
 import Icon from 'components/atoms/Icon';
 import {useUser, useUserUpdateMutation} from 'hooks/useUser';
+import {isNil, omitBy} from 'lodash';
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {getInitials} from 'utils/string';
@@ -37,7 +38,7 @@ export const Component = props => {
 
   const onFinish = values => {
     setLoading(true);
-    updateUser(values, {
+    updateUser(omitBy(values, isNil), {
       onSuccess: () => {
         notification.success({description: 'Successfully updated details'});
       },
@@ -122,26 +123,16 @@ export const Component = props => {
         <Form.Item
           name={'password'}
           label={'Password'}
-          rules={[
-            {
-              required: true,
-              type: 'string',
-            },
-            {min: 6, message: 'Password must be at least 6 characters.'},
-          ]}
+          rules={[{min: 6, message: 'Password must be at least 6 characters.'}]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password placeholder={'**************'} />
         </Form.Item>
         <Form.Item
           name={'confirm'}
           label={'Confirm Password'}
           rules={[
-            {
-              required: true,
-              type: 'string',
-              message: 'Please confirm your password!',
-            },
+            ({getFieldValue}) => ({required: getFieldValue('password'), message: 'Please confirm your password!'}),
             ({getFieldValue}) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -154,7 +145,7 @@ export const Component = props => {
           dependencies={['password']}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password placeholder={'**************'} />
         </Form.Item>
       </Form>
       {isEditing ? (

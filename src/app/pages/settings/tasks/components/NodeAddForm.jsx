@@ -33,7 +33,7 @@ export const NodeAddForm = props => {
         onSuccess: data => {
           onChange(data[0].id);
           message.success(`${capitaliseString(item?.type)} create success!`);
-          queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
+          queryClient.invalidateQueries({queryKey: API_QUERY.NODE});
           setTimeout(() => {
             onCancel();
           }, 800);

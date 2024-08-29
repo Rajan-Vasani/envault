@@ -2,14 +2,15 @@ import {Button, Empty, Flex, Input, Layout, Space, Tag, Tooltip, Tree, Typograph
 import {ThemeProvider, createStyles, useTheme, useThemeMode} from 'antd-style';
 import Icon from 'components/atoms/Icon';
 import DraggableItem from 'components/draggable/item';
-import {TreeSiderSkeleton} from 'components/molecules/Skeleton';
+import {TreeSiderItemsSkeleton} from 'components/molecules/Skeleton';
 import Resizeable from 'components/resizeable';
 import {nodeDetails} from 'config/menu';
 import {GridStack} from 'gridstack';
 import {useNodeFilter, useNodeSaveMutation} from 'hooks/useNode';
 import {debounce, union} from 'lodash';
 import {useEffect, useMemo, useState} from 'react';
-import {generatePath, useNavigate, useParams, useSearchParams} from 'react-router-dom';
+import {createSearchParams, generatePath, useNavigate, useParams, useSearchParams} from 'react-router-dom';
+import {formatNumber} from 'utils/number';
 import {arrayToTree, findAncestors} from 'utils/tree';
 const {Sider} = Layout;
 const {Search} = Input;
@@ -125,9 +126,9 @@ const ItemComponent = props => {
               />
             </Tooltip>
           ),
-          item.latest && (
+          item.type === 'series' && (
             <Tag color={'green'}>
-              {item.latest.text} {item.variable.unit}
+              {formatNumber(item.latest?.value) ?? item.latest?.text} {item.variable?.unit}
             </Tag>
           ),
           isNew && (
@@ -190,8 +191,13 @@ export const Component = props => {
 
   const onNodeClick = (props, info) => {
     const {type, id} = info.node;
-    const path = generatePath('node/:type/:id', {type, id});
-    return navigate({pathname: path, search: searchParams.toString()}, {unstable_viewTransition: true});
+    return navigate(
+      {
+        pathname: generatePath('node/:type/:id', {type, id}),
+        search: searchParams.toString(),
+      },
+      {unstable_viewTransition: true},
+    );
   };
 
   const onExpand = newExpandedKeys => {
@@ -213,8 +219,15 @@ export const Component = props => {
     setSelectedKeys([newNode.id]);
     updateNode(newNode);
     if (!newNode.remove) {
-      const pathname = generatePath('node/:type/:id', {type: newNode.type, id: newNode.id});
-      navigate({pathname}, {unstable_viewTransition: true});
+      navigate(
+        {
+          pathname: generatePath('node/:type/:id', {type: newNode.type, id: newNode.id}),
+          search: createSearchParams({tab: 'info'}).toString(),
+        },
+        {unstable_viewTransition: true},
+      );
+    } else {
+      navigate({pathname: 'node'}, {unstable_viewTransition: true});
     }
   };
 
@@ -248,11 +261,11 @@ export const Component = props => {
   );
 
   return (
-    <Resizeable placement={'left'} initWidth={340}>
+    <Resizeable placement={'left'}>
       <Sider className={styles.sider} width={'auto'}>
         <Flex vertical justify={'space-between'} style={{padding: '10px', minHeight: '100%'}}>
           {!isFetched ? (
-            <TreeSiderSkeleton />
+            <TreeSiderItemsSkeleton />
           ) : (
             <Space direction="vertical" size="middle">
               <Search placeholder="Search" allowClear onChange={onSearch} loading={isSearchLoading} />

@@ -3,39 +3,6 @@ import Icon from 'app/components/atoms/Icon';
 import dayjs from 'dayjs';
 const {Text} = Typography;
 
-export const baseOption = {
-  animation: true,
-  textStyle: {
-    fontFamily: '"Century Gothic", "Helvetica Neue"',
-  },
-  toolbox: {
-    show: true,
-    feature: {
-      saveAsImage: {
-        show: true,
-      },
-      restore: {
-        show: false,
-      },
-      dataView: {
-        show: false,
-      },
-    },
-  },
-  dataZoom: [
-    {
-      type: 'inside',
-      disabled: true,
-    },
-  ],
-  legend: {},
-  grid: [],
-  xAxis: [],
-  yAxis: [],
-  series: [],
-  tooltip: {},
-};
-
 export const baseGlobal = {
   timeRange: {
     from: dayjs().subtract(24, 'h').valueOf(),
@@ -45,8 +12,13 @@ export const baseGlobal = {
   stream: false,
 };
 
-export const baseTimeSeries = {
+export const baseOption = {
+  textStyle: {
+    fontFamily: '"Century Gothic", "Helvetica Neue"',
+  },
   tooltip: {
+    show: true,
+    snap: true,
     trigger: 'axis',
     axisPointer: {
       type: 'cross',
@@ -95,46 +67,30 @@ export const initSeries = {
     type: 'line',
     sampling: 'lttb',
     coordinateSystem: 'cartesian2d',
+    step: false,
+    yAxisIndex: 0,
+    xAxisIndex: 0,
   },
   bar: {
     type: 'bar',
     sampling: 'lttb',
     coordinateSystem: 'cartesian2d',
+    step: false,
+    yAxisIndex: 0,
+    xAxisIndex: 0,
   },
   scatter: {
     type: 'scatter',
     coordinateSystem: 'cartesian2d',
+    step: false,
+    yAxisIndex: 0,
+    xAxisIndex: 0,
   },
   gauge: {
     type: 'gauge',
   },
   radar: {
     type: 'radar',
-  },
-};
-
-export const initBuilderOption = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross',
-    },
-  },
-  toolbox: {
-    feature: {
-      saveAsImage: {show: true},
-    },
-  },
-  xAxis: [{type: 'time'}],
-  yAxis: [{type: 'value'}],
-  series: [],
-  dataZoom: {
-    show: true,
-    realtime: true,
-    start: 0,
-    end: 100,
-    zoomOnMouseWheel: true,
-    moveOnMouseMove: true,
   },
 };
 
@@ -178,10 +134,6 @@ export const gaugeConfig = {
     backgroundColor: 'inherit',
     borderRadius: 3,
   },
-};
-
-export const initUserConfig = {
-  type: 'line',
 };
 
 export const mapTypeOptions = [

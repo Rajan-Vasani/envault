@@ -49,7 +49,7 @@ const ExecutionHistory = props => {
           {
             onSuccess: () => {
               message.open({type: 'success', content: 'Payload executed!'});
-              queryClient.invalidateQueries({queryKey: [API_QUERY.GET_TASK_EXECUTE, globalThis.envault.hub, taskID]});
+              queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK_EXECUTE, globalThis.envault.hub, taskID]});
             },
             onError: () => {
               message.open({type: 'error', content: 'Could not executed this payload! Please try again later!'});

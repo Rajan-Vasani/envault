@@ -6,7 +6,7 @@ import {isNil, omitBy} from 'lodash';
 export const groupQuery = (props = {}) => {
   const {hub, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_GROUP, hub],
+    queryKey: [...API_QUERY.GROUP, hub],
     queryFn: async () => BaseService.get(`api/group?`, {hub}),
     meta: {type: 'group', id: 'all', method: 'read'},
     enabled: !!hub,
@@ -26,7 +26,7 @@ export const useGroupAddMutation = (props = {}) => {
     mutationFn: async ({hub = _hub, ...data}) => BaseService.put(`api/group?`, {hub}, omitBy(data, isNil)),
     meta: {type: 'group', id: 'all', method: 'create / update'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_GROUP_LIST]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.GROUP});
     },
   });
 };
@@ -34,7 +34,7 @@ export const useGroupAddMutation = (props = {}) => {
 export const groupGeoQuery = (props = {}) => {
   const {hub, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_GROUP_GEO, hub],
+    queryKey: [...API_QUERY.GROUP_GEO, hub],
     queryFn: async () => BaseService.get(`api/group?`, {hub}, {Accept: 'application/geo+json'}),
     meta: {type: 'group', id: 'all', method: 'read'},
     enabled: !!hub,

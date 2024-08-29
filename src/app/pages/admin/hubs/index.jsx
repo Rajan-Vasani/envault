@@ -1,4 +1,4 @@
-import {Button, Flex, Form, Input} from 'antd';
+import {App, Button, Flex, Form, Input} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'app/components/atoms/Icon';
 import FormTable from 'components/molecules/FormTable';
@@ -25,25 +25,42 @@ export const Component = () => {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const {styles} = useStyles();
+  const {notification} = App.useApp();
 
   useEffect(() => {
     setDataSource(user.hubs);
   }, [user.hubs]);
 
-  const handleDelete = ({record, saved}) => {
+  const handleDelete = record => {
+    const saved = user.hubs.some(hub => hub.name === record.name);
     if (!saved) {
       setDataSource(dataSource => dataSource.filter(item => item.name !== record.name));
       return;
     }
-    removeHub({name: record.name});
+    removeHub(
+      {name: record.name},
+      {
+        onSuccess: () => {
+          notification.success({description: 'Hub deleted successfully'});
+        },
+      },
+    );
   };
 
   const handleSave = values => {
     const existing = user.hubs.some(hub => hub.name === values.name);
     if (existing) {
-      updateHub(values);
+      updateHub(values, {
+        onSuccess: () => {
+          notification.success({description: 'Hub updated successfully'});
+        },
+      });
     } else {
-      createHub(values);
+      createHub(values, {
+        onSuccess: () => {
+          notification.success({description: 'Hub created successfully'});
+        },
+      });
     }
   };
 

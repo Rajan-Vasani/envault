@@ -8,7 +8,7 @@ export const roleQuery = (props = {}) => {
   const {hub = globalThis.envault.hub, role, ...options} = props;
   const query = omitBy({hub, role}, isNil);
   return {
-    queryKey: [API_QUERY.GET_ROLE, ...Object.values(query)],
+    queryKey: [...API_QUERY.ROLE, ...Object.values(query)],
     queryFn: async () => BaseService.get(`api/role?`, query),
     meta: {type: 'role', id: role || 'all', method: 'read'},
     retry: false,
@@ -21,7 +21,7 @@ export const roleMemberQuery = (props = {}) => {
   const {hub, user, role, ...options} = props;
   const query = omitBy({hub, user, role}, isNil);
   return {
-    queryKey: [API_QUERY.GET_ROLE_MEMBER, ...Object.values(query)],
+    queryKey: [...API_QUERY.ROLE_MEMBER, ...Object.values(query)],
     queryFn: async () => BaseService.get(`api/role-member?`, query),
     meta: {type: 'role member', id: 'all', method: 'read'},
     retry: false,
@@ -35,7 +35,7 @@ export const useRoleUsers = props => {
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
         data: results.map(result => result.data).reduce((a, v) => ({...a, ...v}), {}),
@@ -52,7 +52,7 @@ export const useUserRoles = props => {
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
-        isSuccess: results.every(query => query.isSuccess),
+        isSuccess: results.length ? results.every(query => query.isSuccess) : false,
         isSomeSuccess: results.some(query => query.isSuccess),
         isError: results.some(query => query.isError),
         data: compact(results.map(result => result.data).reduce((a, v) => a.concat(v), [])),
@@ -69,7 +69,7 @@ export const useRolePutMutation = () => {
     mutationFn: async ({hub = _hub, ...data}) => BaseService.put(`api/role?`, {hub}, omitBy(data, isNil)),
     meta: {type: 'role', id: '', method: 'create / update'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.ROLE});
     },
   });
 };
@@ -81,8 +81,7 @@ export const useRoleDeleteMutation = () => {
     mutationFn: async ({hub = _hub, ...query}) => BaseService.remove(`api/role?`, {hub, ...query}),
     meta: {type: 'role', id: '', method: 'delete'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE]});
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE_HUB]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.ROLE});
     },
   });
 };
@@ -94,8 +93,7 @@ export const useRoleMemberPutMutation = () => {
     mutationFn: async ({hub = _hub, ...data}) => BaseService.put(`api/role-member?`, {hub}, omitBy(data, isNil)),
     meta: {type: 'role member', id: '', method: 'create / update'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE_MEMBER]});
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.ROLE});
     },
   });
 };
@@ -107,8 +105,7 @@ export const useRoleMemberDeleteMutation = () => {
     mutationFn: async ({hub = _hub, ...query}) => BaseService.remove(`api/role-member?`, {hub, ...query}),
     meta: {type: 'role member', id: '', method: 'delete'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE_MEMBER]});
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ROLE]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.ROLE});
     },
   });
 };

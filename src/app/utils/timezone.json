@@ -1,0 +1,4786 @@
+[
+  {
+    "name": "Mexico/General",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Mexico/BajaNorte",
+    "abbrev": "PST"
+  },
+  {
+    "name": "Mexico/BajaSur",
+    "abbrev": "MST"
+  },
+  {
+    "name": "Egypt",
+    "abbrev": "EET"
+  },
+  {
+    "name": "GMT0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "America/Dominica",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Menominee",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/St_Vincent",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Yakutat",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "America/Ensenada",
+    "abbrev": "PST"
+  },
+  {
+    "name": "America/Buenos_Aires",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Nuuk",
+    "abbrev": "-02"
+  },
+  {
+    "name": "America/Atka",
+    "abbrev": "HST"
+  },
+  {
+    "name": "America/La_Paz",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Port-au-Prince",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Halifax",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Panama",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Virgin",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Sitka",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "America/Montreal",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Phoenix",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Knox_IN",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Mazatlan",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Regina",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Thule",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Fort_Nelson",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Cuiaba",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Toronto",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Fort_Wayne",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Manaus",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Adak",
+    "abbrev": "HST"
+  },
+  {
+    "name": "America/Monterrey",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Louisville",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Grenada",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Cayman",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Grand_Turk",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Jujuy",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Eirunepe",
+    "abbrev": "-05"
+  },
+  {
+    "name": "America/Puerto_Rico",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Barbados",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Rio_Branco",
+    "abbrev": "-05"
+  },
+  {
+    "name": "America/Resolute",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Campo_Grande",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Inuvik",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Tortola",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Montevideo",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Bogota",
+    "abbrev": "-05"
+  },
+  {
+    "name": "America/Managua",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Boise",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Rosario",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Los_Angeles",
+    "abbrev": "PST"
+  },
+  {
+    "name": "America/Guyana",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Indianapolis",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Sao_Paulo",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Goose_Bay",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Rankin_Inlet",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Bahia_Banderas",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Atikokan",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Cordoba",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Whitehorse",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Nome",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "America/Coral_Harbour",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Porto_Acre",
+    "abbrev": "-05"
+  },
+  {
+    "name": "America/Tijuana",
+    "abbrev": "PST"
+  },
+  {
+    "name": "America/St_Thomas",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Ciudad_Juarez",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Curacao",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Montserrat",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/North_Dakota/Center",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/North_Dakota/Beulah",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/North_Dakota/New_Salem",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/St_Johns",
+    "abbrev": "NST"
+  },
+  {
+    "name": "America/Blanc-Sablon",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Godthab",
+    "abbrev": "-02"
+  },
+  {
+    "name": "America/Anguilla",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Catamarca",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Santiago",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Dawson",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Kralendijk",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Detroit",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Caracas",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Hermosillo",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/New_York",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Antigua",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Guatemala",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Juneau",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "America/Yellowknife",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Santo_Domingo",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Cancun",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Lima",
+    "abbrev": "-05"
+  },
+  {
+    "name": "America/Argentina/Buenos_Aires",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/La_Rioja",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Rio_Gallegos",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Jujuy",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Tucuman",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/ComodRivadavia",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Cordoba",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Catamarca",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Salta",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/San_Juan",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Ushuaia",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/San_Luis",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Argentina/Mendoza",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Santarem",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Tegucigalpa",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Boa_Vista",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Denver",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Fortaleza",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Cayenne",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Port_of_Spain",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Shiprock",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Recife",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Vancouver",
+    "abbrev": "PST"
+  },
+  {
+    "name": "America/Noronha",
+    "abbrev": "-02"
+  },
+  {
+    "name": "America/Iqaluit",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Belize",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Anchorage",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "America/Swift_Current",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Costa_Rica",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Chihuahua",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Chicago",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Winnipeg",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Indiana/Winamac",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Indiana/Indianapolis",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Indiana/Vincennes",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Indiana/Knox",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Indiana/Vevay",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Indiana/Marengo",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Indiana/Tell_City",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Indiana/Petersburg",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Cambridge_Bay",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Asuncion",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Kentucky/Monticello",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Kentucky/Louisville",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Marigot",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Glace_Bay",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Rainy_River",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Merida",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Martinique",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Araguaina",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Dawson_Creek",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Matamoros",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Thunder_Bay",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Moncton",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Bahia",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Metlakatla",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "America/Ojinaga",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Havana",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Nassau",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Belem",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Maceio",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Nipigon",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Lower_Princes",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Porto_Velho",
+    "abbrev": "-04"
+  },
+  {
+    "name": "America/Punta_Arenas",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Scoresbysund",
+    "abbrev": "-01"
+  },
+  {
+    "name": "America/St_Kitts",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Mendoza",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/El_Salvador",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Aruba",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Miquelon",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Jamaica",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/Creston",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/Danmarkshavn",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "America/Santa_Isabel",
+    "abbrev": "PST"
+  },
+  {
+    "name": "America/Paramaribo",
+    "abbrev": "-03"
+  },
+  {
+    "name": "America/Mexico_City",
+    "abbrev": "CST"
+  },
+  {
+    "name": "America/Guayaquil",
+    "abbrev": "-05"
+  },
+  {
+    "name": "America/Edmonton",
+    "abbrev": "MST"
+  },
+  {
+    "name": "America/St_Barthelemy",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Guadeloupe",
+    "abbrev": "AST"
+  },
+  {
+    "name": "America/Pangnirtung",
+    "abbrev": "EST"
+  },
+  {
+    "name": "America/St_Lucia",
+    "abbrev": "AST"
+  },
+  {
+    "name": "NZ-CHAT",
+    "abbrev": "+1345"
+  },
+  {
+    "name": "GMT",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Etc/GMT-11",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Etc/GMT-10",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Etc/GMT-7",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Etc/GMT0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Etc/GMT",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Etc/GMT+2",
+    "abbrev": "-02"
+  },
+  {
+    "name": "Etc/GMT-3",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Etc/GMT-6",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Etc/GMT+9",
+    "abbrev": "-09"
+  },
+  {
+    "name": "Etc/Greenwich",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Etc/GMT-4",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Etc/GMT+11",
+    "abbrev": "-11"
+  },
+  {
+    "name": "Etc/GMT+7",
+    "abbrev": "-07"
+  },
+  {
+    "name": "Etc/GMT+12",
+    "abbrev": "-12"
+  },
+  {
+    "name": "Etc/UCT",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Etc/GMT-8",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Etc/GMT-0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Etc/GMT+1",
+    "abbrev": "-01"
+  },
+  {
+    "name": "Etc/GMT+4",
+    "abbrev": "-04"
+  },
+  {
+    "name": "Etc/GMT-14",
+    "abbrev": "+14"
+  },
+  {
+    "name": "Etc/UTC",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Etc/GMT-2",
+    "abbrev": "+02"
+  },
+  {
+    "name": "Etc/GMT-5",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Etc/GMT+8",
+    "abbrev": "-08"
+  },
+  {
+    "name": "Etc/GMT+0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Etc/GMT+3",
+    "abbrev": "-03"
+  },
+  {
+    "name": "Etc/GMT+6",
+    "abbrev": "-06"
+  },
+  {
+    "name": "Etc/GMT-9",
+    "abbrev": "+09"
+  },
+  {
+    "name": "Etc/GMT-1",
+    "abbrev": "+01"
+  },
+  {
+    "name": "Etc/GMT+10",
+    "abbrev": "-10"
+  },
+  {
+    "name": "Etc/Zulu",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Etc/Universal",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Etc/GMT-13",
+    "abbrev": "+13"
+  },
+  {
+    "name": "Etc/GMT+5",
+    "abbrev": "-05"
+  },
+  {
+    "name": "Etc/GMT-12",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Singapore",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Navajo",
+    "abbrev": "MST"
+  },
+  {
+    "name": "Australia/Darwin",
+    "abbrev": "ACST"
+  },
+  {
+    "name": "Australia/West",
+    "abbrev": "AWST"
+  },
+  {
+    "name": "Australia/LHI",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Australia/Hobart",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/Tasmania",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/Lord_Howe",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Australia/North",
+    "abbrev": "ACST"
+  },
+  {
+    "name": "Australia/Lindeman",
+    "abbrev": "AEST"
+  },
+  {
+    "name": "Australia/Eucla",
+    "abbrev": "+0845"
+  },
+  {
+    "name": "Australia/Currie",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/Victoria",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/Perth",
+    "abbrev": "AWST"
+  },
+  {
+    "name": "Australia/Brisbane",
+    "abbrev": "AEST"
+  },
+  {
+    "name": "Australia/Adelaide",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "Australia/Sydney",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/South",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "Australia/Yancowinna",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "Australia/Melbourne",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/NSW",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/Broken_Hill",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "Australia/Canberra",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/ACT",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Australia/Queensland",
+    "abbrev": "AEST"
+  },
+  {
+    "name": "Asia/Kathmandu",
+    "abbrev": "+0545"
+  },
+  {
+    "name": "Asia/Jerusalem",
+    "abbrev": "IST"
+  },
+  {
+    "name": "Asia/Pontianak",
+    "abbrev": "WIB"
+  },
+  {
+    "name": "Asia/Kolkata",
+    "abbrev": "IST"
+  },
+  {
+    "name": "Asia/Amman",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Dushanbe",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Famagusta",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Asia/Sakhalin",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Asia/Samarkand",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Kashgar",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Chungking",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Tehran",
+    "abbrev": "+0330"
+  },
+  {
+    "name": "Asia/Bangkok",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Krasnoyarsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Singapore",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Irkutsk",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Hong_Kong",
+    "abbrev": "HKT"
+  },
+  {
+    "name": "Asia/Muscat",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Asia/Ulaanbaatar",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Taipei",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Novosibirsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Aden",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Dacca",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Dili",
+    "abbrev": "+09"
+  },
+  {
+    "name": "Asia/Chita",
+    "abbrev": "+09"
+  },
+  {
+    "name": "Asia/Makassar",
+    "abbrev": "WITA"
+  },
+  {
+    "name": "Asia/Thimbu",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Vladivostok",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Asia/Tbilisi",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Asia/Rangoon",
+    "abbrev": "+0630"
+  },
+  {
+    "name": "Asia/Yerevan",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Asia/Urumqi",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Srednekolymsk",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Asia/Qostanay",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Tashkent",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Kabul",
+    "abbrev": "+0430"
+  },
+  {
+    "name": "Asia/Tokyo",
+    "abbrev": "JST"
+  },
+  {
+    "name": "Asia/Bahrain",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Thimphu",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Aqtau",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Kuwait",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Macao",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Karachi",
+    "abbrev": "PKT"
+  },
+  {
+    "name": "Asia/Shanghai",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Barnaul",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Colombo",
+    "abbrev": "+0530"
+  },
+  {
+    "name": "Asia/Dhaka",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Jakarta",
+    "abbrev": "WIB"
+  },
+  {
+    "name": "Asia/Qatar",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Qyzylorda",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Omsk",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Hovd",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Brunei",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Atyrau",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Novokuznetsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Pyongyang",
+    "abbrev": "KST"
+  },
+  {
+    "name": "Asia/Ujung_Pandang",
+    "abbrev": "WITA"
+  },
+  {
+    "name": "Asia/Kuala_Lumpur",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Almaty",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Vientiane",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Gaza",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Asia/Jayapura",
+    "abbrev": "WIT"
+  },
+  {
+    "name": "Asia/Kuching",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Magadan",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Asia/Hebron",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Asia/Choibalsan",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Seoul",
+    "abbrev": "KST"
+  },
+  {
+    "name": "Asia/Chongqing",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Beirut",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Asia/Ashgabat",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Tomsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Yangon",
+    "abbrev": "+0630"
+  },
+  {
+    "name": "Asia/Istanbul",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Tel_Aviv",
+    "abbrev": "IST"
+  },
+  {
+    "name": "Asia/Baghdad",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Phnom_Penh",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Khandyga",
+    "abbrev": "+09"
+  },
+  {
+    "name": "Asia/Macau",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Yakutsk",
+    "abbrev": "+09"
+  },
+  {
+    "name": "Asia/Katmandu",
+    "abbrev": "+0545"
+  },
+  {
+    "name": "Asia/Yekaterinburg",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Damascus",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Ho_Chi_Minh",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Aqtobe",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Harbin",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Asia/Manila",
+    "abbrev": "PST"
+  },
+  {
+    "name": "Asia/Nicosia",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Asia/Ust-Nera",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Asia/Riyadh",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Asia/Bishkek",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Asia/Calcutta",
+    "abbrev": "IST"
+  },
+  {
+    "name": "Asia/Kamchatka",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Asia/Oral",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Ashkhabad",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Asia/Saigon",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Asia/Ulan_Bator",
+    "abbrev": "+08"
+  },
+  {
+    "name": "Asia/Dubai",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Asia/Anadyr",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Asia/Baku",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Israel",
+    "abbrev": "IST"
+  },
+  {
+    "name": "Portugal",
+    "abbrev": "WET"
+  },
+  {
+    "name": "Iran",
+    "abbrev": "+0330"
+  },
+  {
+    "name": "Kwajalein",
+    "abbrev": "+12"
+  },
+  {
+    "name": "MST",
+    "abbrev": "MST"
+  },
+  {
+    "name": "NZ",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "Greenwich",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Indian/Kerguelen",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Indian/Comoro",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Indian/Maldives",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Indian/Mahe",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Indian/Chagos",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Indian/Mayotte",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Indian/Cocos",
+    "abbrev": "+0630"
+  },
+  {
+    "name": "Indian/Christmas",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Indian/Reunion",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Indian/Mauritius",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Indian/Antananarivo",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Pacific/Port_Moresby",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Pacific/Palau",
+    "abbrev": "+09"
+  },
+  {
+    "name": "Pacific/Kanton",
+    "abbrev": "+13"
+  },
+  {
+    "name": "Pacific/Fakaofo",
+    "abbrev": "+13"
+  },
+  {
+    "name": "Pacific/Kiritimati",
+    "abbrev": "+14"
+  },
+  {
+    "name": "Pacific/Samoa",
+    "abbrev": "SST"
+  },
+  {
+    "name": "Pacific/Guadalcanal",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Johnston",
+    "abbrev": "HST"
+  },
+  {
+    "name": "Pacific/Guam",
+    "abbrev": "ChST"
+  },
+  {
+    "name": "Pacific/Honolulu",
+    "abbrev": "HST"
+  },
+  {
+    "name": "Pacific/Easter",
+    "abbrev": "-05"
+  },
+  {
+    "name": "Pacific/Efate",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Bougainville",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Marquesas",
+    "abbrev": "-0930"
+  },
+  {
+    "name": "Pacific/Tongatapu",
+    "abbrev": "+13"
+  },
+  {
+    "name": "Pacific/Gambier",
+    "abbrev": "-09"
+  },
+  {
+    "name": "Pacific/Funafuti",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Chuuk",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Pacific/Truk",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Pacific/Kwajalein",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Rarotonga",
+    "abbrev": "-10"
+  },
+  {
+    "name": "Pacific/Pohnpei",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Pago_Pago",
+    "abbrev": "SST"
+  },
+  {
+    "name": "Pacific/Midway",
+    "abbrev": "SST"
+  },
+  {
+    "name": "Pacific/Tahiti",
+    "abbrev": "-10"
+  },
+  {
+    "name": "Pacific/Tarawa",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Galapagos",
+    "abbrev": "-06"
+  },
+  {
+    "name": "Pacific/Wallis",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Yap",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Pacific/Majuro",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Kosrae",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Apia",
+    "abbrev": "+13"
+  },
+  {
+    "name": "Pacific/Noumea",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Niue",
+    "abbrev": "-11"
+  },
+  {
+    "name": "Pacific/Enderbury",
+    "abbrev": "+13"
+  },
+  {
+    "name": "Pacific/Chatham",
+    "abbrev": "+1345"
+  },
+  {
+    "name": "Pacific/Auckland",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "Pacific/Pitcairn",
+    "abbrev": "-08"
+  },
+  {
+    "name": "Pacific/Nauru",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Norfolk",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Wake",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Pacific/Ponape",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Pacific/Saipan",
+    "abbrev": "ChST"
+  },
+  {
+    "name": "Pacific/Fiji",
+    "abbrev": "+12"
+  },
+  {
+    "name": "Cuba",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Eire",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "GB",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Hongkong",
+    "abbrev": "HKT"
+  },
+  {
+    "name": "WET",
+    "abbrev": "WET"
+  },
+  {
+    "name": "MST7MDT",
+    "abbrev": "MST"
+  },
+  {
+    "name": "Arctic/Longyearbyen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Zagreb",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Chisinau",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Saratov",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Europe/Belfast",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Europe/San_Marino",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Guernsey",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Europe/Ljubljana",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Kaliningrad",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Luxembourg",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Kirov",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "Europe/Prague",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Minsk",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Europe/Zurich",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Budapest",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Tirane",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Dublin",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Europe/Vaduz",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Andorra",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Athens",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Skopje",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Rome",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Zaporozhye",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Sofia",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Monaco",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Paris",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Oslo",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Brussels",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Malta",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Amsterdam",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Stockholm",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Belgrade",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Lisbon",
+    "abbrev": "WET"
+  },
+  {
+    "name": "Europe/Tallinn",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Simferopol",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "Europe/Jersey",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Europe/Podgorica",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Warsaw",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Riga",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Kiev",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Sarajevo",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Copenhagen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Istanbul",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Europe/Astrakhan",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Europe/Samara",
+    "abbrev": "+04"
+  },
+  {
+    "name": "Europe/Mariehamn",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Tiraspol",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Bratislava",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Vatican",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Volgograd",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "Europe/Vienna",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Gibraltar",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Berlin",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Uzhgorod",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Vilnius",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Bucharest",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Busingen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Nicosia",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Kyiv",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Isle_of_Man",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Europe/Moscow",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "Europe/London",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Europe/Helsinki",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Europe/Madrid",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Europe/Ulyanovsk",
+    "abbrev": "+04"
+  },
+  {
+    "name": "UCT",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "MET",
+    "abbrev": "MET"
+  },
+  {
+    "name": "Japan",
+    "abbrev": "JST"
+  },
+  {
+    "name": "localtime",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Iceland",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Nairobi",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Monrovia",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Lagos",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Malabo",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Lubumbashi",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Gaborone",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Harare",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Libreville",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Juba",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Banjul",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Maseru",
+    "abbrev": "SAST"
+  },
+  {
+    "name": "Africa/Bamako",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Djibouti",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Asmera",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Tripoli",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Africa/Ouagadougou",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Lusaka",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Ceuta",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Africa/Khartoum",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Abidjan",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Maputo",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Douala",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Kinshasa",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Blantyre",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Asmara",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Mogadishu",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Windhoek",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Timbuktu",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Bujumbura",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "Africa/Casablanca",
+    "abbrev": "+01"
+  },
+  {
+    "name": "Africa/Luanda",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Conakry",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Dar_es_Salaam",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Johannesburg",
+    "abbrev": "SAST"
+  },
+  {
+    "name": "Africa/Dakar",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Algiers",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Africa/Addis_Ababa",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Freetown",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Tunis",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Africa/El_Aaiun",
+    "abbrev": "+01"
+  },
+  {
+    "name": "Africa/Porto-Novo",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Kampala",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "Africa/Nouakchott",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Niamey",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Accra",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Bangui",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Mbabane",
+    "abbrev": "SAST"
+  },
+  {
+    "name": "Africa/Ndjamena",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Sao_Tome",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Lome",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Brazzaville",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "Africa/Cairo",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Africa/Bissau",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Africa/Kigali",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "EET",
+    "abbrev": "EET"
+  },
+  {
+    "name": "Atlantic/Canary",
+    "abbrev": "WET"
+  },
+  {
+    "name": "Atlantic/Bermuda",
+    "abbrev": "AST"
+  },
+  {
+    "name": "Atlantic/St_Helena",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Atlantic/Stanley",
+    "abbrev": "-03"
+  },
+  {
+    "name": "Atlantic/Cape_Verde",
+    "abbrev": "-01"
+  },
+  {
+    "name": "Atlantic/Azores",
+    "abbrev": "-01"
+  },
+  {
+    "name": "Atlantic/Faroe",
+    "abbrev": "WET"
+  },
+  {
+    "name": "Atlantic/Faeroe",
+    "abbrev": "WET"
+  },
+  {
+    "name": "Atlantic/Madeira",
+    "abbrev": "WET"
+  },
+  {
+    "name": "Atlantic/Jan_Mayen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "Atlantic/South_Georgia",
+    "abbrev": "-02"
+  },
+  {
+    "name": "Atlantic/Reykjavik",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Canada/Yukon",
+    "abbrev": "MST"
+  },
+  {
+    "name": "Canada/Newfoundland",
+    "abbrev": "NST"
+  },
+  {
+    "name": "Canada/Pacific",
+    "abbrev": "PST"
+  },
+  {
+    "name": "Canada/Atlantic",
+    "abbrev": "AST"
+  },
+  {
+    "name": "Canada/Mountain",
+    "abbrev": "MST"
+  },
+  {
+    "name": "Canada/Central",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Canada/Saskatchewan",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Canada/Eastern",
+    "abbrev": "EST"
+  },
+  {
+    "name": "Poland",
+    "abbrev": "CET"
+  },
+  {
+    "name": "W-SU",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "US/Samoa",
+    "abbrev": "SST"
+  },
+  {
+    "name": "US/Pacific",
+    "abbrev": "PST"
+  },
+  {
+    "name": "US/Michigan",
+    "abbrev": "EST"
+  },
+  {
+    "name": "US/Arizona",
+    "abbrev": "MST"
+  },
+  {
+    "name": "US/Hawaii",
+    "abbrev": "HST"
+  },
+  {
+    "name": "US/Mountain",
+    "abbrev": "MST"
+  },
+  {
+    "name": "US/Central",
+    "abbrev": "CST"
+  },
+  {
+    "name": "US/Aleutian",
+    "abbrev": "HST"
+  },
+  {
+    "name": "US/East-Indiana",
+    "abbrev": "EST"
+  },
+  {
+    "name": "US/Alaska",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "US/Indiana-Starke",
+    "abbrev": "CST"
+  },
+  {
+    "name": "US/Eastern",
+    "abbrev": "EST"
+  },
+  {
+    "name": "GMT-0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "Brazil/West",
+    "abbrev": "-04"
+  },
+  {
+    "name": "Brazil/East",
+    "abbrev": "-03"
+  },
+  {
+    "name": "Brazil/DeNoronha",
+    "abbrev": "-02"
+  },
+  {
+    "name": "Brazil/Acre",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posixrules",
+    "abbrev": "EST"
+  },
+  {
+    "name": "GB-Eire",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "UTC",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Antarctica/South_Pole",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "Antarctica/Palmer",
+    "abbrev": "-03"
+  },
+  {
+    "name": "Antarctica/Vostok",
+    "abbrev": "+06"
+  },
+  {
+    "name": "Antarctica/Syowa",
+    "abbrev": "+03"
+  },
+  {
+    "name": "Antarctica/Casey",
+    "abbrev": "+11"
+  },
+  {
+    "name": "Antarctica/Rothera",
+    "abbrev": "-03"
+  },
+  {
+    "name": "Antarctica/McMurdo",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "Antarctica/Davis",
+    "abbrev": "+07"
+  },
+  {
+    "name": "Antarctica/Troll",
+    "abbrev": "+00"
+  },
+  {
+    "name": "Antarctica/DumontDUrville",
+    "abbrev": "+10"
+  },
+  {
+    "name": "Antarctica/Macquarie",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "Antarctica/Mawson",
+    "abbrev": "+05"
+  },
+  {
+    "name": "Chile/EasterIsland",
+    "abbrev": "-05"
+  },
+  {
+    "name": "Chile/Continental",
+    "abbrev": "-03"
+  },
+  {
+    "name": "GMT+0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "HST",
+    "abbrev": "HST"
+  },
+  {
+    "name": "Turkey",
+    "abbrev": "+03"
+  },
+  {
+    "name": "EST",
+    "abbrev": "EST"
+  },
+  {
+    "name": "CET",
+    "abbrev": "CET"
+  },
+  {
+    "name": "CST6CDT",
+    "abbrev": "CST"
+  },
+  {
+    "name": "ROC",
+    "abbrev": "CST"
+  },
+  {
+    "name": "EST5EDT",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/Mexico/General",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Mexico/BajaNorte",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/Mexico/BajaSur",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/Egypt",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/GMT0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/America/Dominica",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Menominee",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/St_Vincent",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Yakutat",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/America/Ensenada",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/America/Buenos_Aires",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Nuuk",
+    "abbrev": "-02"
+  },
+  {
+    "name": "posix/America/Atka",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/America/La_Paz",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Port-au-Prince",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Halifax",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Panama",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Virgin",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Sitka",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/America/Montreal",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Phoenix",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Knox_IN",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Mazatlan",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Regina",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Thule",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Fort_Nelson",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Cuiaba",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Toronto",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Fort_Wayne",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Manaus",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Adak",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/America/Monterrey",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Louisville",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Grenada",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Cayman",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Grand_Turk",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Jujuy",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Eirunepe",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/America/Puerto_Rico",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Barbados",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Rio_Branco",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/America/Resolute",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Campo_Grande",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Inuvik",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Tortola",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Montevideo",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Bogota",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/America/Managua",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Boise",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Rosario",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Los_Angeles",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/America/Guyana",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Indianapolis",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Sao_Paulo",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Goose_Bay",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Rankin_Inlet",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Bahia_Banderas",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Atikokan",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Cordoba",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Whitehorse",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Nome",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/America/Coral_Harbour",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Porto_Acre",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/America/Tijuana",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/America/St_Thomas",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Ciudad_Juarez",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Curacao",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Montserrat",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/North_Dakota/Center",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/North_Dakota/Beulah",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/North_Dakota/New_Salem",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/St_Johns",
+    "abbrev": "NST"
+  },
+  {
+    "name": "posix/America/Blanc-Sablon",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Godthab",
+    "abbrev": "-02"
+  },
+  {
+    "name": "posix/America/Anguilla",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Catamarca",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Santiago",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Dawson",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Kralendijk",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Detroit",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Caracas",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Hermosillo",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/New_York",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Antigua",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Guatemala",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Juneau",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/America/Yellowknife",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Santo_Domingo",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Cancun",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Lima",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/America/Argentina/Buenos_Aires",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/La_Rioja",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Rio_Gallegos",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Jujuy",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Tucuman",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/ComodRivadavia",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Cordoba",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Catamarca",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Salta",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/San_Juan",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Ushuaia",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/San_Luis",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Argentina/Mendoza",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Santarem",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Tegucigalpa",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Boa_Vista",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Denver",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Fortaleza",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Cayenne",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Port_of_Spain",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Shiprock",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Recife",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Vancouver",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/America/Noronha",
+    "abbrev": "-02"
+  },
+  {
+    "name": "posix/America/Iqaluit",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Belize",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Anchorage",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/America/Swift_Current",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Costa_Rica",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Chihuahua",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Chicago",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Winnipeg",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Indiana/Winamac",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Indiana/Indianapolis",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Indiana/Vincennes",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Indiana/Knox",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Indiana/Vevay",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Indiana/Marengo",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Indiana/Tell_City",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Indiana/Petersburg",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Cambridge_Bay",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Asuncion",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Kentucky/Monticello",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Kentucky/Louisville",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Marigot",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Glace_Bay",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Rainy_River",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Merida",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Martinique",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Araguaina",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Dawson_Creek",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Matamoros",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Thunder_Bay",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Moncton",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Bahia",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Metlakatla",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/America/Ojinaga",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Havana",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Nassau",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Belem",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Maceio",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Nipigon",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Lower_Princes",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Porto_Velho",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/America/Punta_Arenas",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Scoresbysund",
+    "abbrev": "-01"
+  },
+  {
+    "name": "posix/America/St_Kitts",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Mendoza",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/El_Salvador",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Aruba",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Miquelon",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Jamaica",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/Creston",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/Danmarkshavn",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/America/Santa_Isabel",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/America/Paramaribo",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/America/Mexico_City",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/America/Guayaquil",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/America/Edmonton",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/America/St_Barthelemy",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Guadeloupe",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/America/Pangnirtung",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/America/St_Lucia",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/NZ-CHAT",
+    "abbrev": "+1345"
+  },
+  {
+    "name": "posix/GMT",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Etc/GMT-11",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Etc/GMT-10",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Etc/GMT-7",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Etc/GMT0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Etc/GMT",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Etc/GMT+2",
+    "abbrev": "-02"
+  },
+  {
+    "name": "posix/Etc/GMT-3",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Etc/GMT-6",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Etc/GMT+9",
+    "abbrev": "-09"
+  },
+  {
+    "name": "posix/Etc/Greenwich",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Etc/GMT-4",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Etc/GMT+11",
+    "abbrev": "-11"
+  },
+  {
+    "name": "posix/Etc/GMT+7",
+    "abbrev": "-07"
+  },
+  {
+    "name": "posix/Etc/GMT+12",
+    "abbrev": "-12"
+  },
+  {
+    "name": "posix/Etc/UCT",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Etc/GMT-8",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Etc/GMT-0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Etc/GMT+1",
+    "abbrev": "-01"
+  },
+  {
+    "name": "posix/Etc/GMT+4",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/Etc/GMT-14",
+    "abbrev": "+14"
+  },
+  {
+    "name": "posix/Etc/UTC",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Etc/GMT-2",
+    "abbrev": "+02"
+  },
+  {
+    "name": "posix/Etc/GMT-5",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Etc/GMT+8",
+    "abbrev": "-08"
+  },
+  {
+    "name": "posix/Etc/GMT+0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Etc/GMT+3",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/Etc/GMT+6",
+    "abbrev": "-06"
+  },
+  {
+    "name": "posix/Etc/GMT-9",
+    "abbrev": "+09"
+  },
+  {
+    "name": "posix/Etc/GMT-1",
+    "abbrev": "+01"
+  },
+  {
+    "name": "posix/Etc/GMT+10",
+    "abbrev": "-10"
+  },
+  {
+    "name": "posix/Etc/Zulu",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Etc/Universal",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Etc/GMT-13",
+    "abbrev": "+13"
+  },
+  {
+    "name": "posix/Etc/GMT+5",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/Etc/GMT-12",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Singapore",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Navajo",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/Australia/Darwin",
+    "abbrev": "ACST"
+  },
+  {
+    "name": "posix/Australia/West",
+    "abbrev": "AWST"
+  },
+  {
+    "name": "posix/Australia/LHI",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Australia/Hobart",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/Tasmania",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/Lord_Howe",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Australia/North",
+    "abbrev": "ACST"
+  },
+  {
+    "name": "posix/Australia/Lindeman",
+    "abbrev": "AEST"
+  },
+  {
+    "name": "posix/Australia/Eucla",
+    "abbrev": "+0845"
+  },
+  {
+    "name": "posix/Australia/Currie",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/Victoria",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/Perth",
+    "abbrev": "AWST"
+  },
+  {
+    "name": "posix/Australia/Brisbane",
+    "abbrev": "AEST"
+  },
+  {
+    "name": "posix/Australia/Adelaide",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "posix/Australia/Sydney",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/South",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "posix/Australia/Yancowinna",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "posix/Australia/Melbourne",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/NSW",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/Broken_Hill",
+    "abbrev": "ACDT"
+  },
+  {
+    "name": "posix/Australia/Canberra",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/ACT",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Australia/Queensland",
+    "abbrev": "AEST"
+  },
+  {
+    "name": "posix/Asia/Kathmandu",
+    "abbrev": "+0545"
+  },
+  {
+    "name": "posix/Asia/Jerusalem",
+    "abbrev": "IST"
+  },
+  {
+    "name": "posix/Asia/Pontianak",
+    "abbrev": "WIB"
+  },
+  {
+    "name": "posix/Asia/Kolkata",
+    "abbrev": "IST"
+  },
+  {
+    "name": "posix/Asia/Amman",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Dushanbe",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Famagusta",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Asia/Sakhalin",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Asia/Samarkand",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Kashgar",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Chungking",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Tehran",
+    "abbrev": "+0330"
+  },
+  {
+    "name": "posix/Asia/Bangkok",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Krasnoyarsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Singapore",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Irkutsk",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Hong_Kong",
+    "abbrev": "HKT"
+  },
+  {
+    "name": "posix/Asia/Muscat",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Asia/Ulaanbaatar",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Taipei",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Novosibirsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Aden",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Dacca",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Dili",
+    "abbrev": "+09"
+  },
+  {
+    "name": "posix/Asia/Chita",
+    "abbrev": "+09"
+  },
+  {
+    "name": "posix/Asia/Makassar",
+    "abbrev": "WITA"
+  },
+  {
+    "name": "posix/Asia/Thimbu",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Vladivostok",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Asia/Tbilisi",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Asia/Rangoon",
+    "abbrev": "+0630"
+  },
+  {
+    "name": "posix/Asia/Yerevan",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Asia/Urumqi",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Srednekolymsk",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Asia/Qostanay",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Tashkent",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Kabul",
+    "abbrev": "+0430"
+  },
+  {
+    "name": "posix/Asia/Tokyo",
+    "abbrev": "JST"
+  },
+  {
+    "name": "posix/Asia/Bahrain",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Thimphu",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Aqtau",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Kuwait",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Macao",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Karachi",
+    "abbrev": "PKT"
+  },
+  {
+    "name": "posix/Asia/Shanghai",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Barnaul",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Colombo",
+    "abbrev": "+0530"
+  },
+  {
+    "name": "posix/Asia/Dhaka",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Jakarta",
+    "abbrev": "WIB"
+  },
+  {
+    "name": "posix/Asia/Qatar",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Qyzylorda",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Omsk",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Hovd",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Brunei",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Atyrau",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Novokuznetsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Pyongyang",
+    "abbrev": "KST"
+  },
+  {
+    "name": "posix/Asia/Ujung_Pandang",
+    "abbrev": "WITA"
+  },
+  {
+    "name": "posix/Asia/Kuala_Lumpur",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Almaty",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Vientiane",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Gaza",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Asia/Jayapura",
+    "abbrev": "WIT"
+  },
+  {
+    "name": "posix/Asia/Kuching",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Magadan",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Asia/Hebron",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Asia/Choibalsan",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Seoul",
+    "abbrev": "KST"
+  },
+  {
+    "name": "posix/Asia/Chongqing",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Beirut",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Asia/Ashgabat",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Tomsk",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Yangon",
+    "abbrev": "+0630"
+  },
+  {
+    "name": "posix/Asia/Istanbul",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Tel_Aviv",
+    "abbrev": "IST"
+  },
+  {
+    "name": "posix/Asia/Baghdad",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Phnom_Penh",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Khandyga",
+    "abbrev": "+09"
+  },
+  {
+    "name": "posix/Asia/Macau",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Yakutsk",
+    "abbrev": "+09"
+  },
+  {
+    "name": "posix/Asia/Katmandu",
+    "abbrev": "+0545"
+  },
+  {
+    "name": "posix/Asia/Yekaterinburg",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Damascus",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Ho_Chi_Minh",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Aqtobe",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Harbin",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Asia/Manila",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/Asia/Nicosia",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Asia/Ust-Nera",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Asia/Riyadh",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Asia/Bishkek",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Asia/Calcutta",
+    "abbrev": "IST"
+  },
+  {
+    "name": "posix/Asia/Kamchatka",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Asia/Oral",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Ashkhabad",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Asia/Saigon",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Asia/Ulan_Bator",
+    "abbrev": "+08"
+  },
+  {
+    "name": "posix/Asia/Dubai",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Asia/Anadyr",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Asia/Baku",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Israel",
+    "abbrev": "IST"
+  },
+  {
+    "name": "posix/Portugal",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/Iran",
+    "abbrev": "+0330"
+  },
+  {
+    "name": "posix/Kwajalein",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/MST",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/NZ",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "posix/Greenwich",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Indian/Kerguelen",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Indian/Comoro",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Indian/Maldives",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Indian/Mahe",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Indian/Chagos",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Indian/Mayotte",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Indian/Cocos",
+    "abbrev": "+0630"
+  },
+  {
+    "name": "posix/Indian/Christmas",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Indian/Reunion",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Indian/Mauritius",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Indian/Antananarivo",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Pacific/Port_Moresby",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Pacific/Palau",
+    "abbrev": "+09"
+  },
+  {
+    "name": "posix/Pacific/Kanton",
+    "abbrev": "+13"
+  },
+  {
+    "name": "posix/Pacific/Fakaofo",
+    "abbrev": "+13"
+  },
+  {
+    "name": "posix/Pacific/Kiritimati",
+    "abbrev": "+14"
+  },
+  {
+    "name": "posix/Pacific/Samoa",
+    "abbrev": "SST"
+  },
+  {
+    "name": "posix/Pacific/Guadalcanal",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Johnston",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/Pacific/Guam",
+    "abbrev": "ChST"
+  },
+  {
+    "name": "posix/Pacific/Honolulu",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/Pacific/Easter",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/Pacific/Efate",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Bougainville",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Marquesas",
+    "abbrev": "-0930"
+  },
+  {
+    "name": "posix/Pacific/Tongatapu",
+    "abbrev": "+13"
+  },
+  {
+    "name": "posix/Pacific/Gambier",
+    "abbrev": "-09"
+  },
+  {
+    "name": "posix/Pacific/Funafuti",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Chuuk",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Pacific/Truk",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Pacific/Kwajalein",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Rarotonga",
+    "abbrev": "-10"
+  },
+  {
+    "name": "posix/Pacific/Pohnpei",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Pago_Pago",
+    "abbrev": "SST"
+  },
+  {
+    "name": "posix/Pacific/Midway",
+    "abbrev": "SST"
+  },
+  {
+    "name": "posix/Pacific/Tahiti",
+    "abbrev": "-10"
+  },
+  {
+    "name": "posix/Pacific/Tarawa",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Galapagos",
+    "abbrev": "-06"
+  },
+  {
+    "name": "posix/Pacific/Wallis",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Yap",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Pacific/Majuro",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Kosrae",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Apia",
+    "abbrev": "+13"
+  },
+  {
+    "name": "posix/Pacific/Noumea",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Niue",
+    "abbrev": "-11"
+  },
+  {
+    "name": "posix/Pacific/Enderbury",
+    "abbrev": "+13"
+  },
+  {
+    "name": "posix/Pacific/Chatham",
+    "abbrev": "+1345"
+  },
+  {
+    "name": "posix/Pacific/Auckland",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "posix/Pacific/Pitcairn",
+    "abbrev": "-08"
+  },
+  {
+    "name": "posix/Pacific/Nauru",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Norfolk",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Wake",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Pacific/Ponape",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Pacific/Saipan",
+    "abbrev": "ChST"
+  },
+  {
+    "name": "posix/Pacific/Fiji",
+    "abbrev": "+12"
+  },
+  {
+    "name": "posix/Cuba",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Eire",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/GB",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Hongkong",
+    "abbrev": "HKT"
+  },
+  {
+    "name": "posix/WET",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/MST7MDT",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/Arctic/Longyearbyen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Zagreb",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Chisinau",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Saratov",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Europe/Belfast",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Europe/San_Marino",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Guernsey",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Europe/Ljubljana",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Kaliningrad",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Luxembourg",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Kirov",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "posix/Europe/Prague",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Minsk",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Europe/Zurich",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Budapest",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Tirane",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Dublin",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Europe/Vaduz",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Andorra",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Athens",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Skopje",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Rome",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Zaporozhye",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Sofia",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Monaco",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Paris",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Oslo",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Brussels",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Malta",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Amsterdam",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Stockholm",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Belgrade",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Lisbon",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/Europe/Tallinn",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Simferopol",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "posix/Europe/Jersey",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Europe/Podgorica",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Warsaw",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Riga",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Kiev",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Sarajevo",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Copenhagen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Istanbul",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Europe/Astrakhan",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Europe/Samara",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/Europe/Mariehamn",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Tiraspol",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Bratislava",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Vatican",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Volgograd",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "posix/Europe/Vienna",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Gibraltar",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Berlin",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Uzhgorod",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Vilnius",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Bucharest",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Busingen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Nicosia",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Kyiv",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Isle_of_Man",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Europe/Moscow",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "posix/Europe/London",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Europe/Helsinki",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Europe/Madrid",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Europe/Ulyanovsk",
+    "abbrev": "+04"
+  },
+  {
+    "name": "posix/UCT",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/MET",
+    "abbrev": "MET"
+  },
+  {
+    "name": "posix/Japan",
+    "abbrev": "JST"
+  },
+  {
+    "name": "posix/Iceland",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Nairobi",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Monrovia",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Lagos",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Malabo",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Lubumbashi",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Gaborone",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Harare",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Libreville",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Juba",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Banjul",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Maseru",
+    "abbrev": "SAST"
+  },
+  {
+    "name": "posix/Africa/Bamako",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Djibouti",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Asmera",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Tripoli",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Africa/Ouagadougou",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Lusaka",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Ceuta",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Africa/Khartoum",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Abidjan",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Maputo",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Douala",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Kinshasa",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Blantyre",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Asmara",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Mogadishu",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Windhoek",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Timbuktu",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Bujumbura",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/Africa/Casablanca",
+    "abbrev": "+01"
+  },
+  {
+    "name": "posix/Africa/Luanda",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Conakry",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Dar_es_Salaam",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Johannesburg",
+    "abbrev": "SAST"
+  },
+  {
+    "name": "posix/Africa/Dakar",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Algiers",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Africa/Addis_Ababa",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Freetown",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Tunis",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Africa/El_Aaiun",
+    "abbrev": "+01"
+  },
+  {
+    "name": "posix/Africa/Porto-Novo",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Kampala",
+    "abbrev": "EAT"
+  },
+  {
+    "name": "posix/Africa/Nouakchott",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Niamey",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Accra",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Bangui",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Mbabane",
+    "abbrev": "SAST"
+  },
+  {
+    "name": "posix/Africa/Ndjamena",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Sao_Tome",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Lome",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Brazzaville",
+    "abbrev": "WAT"
+  },
+  {
+    "name": "posix/Africa/Cairo",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Africa/Bissau",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Africa/Kigali",
+    "abbrev": "CAT"
+  },
+  {
+    "name": "posix/EET",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/Atlantic/Canary",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/Atlantic/Bermuda",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/Atlantic/St_Helena",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Atlantic/Stanley",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/Atlantic/Cape_Verde",
+    "abbrev": "-01"
+  },
+  {
+    "name": "posix/Atlantic/Azores",
+    "abbrev": "-01"
+  },
+  {
+    "name": "posix/Atlantic/Faroe",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/Atlantic/Faeroe",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/Atlantic/Madeira",
+    "abbrev": "WET"
+  },
+  {
+    "name": "posix/Atlantic/Jan_Mayen",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/Atlantic/South_Georgia",
+    "abbrev": "-02"
+  },
+  {
+    "name": "posix/Atlantic/Reykjavik",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Canada/Yukon",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/Canada/Newfoundland",
+    "abbrev": "NST"
+  },
+  {
+    "name": "posix/Canada/Pacific",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/Canada/Atlantic",
+    "abbrev": "AST"
+  },
+  {
+    "name": "posix/Canada/Mountain",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/Canada/Central",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Canada/Saskatchewan",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/Canada/Eastern",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/Poland",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/W-SU",
+    "abbrev": "MSK"
+  },
+  {
+    "name": "posix/US/Samoa",
+    "abbrev": "SST"
+  },
+  {
+    "name": "posix/US/Pacific",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/US/Michigan",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/US/Arizona",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/US/Hawaii",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/US/Mountain",
+    "abbrev": "MST"
+  },
+  {
+    "name": "posix/US/Central",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/US/Aleutian",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/US/East-Indiana",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/US/Alaska",
+    "abbrev": "AKST"
+  },
+  {
+    "name": "posix/US/Indiana-Starke",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/US/Eastern",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/GMT-0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/Brazil/West",
+    "abbrev": "-04"
+  },
+  {
+    "name": "posix/Brazil/East",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/Brazil/DeNoronha",
+    "abbrev": "-02"
+  },
+  {
+    "name": "posix/Brazil/Acre",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/GB-Eire",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/UTC",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Antarctica/South_Pole",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "posix/Antarctica/Palmer",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/Antarctica/Vostok",
+    "abbrev": "+06"
+  },
+  {
+    "name": "posix/Antarctica/Syowa",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/Antarctica/Casey",
+    "abbrev": "+11"
+  },
+  {
+    "name": "posix/Antarctica/Rothera",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/Antarctica/McMurdo",
+    "abbrev": "NZDT"
+  },
+  {
+    "name": "posix/Antarctica/Davis",
+    "abbrev": "+07"
+  },
+  {
+    "name": "posix/Antarctica/Troll",
+    "abbrev": "+00"
+  },
+  {
+    "name": "posix/Antarctica/DumontDUrville",
+    "abbrev": "+10"
+  },
+  {
+    "name": "posix/Antarctica/Macquarie",
+    "abbrev": "AEDT"
+  },
+  {
+    "name": "posix/Antarctica/Mawson",
+    "abbrev": "+05"
+  },
+  {
+    "name": "posix/Chile/EasterIsland",
+    "abbrev": "-05"
+  },
+  {
+    "name": "posix/Chile/Continental",
+    "abbrev": "-03"
+  },
+  {
+    "name": "posix/GMT+0",
+    "abbrev": "GMT"
+  },
+  {
+    "name": "posix/HST",
+    "abbrev": "HST"
+  },
+  {
+    "name": "posix/Turkey",
+    "abbrev": "+03"
+  },
+  {
+    "name": "posix/EST",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/CET",
+    "abbrev": "CET"
+  },
+  {
+    "name": "posix/CST6CDT",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/ROC",
+    "abbrev": "CST"
+  },
+  {
+    "name": "posix/EST5EDT",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/Zulu",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Universal",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "posix/Jamaica",
+    "abbrev": "EST"
+  },
+  {
+    "name": "posix/Libya",
+    "abbrev": "EET"
+  },
+  {
+    "name": "posix/PST8PDT",
+    "abbrev": "PST"
+  },
+  {
+    "name": "posix/Factory",
+    "abbrev": "-00"
+  },
+  {
+    "name": "posix/ROK",
+    "abbrev": "KST"
+  },
+  {
+    "name": "posix/PRC",
+    "abbrev": "CST"
+  },
+  {
+    "name": "Zulu",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Universal",
+    "abbrev": "UTC"
+  },
+  {
+    "name": "Jamaica",
+    "abbrev": "EST"
+  },
+  {
+    "name": "Libya",
+    "abbrev": "EET"
+  },
+  {
+    "name": "PST8PDT",
+    "abbrev": "PST"
+  },
+  {
+    "name": "Factory",
+    "abbrev": "-00"
+  },
+  {
+    "name": "ROK",
+    "abbrev": "KST"
+  },
+  {
+    "name": "PRC",
+    "abbrev": "CST"
+  }
+]

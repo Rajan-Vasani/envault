@@ -1,7 +1,11 @@
-import {useDroppable} from '@dnd-kit/core';
+import {useDndMonitor, useDroppable} from '@dnd-kit/core';
 import {Card, Flex, Typography} from 'antd';
 import {createStyles} from 'antd-style';
 import Icon from 'components/atoms/Icon';
+import {DraggableOverlay} from 'components/draggable/overlay';
+import {Droppable} from 'components/droppable';
+import {nodeDetails} from 'config/menu';
+import {useNavigate} from 'react-router-dom';
 const {Title} = Typography;
 
 const useStyles = createStyles(({token, css}, {isOver}) => ({
@@ -19,24 +23,43 @@ const useStyles = createStyles(({token, css}, {isOver}) => ({
   `,
 }));
 
-export const NoNode = props => {
-  const {type} = props;
+export const Component = props => {
+  const {type = 'node'} = props;
+  const navigate = useNavigate();
   const {isOver} = useDroppable({
     id: `${type}-droppable`,
   });
   const {styles} = useStyles({isOver});
 
+  //dnd-kit
+  useDndMonitor({
+    onDragEnd({active, over}) {
+      if (!over) {
+        return;
+      }
+      const {type, id} = active.data.current;
+      navigate(`${type}/${id}`);
+    },
+  });
+
+  const acceptNodeTypes = nodeDetails.map(item => item.value);
+
   return (
-    <Flex vertical gap={'small'} justify={'center'} align={'center'} className={styles.container}>
-      <Card
-        cover={<Icon icon={'Realtime'} type={'envault'} alt={'Drag&Drop'} raw className={styles.icon} />}
-        className={styles.card}
-      >
-        <Flex vertical gap={'small'} justify={'space-between'} align={'center'} wrap={'wrap'}>
-          <Title level={4}>Select a node to get started</Title>
+    <>
+      <Droppable key={'node-droppable'} id={'node-droppable'} acceptedTypes={acceptNodeTypes}>
+        <Flex vertical gap={'small'} justify={'center'} align={'center'} className={styles.container}>
+          <Card
+            cover={<Icon icon={'Realtime'} type={'envault'} alt={'Drag&Drop'} raw className={styles.icon} />}
+            className={styles.card}
+          >
+            <Flex vertical gap={'small'} justify={'space-between'} align={'center'} wrap={'wrap'}>
+              <Title level={4}>Select a node to get started</Title>
+            </Flex>
+          </Card>
         </Flex>
-      </Card>
-    </Flex>
+      </Droppable>
+      <DraggableOverlay />
+    </>
   );
 };
-export default NoNode;
+export default Component;

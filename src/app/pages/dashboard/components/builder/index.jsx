@@ -1,10 +1,9 @@
 import {Drawer, Form, Input} from 'antd';
 import {createStyles} from 'antd-style';
-import {useGetNodeById} from 'hooks/useGetNodeById';
 import {Component as Chart} from 'pages/chart';
 import {Component as Gallery} from 'pages/gallery';
 import MapSetting from 'pages/map/widget/settings';
-import {useContext, useMemo, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import DashboardContext from '../../context';
 
 const useStyles = createStyles(({token, css}) => ({
@@ -24,7 +23,9 @@ const useStyles = createStyles(({token, css}) => ({
 export default function DashboardDetailBuilder({widgets}) {
   const {editWidget, setEditWidget} = useContext(DashboardContext);
   const [form] = Form.useForm();
-  const currentNode = useGetNodeById(editWidget?.widgetData?.id);
+  //@TODO need to fix before production
+  // const currentNode = useGetNodeById(editWidget?.widgetData?.id);
+  const currentNode = undefined;
   const [currentEditWidget, setCurrentEditWidget] = useState();
   const {styles} = useStyles();
 
@@ -78,7 +79,7 @@ export default function DashboardDetailBuilder({widgets}) {
       break;
   }
 
-  useMemo(() => {
+  useEffect(() => {
     setCurrentEditWidget(prevEditWidget => widgets.find(widget => widget.id === editWidget?.id) ?? prevEditWidget);
   }, [editWidget, widgets]);
 

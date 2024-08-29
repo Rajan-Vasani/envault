@@ -44,7 +44,7 @@ const ExecuteForm = props => {
           message.open({type: 'error', content: 'Could not executed this payload! Please try again later!'});
         },
         onSettled: () => {
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ALL_TASK]});
+          queryClient.invalidateQueries({queryKey: API_QUERY.TASK});
         },
       },
     );

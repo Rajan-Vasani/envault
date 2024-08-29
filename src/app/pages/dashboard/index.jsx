@@ -1,8 +1,8 @@
 import {useQueryClient} from '@tanstack/react-query';
 import {App, Form, Input, Layout} from 'antd';
-import NodeHeader from 'app/layouts/node/header';
 import {API_QUERY} from 'constant/query';
 import {useNode, useNodeSaveMutation} from 'hooks/useNode';
+import NodeHeader from 'layouts/node/components/header';
 import {createContext, useEffect, useRef, useState} from 'react';
 import {useOutletContext, useParams} from 'react-router-dom';
 import GridStackControl from './DashboardPreview/GridStackControl';
@@ -57,7 +57,7 @@ export const Component = props => {
       {
         onSuccess: () => {
           message.success('Dashboard save success!');
-          queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
+          queryClient.invalidateQueries({queryKey: API_QUERY.NODE});
         },
       },
     );
@@ -153,13 +153,6 @@ export const Component = props => {
             <Content ref={contentRef} style={{overflowY: 'auto', flex: '1 1 auto'}}>
               <GridStackControl widgetItems={widgets} removeWidget={handleWidgetRemove} addWidget={handleWidgetAdd} />
             </Content>
-            <NodeSider
-              node={node}
-              hub={hub}
-              type={'dashboard'}
-              clearWidget={clearWidget}
-              addWidget={data => setWidgets([...widgets, data])}
-            />
           </Layout>
           <DashboardDetailBuilder widgets={widgets} />
         </Form.Provider>

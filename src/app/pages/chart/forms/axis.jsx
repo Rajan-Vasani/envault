@@ -25,7 +25,7 @@ export const AxisFormList = props => {
       path,
     } = props;
     const values = {
-      min: to ? from.valueOf() : delta.join(''),
+      min: to ? from.valueOf() : delta?.join(''),
       max: to ? to.valueOf() : undefined,
     };
     form.setFields([

@@ -1,8 +1,8 @@
 import {ChartConfig} from 'pages/chart/forms/config';
 import {GroupConfig} from 'pages/group/forms/config';
 // import {DashboardConfig} from 'pages/dashboard/forms/config';
-// import {DeviceConfig} from 'pages/device/forms/config';
-// import {GalleryConfig} from 'pages/gallery/forms/config';
+import {DeviceConfig} from 'pages/device/forms/config';
+import {GalleryConfig} from 'pages/gallery/forms/config';
 // import {SeriesConfig} from 'pages/series/forms/config';
 // import {NotificationConfig} from 'pages/notification/forms/config';
 // import {SeriesConfig} from 'pages/series/forms/config';
@@ -24,12 +24,12 @@ export default function NodeConfig(props) {
         return <ChartConfig {...props} />;
       // case 'timelapse':
       //   return <TimelapseConfig {...props} />;
-      // case 'gallery':
-      //   return <GalleryConfig {...props} />;
+      case 'gallery':
+        return <GalleryConfig {...props} />;
       // case 'dashboard':
       //   return <DashboardConfig {...props} />;
-      // case 'device':
-      //   return <DeviceConfig {...props} />;
+      case 'device':
+        return <DeviceConfig {...props} />;
       // case 'variable':
       //   return <VariableConfig {...props} />;
       // case 'task':

@@ -13,11 +13,11 @@ const {Content} = Layout;
 
 export const Component = props => {
   const {closeWidgetEdit} = props;
-  const {node} = useNodeContext();
-  const {data: descendants} = useNodeDescendants({id: node?.id});
+  const {nodeAttrs} = useNodeContext();
+  const {data: descendants} = useNodeDescendants({id: nodeAttrs?.id});
   const descendantIds = descendants?.flatMap(n => (n.type === 'group' ? n.id : []));
   const {data: geom} = useGroupGeo({
-    select: data => data.features.filter(({properties}) => [+node?.id, ...descendantIds].includes(properties.id)),
+    select: data => data.features.filter(({properties}) => [+nodeAttrs?.id, ...descendantIds].includes(properties.id)),
   });
   const [visible, setVisible] = useState();
   const containerRef = useRef(null);
@@ -38,28 +38,32 @@ export const Component = props => {
   }, [geom]);
 
   const handleMarkerClick = item => {
-    const path = generatePath('../group/:id', {id: item.properties.id});
-    navigate({pathname: path, search: location.search});
+    navigate(
+      {
+        pathname: generatePath('../group/:id', {id: item.properties.id}),
+        search: location.search,
+      },
+      {unstable_viewTransition: true},
+    );
   };
 
   return (
-    <Content>
+    <>
       <Droppable key={'map-droppable'} id={'map-droppable'} acceptedTypes={['device', 'group']}>
         <MapView data={geomData} handleMarkerClick={handleMarkerClick} />
         {visible && (
           <Resizeable
-            placement="bottom"
+            placement={'bottom'}
             onClose={handleResizeableClose}
             parent={containerRef?.current}
             stop={[0.4, 0.6, 1]}
-            initHeight={'300'}
           >
             <GroupControl nodeData={visible} />
           </Resizeable>
         )}
       </Droppable>
       <DraggableOverlay />
-    </Content>
+    </>
   );
 };
 Component.displayName = 'Map';

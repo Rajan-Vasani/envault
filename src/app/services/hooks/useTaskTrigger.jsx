@@ -6,7 +6,8 @@ import {isNil, omitBy} from 'lodash';
 export const taskTriggerQuery = (props = {}) => {
   const {hub, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_TASK_TRIGGER, hub],
+    queryKey: API_QUERY.TASK_TRIGGER,
+    hub,
     queryFn: async () => BaseService.get(`api/task-trigger?`, {hub}),
     meta: {type: 'Task trigger', id: 'all', method: 'read'},
     retry: false,
@@ -16,7 +17,7 @@ export const taskTriggerQuery = (props = {}) => {
 export const taskTriggerQueryById = (props = {}) => {
   const {hub, task, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_TASK_TRIGGER, hub, task],
+    queryKey: [...API_QUERY.TASK_TRIGGER, hub, task],
     queryFn: async () => BaseService.get(`api/task-trigger?`, {hub, task}),
     meta: {type: 'Task trigger by id', id: 'all', method: 'read'},
     retry: false,
