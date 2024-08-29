@@ -10,6 +10,7 @@ import {useNodeFilter, useNodeSaveMutation} from 'hooks/useNode';
 import {debounce, union} from 'lodash';
 import {useEffect, useMemo, useState} from 'react';
 import {createSearchParams, generatePath, useNavigate, useParams, useSearchParams} from 'react-router-dom';
+import {formatNumber} from 'utils/number';
 import {arrayToTree, findAncestors} from 'utils/tree';
 const {Sider} = Layout;
 const {Search} = Input;
@@ -125,9 +126,9 @@ const ItemComponent = props => {
               />
             </Tooltip>
           ),
-          item.latest && (
+          item.type === 'series' && (
             <Tag color={'green'}>
-              {item.latest.text} {item.variable.unit}
+              {formatNumber(item.latest?.value) ?? item.latest?.text} {item.variable?.unit}
             </Tag>
           ),
           isNew && (

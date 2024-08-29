@@ -1,4 +1,4 @@
-import {Tag} from 'antd';
+import {Flex, Tag} from 'antd';
 import {Icon} from 'components/atoms/Icon';
 import {routes} from 'constant/routes';
 import {Link} from 'react-router-dom';
@@ -108,6 +108,17 @@ export const nodeDetails = [
     label: {name: 'Notification'},
   },
 ];
+
+export const nodeTypeOptions = nodeDetails.map(node => ({
+  value: node.value,
+  label: (
+    <Flex align={'center'} gap={'middle'}>
+      <Icon {...node.icon} />
+      {node.title}
+    </Flex>
+  ),
+}));
+
 export const mainMenuItems = [
   {
     key: 'explore',

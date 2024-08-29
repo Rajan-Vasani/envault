@@ -93,7 +93,7 @@ const onErrorHandler = (error, query) => {
           case 'NO_ACCESS_HUB':
             errorResponse.message = 'Access Denied';
             errorResponse.description = 'You do not have access to this hub';
-            errorResponse.navigate = {to: {pathname: globalThis.envault.app}, replace: true};
+            errorResponse.navigate = {to: globalThis.envault.app, replace: true};
             break;
           case 'NO_ACCESS_HUB_ADMIN':
             errorResponse.message = 'Access Denied';
@@ -381,17 +381,17 @@ const router = createBrowserRouter(
                         {
                           path: 'data',
                           id: 'device-data',
-                          lazy: () => import('pages/chart'),
+                          lazy: () => import('pages/device/data'),
                         },
                         {
                           path: 'image',
                           id: 'device-image',
-                          lazy: () => import('pages/gallery'),
+                          lazy: () => import('pages/device/image'),
                         },
                         {
                           path: 'state',
                           id: 'device-state',
-                          lazy: () => import('pages/dashboard'),
+                          lazy: () => import('pages/device/state'),
                         },
                       ],
                     },
@@ -429,6 +429,22 @@ const router = createBrowserRouter(
                       path: 'chart/:nodeId?',
                       id: 'chart',
                       lazy: () => import('pages/chart'),
+                      children: [
+                        {
+                          index: true,
+                          element: <Navigate to={'chart'} replace />,
+                        },
+                        {
+                          path: 'chart',
+                          id: 'chart-chart',
+                          lazy: () => import('pages/chart/chart'),
+                        },
+                        {
+                          path: 'table',
+                          id: 'chart-table',
+                          lazy: () => import('pages/chart/table'),
+                        },
+                      ],
                     },
                     {
                       path: 'series/:nodeId?',

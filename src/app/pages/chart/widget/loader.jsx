@@ -1,9 +1,10 @@
-import {Echarts} from 'app/pages/chart/components/echarts/init';
+import {Echarts} from 'app/pages/chart/components/echarts';
 import {EVENTSTATES, useEventListStream} from 'hooks/useEventStream';
-import {initUserConfig} from 'pages/chart/config';
 import {getChartConfig} from 'pages/chart/helper';
 import {useEffect, useMemo, useState} from 'react';
 import {useSeriesDataList, useSeriesDataUpdate} from 'services/hooks/useSeries';
+
+const initUserConfig = {};
 
 function EchartControl(props) {
   const {

@@ -1,16 +1,14 @@
 import {App, Divider, Flex, Form, Input, Select, Switch} from 'antd';
 import {StreamIndicator} from 'components/atoms/StreamIndicator';
 import TimeRange from 'components/molecules/TimeRange';
-import dayjs from 'dayjs';
 import {useNodeSaveMutation} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
-import {isArray, isNil, mergeWith, omitBy} from 'lodash';
+import {isArray, mergeWith} from 'lodash';
 import {baseGlobal, baseOption, mapTypeOptions} from 'pages/chart/config';
 import AxisFormList from 'pages/chart/forms/axis';
 import SeriesFormList from 'pages/chart/forms/series';
 import DataZoomFormList from 'pages/chart/forms/zoom';
 import {useEffect} from 'react';
-import {parseTimeFrom} from 'utils/time';
 
 const initialValues = {
   global: baseGlobal,
@@ -33,9 +31,13 @@ export const ChartConfig = props => {
     form,
   );
 
-  useEffect(() => setForm?.(form), [form, setForm]);
   useEffect(() => {
-    if (nodeParams.config?.option && nodeParams.config?.global) {
+    setForm(form);
+    return () => setForm(null);
+  }, [form, setForm]);
+
+  useEffect(() => {
+    if (nodeParams.config?.option || nodeParams.config?.global) {
       form.setFieldsValue(nodeParams.config);
     } else {
       form.setFieldsValue(initialValues);
@@ -44,26 +46,15 @@ export const ChartConfig = props => {
 
   const onFinish = values => {
     notification.info({description: 'Saving chart configuration'});
-    const timeRange = values.global.timeRange;
     const dataChart = {
       id: nodeAttrs?.id,
       type: 'chart',
       data: values.option.series.reduce(
         (a, v, index) => ({
           ...a,
-          [`${index}-${v.id}`]: {
-            pathname: `/series-data`,
-            query: new URLSearchParams(
-              omitBy(
-                {
-                  hub: globalThis.envault.hub,
-                  series: v.id,
-                  from: timeRange?.from,
-                  to: timeRange?.to,
-                },
-                isNil,
-              ),
-            ).toString(),
+          [index]: {
+            id: v.node.id,
+            type: v.node.type,
           },
         }),
         {},
@@ -80,14 +71,6 @@ export const ChartConfig = props => {
     );
   };
   // Normalize input and output of form components to suit chart options
-  // input: Global TimeRange
-  const getTimeRangeValueProps = value => {
-    if (value) {
-      value.from = parseTimeFrom(value);
-      value.to = value.to ? dayjs(value.to) : null;
-      return {value};
-    }
-  };
   // output: Global TimeRange
   const normalizeTimeRange = value => {
     if (value) {
@@ -95,18 +78,19 @@ export const ChartConfig = props => {
       if (!to && delta) {
         from = delta.join('');
       } else {
-        from = from.valueOf();
-        to = to.valueOf();
+        from = from?.valueOf();
+        to = to?.valueOf();
       }
       return {from, to};
     }
   };
+
   return (
-    <Flex vertical justify="space-between">
+    <Flex vertical justify={'space-between'}>
       <Form
         form={form}
-        layout="horizontal"
-        labelAlign="left"
+        layout={'horizontal'}
+        labelAlign={'left'}
         name={`chart-config-${nodeAttrs?.id}`}
         requiredMark={false}
         onFinish={onFinish}
@@ -122,12 +106,7 @@ export const ChartConfig = props => {
             <StreamIndicator eventState={eventState} onChange={handleStreamStateChange} />
           </Flex>
         </Form.Item>
-        <Form.Item
-          label={'Time'}
-          name={['global', 'timeRange']}
-          getValueProps={getTimeRangeValueProps}
-          normalize={normalizeTimeRange}
-        >
+        <Form.Item label={'Time'} name={['global', 'timeRange']} normalize={normalizeTimeRange}>
           <TimeRange />
         </Form.Item>
         <Form.Item label={'Type'} name={['global', 'type']}>

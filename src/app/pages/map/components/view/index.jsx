@@ -80,7 +80,7 @@ const MapControl = props => {
 const MapView = props => {
   const {zoom, data = [], handleMarkerClick = () => {}} = props;
   const mapRef = useRef(null);
-  const {width, height} = useSize(mapRef);
+  const {width, height} = useSize(mapRef ?? null);
   const {styles} = useStyles();
 
   return (

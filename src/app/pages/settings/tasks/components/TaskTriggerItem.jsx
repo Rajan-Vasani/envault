@@ -36,7 +36,7 @@ const TaskTriggerItem = props => {
           message.open({type: 'success', content: 'Trigger deleted!'});
         },
         onSettled: () => {
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_TASK_TRIGGER, hub, taskId]});
+          queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK_TRIGGER, hub, taskId]});
         },
       },
     );
@@ -49,7 +49,7 @@ const TaskTriggerItem = props => {
       {
         onSuccess: () => {
           message.open({type: 'success', content: 'Trigger saved!'});
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_TASK_TRIGGER, hub, taskId]});
+          queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK_TRIGGER, hub, taskId]});
         },
         onError: () => {
           message.open({type: 'error', content: 'Could not saved this trigger! Please try again later!'});

@@ -219,9 +219,9 @@ const Resizeable = ({children, ...props}) => {
   } = props;
   const parentComponent = parent || document.body;
   const parentRef = useRef(parentComponent);
-  const parentSize = useSize(parentRef);
+  const parentSize = useSize(parentRef ?? null);
   const resizeableRef = useRef(null);
-  const currentSize = useSize(resizeableRef);
+  const currentSize = useSize(resizeableRef ?? null);
   const parentSpan = placement === 'top' || placement === 'bottom' ? parentSize.height : parentSize.width;
   const currentSpan = placement === 'top' || placement === 'bottom' ? currentSize.height : currentSize.width;
   const isResizing = useRef(false);
@@ -234,7 +234,7 @@ const Resizeable = ({children, ...props}) => {
     space,
     collapsed,
     collapsedSize,
-    isResizing,
+    isResizing: isResizing ?? false,
   });
 
   useEffect(() => {

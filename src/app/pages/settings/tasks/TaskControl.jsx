@@ -46,7 +46,7 @@ const TaskControl = props => {
       {
         onSuccess: () => {
           message.success('Task save success!');
-          queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ALL_TASK, globalThis.envault.hub]});
+          queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK, globalThis.envault.hub]});
         },
         onSettled: () => {
           setTask(false);

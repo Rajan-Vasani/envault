@@ -4,6 +4,7 @@ import {NodeHeaderSkeleton, NodeSiderSkeleton} from 'components/molecules/Skelet
 import {useNode} from 'hooks/useNode';
 import {nodeNavItems} from 'layouts/node/config';
 import {NodeProvider} from 'layouts/node/context';
+import {merge} from 'lodash';
 import NoNode from 'pages/error/nonode';
 import {Suspense, lazy, useMemo} from 'react';
 import {Outlet, useMatch, useOutletContext} from 'react-router-dom';
@@ -14,7 +15,6 @@ const {Content} = Layout;
 const useStyles = createStyles(({token, css}) => ({
   content: css`
     border-radius: ${token.borderRadius}px;
-    background: ${token.colorBgContainer};
     margin: 10px;
   `,
 }));
@@ -33,11 +33,7 @@ export const Component = props => {
 
   const currentNode = treeData?.find(({id}) => id === nodeAttrs.id);
   const node = useMemo(
-    () => ({
-      ...params,
-      ...nodeData,
-      ...currentNode,
-    }),
+    () => merge({id: params.id, type: params.type}, nodeData, currentNode),
     [params, nodeData, currentNode],
   );
 

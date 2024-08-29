@@ -59,7 +59,7 @@ export const Component = props => {
   useEffect(() => {
     if (isAuthFetched) {
       if (!isAuthError) {
-        queryClient.setQueryData([API_QUERY.USER_DATA, userData[0].id], userData);
+        queryClient.setQueryData([...API_QUERY.USER, userData[0].id], userData);
         navigate(searchParams.get('redirect') ?? '/');
       }
     }

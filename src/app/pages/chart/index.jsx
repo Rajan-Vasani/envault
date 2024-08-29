@@ -1,28 +1,27 @@
 import {useDndMonitor} from '@dnd-kit/core';
-import {App, Button, Layout} from 'antd';
+import {App, Button} from 'antd';
 import {findDescendants} from 'app/utils/tree';
 import {DraggableOverlay} from 'components/draggable/overlay';
 import {Droppable} from 'components/droppable';
 import {useNode} from 'hooks/useNode';
 import {useNodeContext} from 'layouts/node/context';
-import ChartLoader from 'pages/chart/components/loader';
-import {baseGlobal} from 'pages/chart/config';
-const {Content} = Layout;
+import {initSeries} from 'pages/chart/config';
+import {Outlet} from 'react-router-dom';
 
 export const Component = props => {
-  const {nodeParams, mergeNodeParams} = useNodeContext();
+  const {updateNodeParams} = useNodeContext();
   const {data: tree} = useNode();
   const {notification} = App.useApp();
   const acceptedTypes = ['series', 'group'];
 
   //dnd-kit
-  const handleLargeGroup = series => {
+  const handleLargeGroup = nodes => {
     const key = `warning-${Date.now()}`;
     return notification.warning({
       message: 'Warning',
       description: (
         <>
-          This action will load <b>{series.length}</b> series nodes, this could result in long load times
+          This action will load <b>{nodes.length}</b> series nodes, this could result in long load times
         </>
       ),
       key,
@@ -30,7 +29,7 @@ export const Component = props => {
       btn: (
         <Button
           onClick={() => {
-            mergeNodeParams({config: {option: {series: series}}});
+            updateNodeParams('config.option.series', prev => [...(Array.isArray(prev) ? prev : []), ...nodes]);
             notification.destroy(key);
           }}
         >
@@ -56,25 +55,36 @@ export const Component = props => {
       if (!over) {
         return;
       }
-      const {type, id, name} = active.data.current;
+      const {type, id, name, sensor} = active.data.current;
       const {accepts} = over.data.current;
       if (accepts.includes(type)) {
         if (type === 'group') {
           const descendants = findDescendants(tree, id);
-          const series = descendants.filter(node => node.type === 'series');
-          const chartSeries = series.map(s => ({
-            id: s.id,
+          const groupNodes = descendants.filter(node => node.type === 'series');
+          const nodes = groupNodes.map(s => ({
             name: s.name,
-            type: nodeParams.config?.global?.type || baseGlobal.type,
+            node: s,
+            ...initSeries['line'],
           }));
-          if (chartSeries.length > 10) {
-            handleLargeGroup(series);
+          if (nodes.length > 10) {
+            handleLargeGroup(nodes);
           }
-          return mergeNodeParams({config: {option: {series: chartSeries}}});
+          return updateNodeParams('config.option.series', prevSeries => [
+            ...(Array.isArray(prevSeries) ? prevSeries : []),
+            ...nodes,
+          ]);
         }
-        return mergeNodeParams({
-          config: {option: {series: [{id, name, type: nodeParams.config?.global?.type || baseGlobal.type}]}},
-        });
+        if (type === 'device') {
+          return; // add routine / trigger for adding sensors from a device
+        }
+        return updateNodeParams('config.option.series', prevSeries => [
+          ...(Array.isArray(prevSeries) ? prevSeries : []),
+          {
+            name,
+            node: active.data.current,
+            ...initSeries['line'],
+          },
+        ]);
       }
       handleRejectedType(type, accepts);
     },
@@ -83,10 +93,11 @@ export const Component = props => {
   return (
     <>
       <Droppable key={'chart-droppable'} id={'chart-droppable'} acceptedTypes={acceptedTypes}>
-        <ChartLoader />
+        <Outlet />
       </Droppable>
       <DraggableOverlay />
     </>
   );
 };
+export default Component;
 Component.displayName = 'Chart';

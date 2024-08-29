@@ -4,7 +4,7 @@ import {BaseService} from '../api/base.service';
 
 export const schemaQuery = () => {
   return {
-    queryKey: [API_QUERY.GET_SCHEMA],
+    queryKey: API_QUERY.TASK_ACTION_SCHEMA,
     queryFn: async () => BaseService.get('api/static/action-schema.json'),
     meta: {type: 'action schema', id: '', method: 'read'},
   };

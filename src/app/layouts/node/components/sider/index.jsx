@@ -63,7 +63,6 @@ export const NodeSider = props => {
   }, [hasTab]); // tab change
 
   const handleTabChange = e => {
-    setForm(null);
     setSearchParams({...searchParams, tab: e});
   };
 
@@ -117,6 +116,7 @@ export const NodeSider = props => {
               defaultActiveKey={'info'}
               items={items}
               onChange={handleTabChange}
+              destroyInactiveTabPane={true}
               tabBarExtraContent={
                 <Flex justify={'flex-end'} gap={'small'}>
                   <Tooltip title={disabled ? 'Unlock' : 'Lock'}>

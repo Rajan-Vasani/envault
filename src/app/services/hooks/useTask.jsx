@@ -7,7 +7,7 @@ export const taskQuery = (props = {}) => {
   const {hub, id, ...options} = props;
   const query = omitBy({hub, id}, isNil);
   return {
-    queryKey: [API_QUERY.GET_TASK, hub, id],
+    queryKey: [...API_QUERY.TASK, hub, id],
     queryFn: async () => BaseService.get(`api/task?`, query),
     meta: {type: 'task', id, method: 'read'},
     enabled: !!id,
@@ -23,7 +23,7 @@ export const useTask = (props = {}) => {
 export const allTaskQuery = (props = {}) => {
   const {hub, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_ALL_TASK, hub],
+    queryKey: [...API_QUERY.TASK, hub],
     queryFn: async () => BaseService.get(`api/task?`, {hub}),
     meta: {type: 'task', id: 'all', method: 'read'},
     ...options,
@@ -39,7 +39,7 @@ export const taskExecutionQuery = (props = {}) => {
   const {hub, task, from, to, pageSize, pageNum, ...options} = props;
   const query = omitBy({hub, task, from, to, pageSize, pageNum}, isNil);
   return {
-    queryKey: [API_QUERY.GET_TASK_EXECUTE, hub, task],
+    queryKey: [...API_QUERY.TASK_EXECUTE, hub, task],
     queryFn: async () => BaseService.get(`api/execution?`, query),
     meta: {type: 'task execution', id: task, method: 'read'},
     enabled: !!task,
@@ -60,7 +60,7 @@ export const useTaskDeleteMutation = () => {
     mutationFn: ({hub = _hub, id}) => BaseService.remove(`api/task?`, {hub, id}),
     meta: {type: 'task', id: '', method: 'delete'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.GET_ALL_TASK]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.TASK});
     },
   });
 };

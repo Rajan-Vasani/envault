@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
-import {gaugeConfig, initBuilderOption} from 'pages/chart/config';
+import {gaugeConfig} from 'pages/chart/config';
 import {ISOToDate} from 'utils/time';
+
+const initBuilderOption = {};
 
 const getGaugeData = seriesData => {
   return seriesData.map((s, idx) => ({
@@ -86,13 +88,13 @@ export const getChartConfig = (seriesData = [], userConfig = {}) => {
       },
       angleAxis: {
         type: 'value',
-        startAngle: !!angleAxis?.startAngle ? +angleAxis?.startAngle : 0,
-        max: !!angleAxis?.max ? +angleAxis?.max : 360,
-        min: !!angleAxis?.min ? +angleAxis?.min : null,
+        startAngle: angleAxis?.startAngle ? +angleAxis?.startAngle : 0,
+        max: angleAxis?.max ? +angleAxis?.max : 360,
+        min: angleAxis?.min ? +angleAxis?.min : null,
       },
       radiusAxis: {
-        max: !!radiusAxis?.max ? +radiusAxis?.max : null,
-        min: !!radiusAxis?.min ? +radiusAxis?.min : null,
+        max: radiusAxis?.max ? +radiusAxis?.max : null,
+        min: radiusAxis?.min ? +radiusAxis?.min : null,
       },
       series: [
         {

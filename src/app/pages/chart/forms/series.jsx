@@ -1,7 +1,7 @@
-import {Button, Cascader, Collapse, Divider, Empty, Flex, Form, Input, Popover, Select, Tooltip} from 'antd';
+import {Button, Cascader, Collapse, Divider, Empty, Flex, Form, Input, Popover, Select, Tag, Tooltip} from 'antd';
 import Icon from 'components/atoms/Icon';
 import {useNestedNodeFilter, useNodeFilter} from 'hooks/useNode';
-import {mapTypeOptions} from 'pages/chart/config';
+import {initSeries, mapTypeOptions} from 'pages/chart/config';
 import {ChartTypeConfig} from 'pages/chart/forms';
 import {useState} from 'react';
 import {findAncestors} from 'utils/tree';
@@ -9,13 +9,19 @@ import {findAncestors} from 'utils/tree';
 export const SeriesFormList = props => {
   const {name: listName} = props;
   const form = Form.useFormInstance();
-  const {data: tree = []} = useNodeFilter({filters: ['series', 'group']});
-  const {data: nestedTree = []} = useNestedNodeFilter({filters: ['series', 'group']});
+  const {data: tree = []} = useNodeFilter({filters: ['series', 'device', 'group']});
+  const {data: nestedTree = []} = useNestedNodeFilter({filters: ['series', 'device', 'group']});
   const [seriesSelectorOpen, setSeriesSelectorOpen] = useState(false);
   const AxisOptions = Form.useWatch(
     values => ({
-      yAxis: values?.option?.yAxis?.map(({name, type}, index) => ({label: name || `${index}-${type}`, value: index})),
-      xAxis: values?.option?.xAxis?.map(({name, type}, index) => ({label: name || `${index}-${type}`, value: index})),
+      yAxis: values?.option?.yAxis?.map(({name, type}, index) => ({
+        label: name || `${type} (${index})`,
+        value: index,
+      })),
+      xAxis: values?.option?.xAxis?.map(({name, type}, index) => ({
+        label: name || `${type} (${index})`,
+        value: index,
+      })),
     }),
     form,
   );
@@ -26,6 +32,14 @@ export const SeriesFormList = props => {
       const ancestors = findAncestors(tree, value)?.reverse();
       const ancestorIds = [...ancestors.map(node => node.id), value];
       return {value: ancestorIds};
+    }
+  };
+  // picker: Set fields on select
+  const getCascaderValueFromEvent = (values, options, fieldName) => {
+    const {id, type, name, sensor} = options[options.length - 1];
+    if (values) {
+      form.setFieldValue([...listName, [fieldName]], {node: {id, type, name, sensor}});
+      return values;
     }
   };
   // output: Tree Cascader
@@ -44,8 +58,8 @@ export const SeriesFormList = props => {
     <Form.List name={[...listName]}>
       {(fields, {add, remove}) => {
         const items = fields.map((field, index) => {
-          const {id, name, type, coordinateSystem} = form.getFieldValue([...listName, field.name]);
-          const series = tree.find(node => node.id === id);
+          const {node, name, type, coordinateSystem} = form.getFieldValue([...listName, field.name]);
+          const series = tree.find(item => item.id === node.id);
           return {
             key: field.key,
             label: (
@@ -59,16 +73,55 @@ export const SeriesFormList = props => {
                 <Form.Item label={'Type'} name={[field.name, 'type']}>
                   <Select options={mapTypeOptions} />
                 </Form.Item>
-                <Form.Item label={'Name'} name={[field.name, 'name']}>
-                  <Input allowClear placeholder={series?.name} />
+                <Form.Item label={'Name'} name={[field.name, 'name']} initialValue={series?.name}>
+                  <Input allowClear />
                 </Form.Item>
                 <Form.Item
                   label={'Series'}
-                  name={[field.name, 'id']}
+                  name={[field.name, 'node', 'id']}
                   getValueProps={getCascaderValueProps}
+                  getValueFromEvent={(values, options) => getCascaderValueFromEvent(values, options, field.name)}
                   normalize={normalizeCascader}
                 >
-                  <Cascader options={nestedTree} showSearch fieldNames={{label: 'name', value: 'id'}} />
+                  <Cascader
+                    options={nestedTree}
+                    showSearch
+                    fieldNames={{label: 'name', value: 'id'}}
+                    displayRender={(labels, selectedOptions) =>
+                      labels.map((label, index) => {
+                        const option = selectedOptions[index];
+                        return index === labels.length - 1 ? (
+                          <span key={index}>
+                            {option.name} <Tag>{option.type}</Tag>
+                          </span>
+                        ) : (
+                          <span key={index}>{label} / </span>
+                        );
+                      })
+                    }
+                    optionRender={({name, type}) => {
+                      return ['series', 'device'].includes(type) ? (
+                        <span key={index}>
+                          {name} <Tag>{type}</Tag>
+                        </span>
+                      ) : (
+                        name
+                      );
+                    }}
+                  />
+                </Form.Item>
+                {series?.type === 'device' && (
+                  <Form.Item
+                    label={'Sensor'}
+                    name={[field.name, 'node', 'sensor']}
+                    initialValue={series?.name}
+                    rules={[{required: true, message: 'Sensor name required'}]}
+                  >
+                    <Input />
+                  </Form.Item>
+                )}
+                <Form.Item hidden name={[field.name, 'node', 'type']} initialValue={series?.type}>
+                  <Input type={'hidden'} />
                 </Form.Item>
                 <Divider orientation={'left'} type={'horizontal'} plain>
                   Advanced
@@ -111,9 +164,10 @@ export const SeriesFormList = props => {
           };
         });
 
-        const addSeries = series => {
+        const addSeries = (series, options) => {
+          const {id, name, type} = options[options.length - 1];
           setSeriesSelectorOpen(false);
-          add({id: series.pop(), type: 'line'});
+          add({node: {id, name, type}, name, ...initSeries['line']});
         };
 
         return (

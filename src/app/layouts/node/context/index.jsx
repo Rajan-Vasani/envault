@@ -1,9 +1,8 @@
-import {isArray, mergeWith, union} from 'lodash';
+import {get, set} from 'lodash';
 import {createContext, useContext, useEffect, useState} from 'react';
 
 const NodeContext = createContext({
   setNodeParams: () => {},
-  mergeNodeParams: () => {},
   updateNodeParams: () => {},
 });
 
@@ -27,32 +26,17 @@ export const NodeProvider = ({children, node}) => {
   useEffect(() => setNodeParams(params), [node]);
 
   /**
-   * Merges the given parameters with the current node parameters.
-   * @param {Object} newParams - The new parameters to merge.
-   * @returns {void}
-   */
-  const mergeNodeParams = newParams => {
-    setNodeParams(config =>
-      structuredClone(
-        mergeWith(config, newParams, (objValue, srcValue) => {
-          if (isArray(objValue)) {
-            return union(objValue, srcValue);
-          }
-        }),
-      ),
-    );
-  };
-
-  /**
    * Updates the node parameters at the specified index.
-   * @param {number} index - The index of the node parameters to update.
+   * @param {string} path - The path to the node property to update.
    * @param {Function|any} updater - The updater function or value to apply to the node parameters.
    * @returns {void}
    */
-  const updateNodeParams = (index, updater) => {
+  const updateNodeParams = (path, updater) => {
     setNodeParams(previousParams => {
       const updated = structuredClone(previousParams);
-      updated[index] = typeof updater === 'function' ? updater(updated[index] ?? {}) : updater;
+      const currentValue = get(updated, path);
+      const newValue = typeof updater === 'function' ? updater(currentValue ?? {}) : updater;
+      set(updated, path, newValue);
       return updated;
     });
   };
@@ -62,7 +46,6 @@ export const NodeProvider = ({children, node}) => {
     nodeAttrs,
     nodeParams,
     setNodeParams,
-    mergeNodeParams,
     updateNodeParams,
   };
 

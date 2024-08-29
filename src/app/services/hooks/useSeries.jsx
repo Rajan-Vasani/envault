@@ -7,7 +7,7 @@ import {BaseService} from 'services/api/base.service';
 export const seriesQuery = (props = {}) => {
   const {hub = globalThis.envault.hub, ...options} = props;
   return {
-    queryKey: [API_QUERY.GET_SERIES_LIST, hub],
+    queryKey: [...API_QUERY.SERIES, hub],
     queryFn: async () => BaseService.get(`api/series?`, {hub}),
     meta: {type: 'series', id: 'all', method: 'read'},
     enabled: !!hub,
@@ -19,27 +19,35 @@ export const useSeries = props => useQuery(seriesQuery(props));
 export const seriesDataQuery = (props = {}) => {
   const {
     hub = globalThis.envault.hub,
-    series,
-    range: {from, to},
+    id: series,
+    device,
+    from,
+    to,
+    page_size,
+    page_num,
+    sort,
+    valid_from,
+    access_token,
     ...options
   } = props;
-  const query = omitBy({hub, series, from, to}, isNil);
+  const query = omitBy({hub, series, device, from, to, page_size, page_num, sort, valid_from, access_token}, isNil);
+  const key = Object.values(omitBy({hub, series, device, from, to}, isNil));
   return {
-    queryKey: [API_QUERY.SERIES_DATA, series, from, to],
+    queryKey: [...API_QUERY.SERIES_DATA, ...key],
     queryFn: async () => BaseService.get(`api/series-data?`, query),
     meta: {type: 'series data', id: series, method: 'read'},
-    keepPreviousData: true,
-    enabled: !!series && !!from,
+    refetchInterval: 1000 * 60 * 5,
+    enabled: !!(hub && series),
     ...options,
   };
 };
 
 export const useSeriesData = props => useQuery(seriesDataQuery(props));
 
-export const useSeriesDataList = props => {
-  const {hub = globalThis.envault.hub, series, ...rest} = props;
+export const useSeriesDataList = (props = {}) => {
+  const {series, ...rest} = props;
   return useQueries({
-    queries: series ? series.map(({id}) => seriesDataQuery({series: id, hub, ...rest})) : [],
+    queries: series ? series.map(s => seriesDataQuery({...s, ...rest})) : [],
     combine: useCallback(
       results => ({
         isLoading: results.some(query => query.isLoading),
@@ -58,7 +66,7 @@ export const useTokenisedSeriesList = props => {
   return useQueries({
     queries: tokens
       ? Object.entries(tokens).map(([series, accessToken]) => ({
-          queryKey: [API_QUERY.SERIES_DATA, +series],
+          queryKey: [...API_QUERY.SERIES_DATA, +series],
           queryFn: async () => BaseService.get(`api/series-data?`, {access_token: accessToken}),
         }))
       : [],
@@ -87,7 +95,7 @@ export const useSeriesDataUpdate = () => {
       const {seriesId, range, latestData} = data;
       const from = range?.from?.valueOf().toString();
       const to = range?.to?.valueOf().toString();
-      queryClient.setQueryData([API_QUERY.GET_SERIES_DETAIL, seriesId, from, to], oldData =>
+      queryClient.setQueryData([API_QUERY.SERIES_DATA, seriesId, from, to], oldData =>
         oldData
           ? {
               [seriesId]: [...latestData, ...oldData[seriesId]],

@@ -38,29 +38,29 @@ const ExecutionDetails = props => {
     }
   }, [isExecutionDataFetched, isDataRangeSet]);
 
-  const onFinish = values => {
-    setLoading(true);
-    const taskData = {
-      hub: globalThis.envault.hub,
-      id: executionDetails.id,
-      ...values,
-    };
-    console.log(taskData);
-    // createKey(
-    //   {...keyData},
-    //   {
-    //     onSuccess: () => {
-    //       message.open({type: 'success', content: 'Key created'});
-    //     },
-    //     onError: () => {
-    //       message.open({type: 'error', content: 'Could not create key'});
-    //     },
-    //     onSettled: () => {
-    setLoading(false);
-    //     },
-    //   }
-    // );
-  };
+  // const onFinish = values => {
+  //   setLoading(true);
+  //   const taskData = {
+  //     hub: globalThis.envault.hub,
+  //     id: executionDetails.id,
+  //     ...values,
+  //   };
+  //   console.log(taskData);
+  //   // createKey(
+  //   //   {...keyData},
+  //   //   {
+  //   //     onSuccess: () => {
+  //   //       message.open({type: 'success', content: 'Key created'});
+  //   //     },
+  //   //     onError: () => {
+  //   //       message.open({type: 'error', content: 'Could not create key'});
+  //   //     },
+  //   //     onSettled: () => {
+  //   setLoading(false);
+  //   //     },
+  //   //   }
+  //   // );
+  // };
 
   const getPayload = async url => {
     const response = await fetch(url);
@@ -75,7 +75,7 @@ const ExecutionDetails = props => {
           {
             onSuccess: () => {
               message.open({type: 'success', content: 'Payload executed!'});
-              queryClient.invalidateQueries({queryKey: [API_QUERY.GET_TASK_EXECUTE, globalThis.envault.hub, taskID]});
+              queryClient.invalidateQueries({queryKey: [...API_QUERY.TASK_EXECUTE, globalThis.envault.hub, taskID]});
             },
             onError: () => {
               message.open({type: 'error', content: 'Could not executed this payload! Please try again later!'});

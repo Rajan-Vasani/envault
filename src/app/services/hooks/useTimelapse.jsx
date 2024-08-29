@@ -1,23 +1,46 @@
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQueries, useQuery, useQueryClient} from '@tanstack/react-query';
 import {BaseService} from 'api/base.service';
 import {API_QUERY} from 'app/constant/query';
 import {isNil, omitBy} from 'lodash';
 
 export const timelapseImageQuery = (props = {}) => {
-  const {hub, timelapse, from, to, ...options} = props;
-  const query = omitBy({hub, timelapse, from, to}, isNil);
+  const {
+    hub = globalThis.envault.hub,
+    id: timelapse,
+    device,
+    from,
+    to,
+    page_size,
+    page_num,
+    sort,
+    access_token,
+    ...options
+  } = props;
+  const query = omitBy({hub, timelapse, device, from, to, page_size, page_num, sort, access_token}, isNil);
+  const key = Object.values(omitBy({hub, timelapse, device, from, to}, isNil));
   return {
-    queryKey: [API_QUERY.GET_TIMELAPSE_TOKEN, timelapse, from, to],
+    queryKey: [...API_QUERY.TIMELAPSE_IMAGE, ...key],
     queryFn: async () => BaseService.get(`api/timelapse-image?`, query),
     meta: {type: 'timelapse image', id: timelapse, method: 'read'},
-    enabled: !!timelapse && !!from && !!to,
+    refetchInterval: 1000 * 60 * 5,
+    enabled: !!timelapse,
     ...options,
   };
 };
+export const useTimelapseImage = props => useQuery(timelapseImageQuery(props));
 
-export const useTimelapseImage = (props = {}) => {
-  const {hub = globalThis.envault.hub, ...rest} = props;
-  return useQuery(timelapseImageQuery({hub, ...rest}));
+export const useTimelapseImageList = (props = {}) => {
+  const {timelapse, ...rest} = props;
+  return useQueries({
+    queries: timelapse ? timelapse.map(t => timelapseImageQuery({...t, ...rest})) : [],
+    combine: results => ({
+      isLoading: results.some(query => query.isLoading),
+      isSuccess: results.length ? results.every(query => query.isSuccess) : false,
+      isSomeSuccess: results.some(query => query.isSuccess),
+      isError: results.some(query => query.isError),
+      data: timelapse?.reduce((acc, {id}, index) => ({...acc, [id]: results[index].data}), {}),
+    }),
+  });
 };
 
 export const useTimelapseAddMutation = () => {
@@ -28,36 +51,20 @@ export const useTimelapseAddMutation = () => {
     mutationFn: data => BaseService.put(`api/timelapse?`, {hub}, omitBy(data, isNil)),
     meta: {type: 'timelapse', id: '', method: 'create / update'},
     onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
+      queryClient.invalidateQueries({queryKey: API_QUERY.NODE});
     },
   });
 };
 
-export const useTimelapseDataUpdate = () => {
+export const useTimelapseImageUpdate = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: data => {
       const {id, from, to, newImage} = data;
-      queryClient.setQueryData([API_QUERY.GET_TIMELAPSE_TOKEN, id, from, to], oldData =>
+      queryClient.setQueryData([...API_QUERY.TIMELAPSE_IMAGE, id, from, to], oldData =>
         oldData ? [newImage, ...oldData] : oldData,
       );
       return data;
     },
   });
-};
-
-export const timelapseLatestImageQuery = (props = {}) => {
-  const {hub, timelapse, to, page_size = 1, ...options} = props;
-  const query = omitBy({hub, to, page_size, timelapse}, isNil);
-  return {
-    queryKey: [API_QUERY.GET_TIMELAPSE_LATEST_TOKEN, query],
-    queryFn: async () => BaseService.get(`api/timelapse-image?`, query),
-    enabled: !!timelapse,
-    ...options,
-  };
-};
-
-export const useTimelapseLatestImage = (props = {}) => {
-  const {hub = globalThis.envault.hub, ...rest} = props;
-  return useQuery(timelapseLatestImageQuery({hub, ...rest}));
 };

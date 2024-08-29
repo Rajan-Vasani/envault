@@ -1,11 +1,11 @@
 import {App, Flex, Form, Input, Select, TreeSelect} from 'antd';
-import {useNodeFilter, useNodeSaveMutation} from 'app/services/hooks/useNode';
+import {useNode, useNodeSaveMutation} from 'app/services/hooks/useNode';
 import {useOwner} from 'app/services/hooks/useUser';
 import Icon from 'components/atoms/Icon';
 import {nodeDetails} from 'config/menu';
 import {baseNodeAttrs} from 'layouts/node/config';
 import {useNodeContext} from 'layouts/node/context';
-import {useEffect} from 'react';
+import {useEffect, useMemo} from 'react';
 import {createSearchParams, generatePath, useNavigate} from 'react-router-dom';
 
 const nodeTypeOptions = nodeDetails.map(node => ({
@@ -22,19 +22,26 @@ export const NodeInfo = props => {
   const {setForm, disabled} = props;
   const {nodeAttrs} = useNodeContext();
   const {data: ownerData} = useOwner();
-  const {data: dataSource = []} = useNodeFilter({filters: ['group']});
+  const {data: tree = []} = useNode();
   const {mutate: saveNode, updateNode} = useNodeSaveMutation();
   const {notification} = App.useApp();
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  useEffect(() => setForm?.(form), [form, setForm]);
+  const treeData = useMemo(() => tree.filter(node => 'group' === node.type), [tree]);
+  const variables = useMemo(() => tree.filter(node => 'variable' === node.type), [tree]);
+
+  useEffect(() => {
+    setForm(form);
+    return () => setForm(null);
+  }, [form, setForm]);
+
   useEffect(() => {
     form.setFieldsValue(nodeAttrs);
   }, [nodeAttrs, form]);
 
   const onFinish = values => {
-    notification.info({type: 'info', description: `Saving ${values.type}`});
+    notification.info({type: 'info', description: `Saving ${values.type} information`});
     let {type, ...data} = values;
     if (data.id === -1) {
       delete data.id;
@@ -92,7 +99,7 @@ export const NodeInfo = props => {
         <TreeSelect
           placeholder={'None'}
           allowClear={true}
-          treeData={dataSource}
+          treeData={treeData}
           treeDataSimpleMode={{pId: 'parent', id: 'id', rootPId: null}}
           fieldNames={{label: 'name', value: 'id'}}
           showSearch
@@ -113,11 +120,24 @@ export const NodeInfo = props => {
       >
         <Input disabled={disabled} />
       </Form.Item>
-      {nodeAttrs.type === 'task' && (
-        <Form.Item label={'Owner'} name={'owner'} rules={[{required: true, message: 'Owner is required!'}]}>
-          <Select placeholder={'Owner'} options={ownerData} fieldNames={{label: 'name', value: 'id'}} />
-        </Form.Item>
-      )}
+      {
+        {
+          task: (
+            <Form.Item label={'Owner'} name={'owner'} rules={[{required: true, message: 'Owner is required!'}]}>
+              <Select placeholder={'Owner'} options={ownerData} fieldNames={{label: 'name', value: 'id'}} />
+            </Form.Item>
+          ),
+          series: (
+            <Form.Item
+              label={'Variable'}
+              name={'variable'}
+              rules={[{required: true, message: 'Variable is required!'}]}
+            >
+              <Select placeholder={'Variable'} options={variables} fieldNames={{label: 'name', value: 'id'}} />
+            </Form.Item>
+          ),
+        }[nodeAttrs.type]
+      }
     </Form>
   );
 };

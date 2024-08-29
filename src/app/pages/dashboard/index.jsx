@@ -57,7 +57,7 @@ export const Component = props => {
       {
         onSuccess: () => {
           message.success('Dashboard save success!');
-          queryClient.invalidateQueries({queryKey: [API_QUERY.NODE_DATA]});
+          queryClient.invalidateQueries({queryKey: API_QUERY.NODE});
         },
       },
     );
@@ -153,13 +153,6 @@ export const Component = props => {
             <Content ref={contentRef} style={{overflowY: 'auto', flex: '1 1 auto'}}>
               <GridStackControl widgetItems={widgets} removeWidget={handleWidgetRemove} addWidget={handleWidgetAdd} />
             </Content>
-            <NodeSider
-              node={node}
-              hub={hub}
-              type={'dashboard'}
-              clearWidget={clearWidget}
-              addWidget={data => setWidgets([...widgets, data])}
-            />
           </Layout>
           <DashboardDetailBuilder widgets={widgets} />
         </Form.Provider>

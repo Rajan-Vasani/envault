@@ -11,7 +11,7 @@ export const userQuery = (props = {}) => {
   const {_id = Cookies.get('uid'), ...options} = props;
   const id = +_id;
   return {
-    queryKey: [API_QUERY.USER_DATA, id],
+    queryKey: [...API_QUERY.USER, id],
     queryFn: async () => BaseService.get(`api/user?`, {id}),
     meta: {type: 'user', id, method: 'read'},
     enabled: !!id,
@@ -24,7 +24,7 @@ export const useUser = props => useQuery(userQuery(props));
 
 export const allUserQuery = () => {
   return {
-    queryKey: [API_QUERY.USER_DATA],
+    queryKey: API_QUERY.USER,
     queryFn: async () => BaseService.get('api/user'),
     meta: {type: 'user', id: 'all', method: 'read'},
     retry: false,
@@ -40,7 +40,7 @@ export const useUserUpdateMutation = () => {
     mutationFn: async data => BaseService.patch('api/user', undefined, omitBy(data, isNil)),
     meta: {type: 'user', id: '', method: 'update'},
     onSettled: () => {
-      queryClient.refetchQueries({queryKey: [API_QUERY.USER_DATA]});
+      queryClient.refetchQueries({queryKey: API_QUERY.USER});
     },
   });
 };
@@ -48,7 +48,7 @@ export const useUserUpdateMutation = () => {
 export const userRecoveryQuery = (props = {}) => {
   const {name, password, token, ...options} = props;
   return {
-    queryKey: [API_QUERY.AUTH_RECOVER, password, token],
+    queryKey: [...API_QUERY.AUTH_RECOVER, password, token],
     queryFn: async () => BaseService.patch(`api/user?`, {access_token: token}, {...(name && {name}), password}),
     meta: {type: 'user', id: 'recovery', method: 'update'},
     enabled: !!(password && token),

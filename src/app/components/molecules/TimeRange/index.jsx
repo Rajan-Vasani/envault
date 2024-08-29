@@ -4,7 +4,8 @@ import duration from 'dayjs/plugin/duration';
 import isToday from 'dayjs/plugin/isToday';
 import localeData from 'dayjs/plugin/localeData';
 import weekday from 'dayjs/plugin/weekday';
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useRef} from 'react';
+import {parseTimeFrom} from 'utils/time';
 dayjs.extend(weekday);
 dayjs.extend(localeData);
 dayjs.extend(isToday);
@@ -14,7 +15,7 @@ const {RangePicker} = DatePicker;
 const TimeRange = props => {
   const {id, value, lastTime, containerStyle, onChange} = props;
   const timeRangeRef = useRef(null);
-  const [range, setRange] = useState([value?.from, value?.to]);
+  const range = [parseTimeFrom(value), value.to ? dayjs(value.to) : null];
 
   const triggerChange = changedValue => {
     onChange?.({
@@ -61,11 +62,12 @@ const TimeRange = props => {
         return [Math.floor(diff / 86400000), 'd'];
       } else if (diff >= 3600000) {
         return [Math.floor(diff / 3600000), 'h'];
+      } else if (diff == 0) {
+        return null;
       } else {
         return [Math.floor(diff / 60000), 'm'];
       }
     })();
-    setRange([from, to]);
     return triggerChange({to, from, delta});
   };
 

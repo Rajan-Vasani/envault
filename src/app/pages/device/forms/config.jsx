@@ -15,7 +15,11 @@ export const DeviceConfig = props => {
   const {notification} = App.useApp();
   const {type, eui, key} = Form.useWatch('driver', {form, preserve: true}) ?? {};
 
-  useEffect(() => setForm?.(form), [form, setForm]);
+  useEffect(() => {
+    setForm(form);
+    return () => setForm(null);
+  }, [form, setForm]);
+
   useEffect(() => {
     if (nodeParams) {
       form.setFieldsValue(nodeParams);

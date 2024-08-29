@@ -10,10 +10,13 @@ const DeviceSchemaInput = ({deviceConfigName, deviceSchemaConfig, name}) => {
     switch (type) {
       case 'array':
         inputElement = <Select mode="tags" placeholder="Add multiple item" />;
+        break;
       case 'string':
         inputElement = <Input placeholder={description} />;
+        break;
       case 'boolean':
         inputElement = <Checkbox />;
+        break;
       default:
         inputElement = <Input />;
     }
